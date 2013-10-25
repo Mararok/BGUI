@@ -5,6 +5,11 @@
 */
 package com.gmail.mararok.bgui.scene;
 
-public class Scene {
-
+public interface Scene {
+	String getName();
+	ContainerSceneNode getRootNode();
+	SceneManager getSceneManager();
+	
+	void onEnable();
+	void onDisable();
 }
