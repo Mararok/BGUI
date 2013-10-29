@@ -8,7 +8,7 @@ package com.gmail.mararok.bgui.sc.impl;
 import java.awt.Color;
 
 import com.gmail.mararok.bgui.sc.Label;
-import com.gmail.mararok.bgui.scene.ContainerSceneNode;
+import com.gmail.mararok.bgui.scene.ParentSceneNode;
 import com.gmail.mararok.bgui.scene.impl.SceneNodeImpl;
 
 public class LabelImpl extends SceneNodeImpl implements Label {
@@ -17,7 +17,7 @@ public class LabelImpl extends SceneNodeImpl implements Label {
 		super(id);
 	}
 	
-	public LabelImpl(String id, ContainerSceneNode parent) {
+	public LabelImpl(String id, ParentSceneNode parent) {
 		super(id,parent);
 	}
 

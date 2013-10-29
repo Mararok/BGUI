@@ -5,8 +5,9 @@
 */
 package com.gmail.mararok.bgui.spi.render;
 
-public interface SpatialContainerNode extends SpatiaNode {
-	void attachChild(SpatiaNode node);
-	void detachChild(SpatiaNode node);
+public interface ParentVisualNode extends VisualNode {
+	
+	void attachChild(VisualNode child);
+	void detachChild(VisualNode child);
 	void detachAllChildren();
 }

@@ -5,10 +5,14 @@
 */
 package com.gmail.mararok.bgui.scene;
 
+import com.gmail.mararok.bgui.spi.render.RenderDevice;
+
 public interface Scene {
 	String getName();
-	ContainerSceneNode getRootNode();
+	ParentSceneNode getRootNode();
 	SceneManager getSceneManager();
+	
+	RenderDevice getRenderDevice();
 	
 	void onEnable();
 	void onDisable();

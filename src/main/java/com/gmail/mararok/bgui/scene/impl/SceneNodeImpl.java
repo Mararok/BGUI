@@ -7,35 +7,32 @@ package com.gmail.mararok.bgui.scene.impl;
 
 import java.util.List;
 
-import javax.vecmath.AxisAngle4f;
 import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
-import com.gmail.mararok.bgui.scene.ContainerSceneNode;
+import com.gmail.mararok.bgui.scene.ParentSceneNode;
 import com.gmail.mararok.bgui.scene.Scene;
 import com.gmail.mararok.bgui.scene.SceneNode;
+import com.gmail.mararok.bgui.spi.render.VisualNode;
 import com.gmail.mararok.bgui.style.Styleable;
 
 public abstract class SceneNodeImpl implements SceneNode {
 	private String id;
-	private ContainerSceneNode parent;
+	private ParentSceneNode parent;
+	
+	private VisualNode visualNode;
 	
 	private boolean visible;
 	private boolean enabled;
 	
-	private Vector3f localTranslation;
-	private Quat4f localRotation;
-	private Vector3f localScale;
-	
 	private String style;
 	private List<String> styleClasses;
 	
-	public SceneNodeImpl() {}
 	public SceneNodeImpl(String id) {
 		this(id,null);
 	}
 	
-	public SceneNodeImpl(String id, ContainerSceneNode parent) {
+	public SceneNodeImpl(String id, ParentSceneNode parent) {
 		this.id = id;
 		setParent(parent);
 	}
@@ -46,18 +43,20 @@ public abstract class SceneNodeImpl implements SceneNode {
 	}
 	
 	@Override
-	public ContainerSceneNode getParent() {
+	public ParentSceneNode getParent() {
 		return parent;
 	}
 	
 	@Override
-	public void setParent(ContainerSceneNode newParent) {
+	public void setParent(ParentSceneNode newParent) {
 		if (parent != null) {
 			getParent().detachChild(this);
 		}
 		
 		parent = newParent;
-		parent.attachChild(this);
+		if (parent != null) {
+			parent.attachChild(this);
+		}
 	}
 	
 	@Override
@@ -147,22 +146,22 @@ public abstract class SceneNodeImpl implements SceneNode {
 	
 	@Override
 	public Vector3f getLocalTranslation() {
-		return localTranslation;
+		return visualNode.getLocalTranslation();
 	}
 	
 	@Override
 	public void setLocalTranslation(float x, float y) {
-		localTranslation.set(x,y,1.0f);
+		setLocalTranslation(x,y,1f);
 	}
 	
 	@Override
 	public void setLocalTranslation(float x, float y, float z) {
-		localTranslation.set(x,y,z);
+		visualNode.setLocalTranslation(x,y,z);
 	}
 	
 	@Override
 	public Quat4f getLocalRotation() {
-		return localRotation;
+		return visualNode.getLocalRotation();
 	}
 	
 	@Override
@@ -182,21 +181,29 @@ public abstract class SceneNodeImpl implements SceneNode {
 	
 	@Override
 	public void setLocalRotation(float xaxis, float yaxis, float zaxis, float angle) {
-		localRotation.set(new AxisAngle4f(xaxis,yaxis,zaxis,angle));
+		visualNode.setLocalRotation(xaxis,yaxis,zaxis,angle);
 	}
 	
 	@Override
 	public Vector3f getLocalScale() {
-		return localScale;
+		return visualNode.getLocalScale();
 	}
 	
 	@Override
 	public void setLocalScale(float scale) {
-		localScale.set(scale,scale,scale);
+		setLocalScale(scale,scale,scale);
 	}
 	
 	@Override
 	public void setLocalScale(float xscale, float yscale, float zscale) {
-		localScale.set(xscale,yscale,zscale);
+		visualNode.setLocalScale(xscale,yscale,zscale);
+	}
+	
+	VisualNode getVisualNode() {
+		return visualNode;
+	}
+	
+	void setVisualNode(VisualNode newVisualNode) {
+		visualNode = newVisualNode;
 	}
 }

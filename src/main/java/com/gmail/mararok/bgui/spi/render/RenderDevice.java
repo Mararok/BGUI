@@ -6,17 +6,14 @@
 package com.gmail.mararok.bgui.spi.render;
 
 public interface RenderDevice {
-	void beginFrame();
-	void endFrame();
 	
-	void clear();
-	
-	RenderableFont createFont(String filename);
-	RenderableImage createImage(String filename);
+	Font createFont(String filename);
+	Image createImage(String filename);
 	MouseCursor createMouseCursor(String filename, int hotspotX, int hotspotY);
 	
-	void enableCliping(int x, int y, int width, int height);
-	void disableCliping();
+	ParentVisualNode createParentNode();
+	GeometryVisualNode createGeometryNode();
+	TextVisualNode createTextNode();
 	
 	void enableMouseCursor();
 	void disableMouseCursor();

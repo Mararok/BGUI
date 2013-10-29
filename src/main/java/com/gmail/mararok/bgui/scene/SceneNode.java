@@ -13,8 +13,8 @@ import com.gmail.mararok.bgui.style.Styleable;
 public interface SceneNode extends Styleable {
 	String getID();
 	
-	ContainerSceneNode getParent();
-	void setParent(ContainerSceneNode newParent);
+	ParentSceneNode getParent();
+	void setParent(ParentSceneNode newParent);
 	
 	Scene getScene();
 	

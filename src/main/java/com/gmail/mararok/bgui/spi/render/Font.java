@@ -5,8 +5,11 @@
 */
 package com.gmail.mararok.bgui.spi.render;
 
-public interface RenderableFont extends Renderable {
-	int getCharacterAdvence(char curChar, char nextChar, float size);
+public interface Font {
+
+	float getWidth(char character);
 	float getLineWidth(String text);
+	
+	float getHieght(char character);
 	float getLineHeight(String text);
 }

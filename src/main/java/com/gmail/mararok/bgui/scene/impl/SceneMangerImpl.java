@@ -9,10 +9,13 @@ import java.util.HashMap;
 
 import com.gmail.mararok.bgui.scene.Scene;
 import com.gmail.mararok.bgui.scene.SceneManager;
+import com.gmail.mararok.bgui.spi.render.RenderDevice;
 
 public class SceneMangerImpl implements SceneManager {
 	private HashMap<String,Scene> scenes;
 	private Scene currentScene;
+	
+	private RenderDevice renderDevice;
 	
 	@Override
 	public Scene createScene(String sceneName) {
@@ -41,5 +44,10 @@ public class SceneMangerImpl implements SceneManager {
 		}
 		
 		currentScene = scenes.get(sceneName);
+	}
+
+	@Override
+	public RenderDevice getRenderDevice() {
+		return renderDevice;
 	}
 }

@@ -7,9 +7,9 @@ package com.gmail.mararok.bgui.sc.impl;
 
 import com.gmail.mararok.bgui.render.MemoryMesh;
 import com.gmail.mararok.bgui.sc.Panel;
-import com.gmail.mararok.bgui.scene.impl.ContainerSceneNodeImpl;
+import com.gmail.mararok.bgui.scene.impl.ParentSceneNodeImpl;
 
-public class PanelImpl extends ContainerSceneNodeImpl implements Panel {
+public class PanelImpl extends ParentSceneNodeImpl implements Panel {
 	private MemoryMesh mesh;
 	
 	public PanelImpl(String id) {

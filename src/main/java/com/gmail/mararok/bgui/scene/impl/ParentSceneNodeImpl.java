@@ -9,24 +9,26 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.gmail.mararok.bgui.scene.ContainerSceneNode;
+import com.gmail.mararok.bgui.scene.ParentSceneNode;
 import com.gmail.mararok.bgui.scene.SceneNode;
 
-public class ContainerSceneNodeImpl extends SceneNodeImpl implements ContainerSceneNode {
-	private List<SceneNodeImpl> children;
+public class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNode {
+	private List<SceneNode> children;
 	
-	public ContainerSceneNodeImpl(String id) {
+	public ParentSceneNodeImpl(String id) {
 		super(id);
 	}
 
-	public ContainerSceneNodeImpl(String id, ContainerSceneNode parentNode) {
+	public ParentSceneNodeImpl(String id, ParentSceneNode parentNode) {
 		super(id,parentNode);
 	}
 	
 	public void attachChild(SceneNode child) {
 		if (children == null) {
-			children = new LinkedList<SceneNodeImpl>();
+			children = new LinkedList<SceneNode>();
 		}
+		children.add(child);
+		getVisualNode();
 	}
 
 	public void detachChild(SceneNode child) {
@@ -36,11 +38,11 @@ public class ContainerSceneNodeImpl extends SceneNodeImpl implements ContainerSc
 		
 	}
 	
-	public SceneNodeImpl getChild(int childIndex) {
+	public SceneNode getChild(int childIndex) {
 		return children.get(childIndex);
 	}
 	
-	public Iterator<SceneNodeImpl> getIterator() {
+	public Iterator<SceneNode> getIterator() {
 		return children.iterator();
 	}
 }

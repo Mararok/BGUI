@@ -5,9 +5,10 @@
 */
 package com.gmail.mararok.bgui.scene.impl;
 
-import com.gmail.mararok.bgui.scene.ContainerSceneNode;
+import com.gmail.mararok.bgui.scene.ParentSceneNode;
 import com.gmail.mararok.bgui.scene.Scene;
 import com.gmail.mararok.bgui.scene.SceneManager;
+import com.gmail.mararok.bgui.spi.render.RenderDevice;
 
 public class SceneImpl implements Scene {
 	private String name;
@@ -27,7 +28,7 @@ public class SceneImpl implements Scene {
 	}
 
 	@Override
-	public ContainerSceneNode getRootNode() {
+	public ParentSceneNode getRootNode() {
 		return rootNode;
 	}
 
@@ -37,11 +38,17 @@ public class SceneImpl implements Scene {
 	}
 
 	@Override
+	public RenderDevice getRenderDevice() {
+		return getSceneManager().getRenderDevice();
+	}
+	
+	@Override
 	public void onEnable() {
 	}
 
 	@Override
 	public void onDisable() {
 	}
+
 
 }

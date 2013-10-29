@@ -5,6 +5,7 @@
 */
 package com.gmail.mararok.bgui.spi.render;
 
-public interface ShaderMaterial {
-
+public interface Image {
+	int getWidth();
+	int getHeight();
 }

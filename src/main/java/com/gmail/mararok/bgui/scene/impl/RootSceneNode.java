@@ -7,7 +7,7 @@ package com.gmail.mararok.bgui.scene.impl;
 
 import com.gmail.mararok.bgui.scene.Scene;
 
-public class RootSceneNode extends ContainerSceneNodeImpl {
+public class RootSceneNode extends ParentSceneNodeImpl {
 	private Scene scene;
 	
 	public RootSceneNode(Scene scene) {
