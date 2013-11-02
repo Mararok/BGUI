@@ -12,13 +12,20 @@ import com.gmail.mararok.bgui.spi.render.MouseCursor;
 import com.gmail.mararok.bgui.spi.render.ParentVisualNode;
 import com.gmail.mararok.bgui.spi.render.RenderDevice;
 import com.gmail.mararok.bgui.spi.render.TextVisualNode;
+import com.jme3.app.SimpleApplication;
 
 public class JMERenderDevice implements RenderDevice {
-
+	private SimpleApplication application;
+	
+	public JMERenderDevice(SimpleApplication application) {
+		this.application = application;
+	}
+	
 	@Override
-	public Font createFont(String filename) {
-		// TODO Auto-generated method stub
-		return null;
+	public Font createFont(String fontName, Font.Style style, int size) {
+		JMEFont font = new JMEFont();
+		font.setFont(new java.awt.Font(fontName,style.toAWTStyle(),size));
+		return font;
 	}
 
 	@Override
@@ -35,21 +42,18 @@ public class JMERenderDevice implements RenderDevice {
 	}
 
 	@Override
-	public ParentVisualNode createParentNode() {
-		// TODO Auto-generated method stub
-		return null;
+	public ParentVisualNode createParentNode(String id) {
+		return new JMEParentVisualNode(id);
 	}
 
 	@Override
-	public GeometryVisualNode createGeometryNode() {
-		// TODO Auto-generated method stub
-		return null;
+	public GeometryVisualNode createGeometryNode(String id) {
+		return new JMEGeometryVisualNode(id);
 	}
 
 	@Override
-	public TextVisualNode createTextNode() {
-		// TODO Auto-generated method stub
-		return null;
+	public TextVisualNode createTextNode(String id) {
+		return new JMETextVisualNode(id);
 	}
 
 	@Override
@@ -66,14 +70,12 @@ public class JMERenderDevice implements RenderDevice {
 
 	@Override
 	public int getWidth() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 800;
 	}
 
 	@Override
 	public int getHeight() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 600;
 	}
 
 }

@@ -18,9 +18,10 @@ import com.gmail.mararok.bgui.style.Styleable;
 
 public abstract class SceneNodeImpl implements SceneNode {
 	private String id;
+	
 	private ParentSceneNode parent;
 	
-	private VisualNode visualNode;
+	protected VisualNode visualNode;
 	
 	private boolean visible;
 	private boolean enabled;
@@ -29,12 +30,7 @@ public abstract class SceneNodeImpl implements SceneNode {
 	private List<String> styleClasses;
 	
 	public SceneNodeImpl(String id) {
-		this(id,null);
-	}
-	
-	public SceneNodeImpl(String id, ParentSceneNode parent) {
 		this.id = id;
-		setParent(parent);
 	}
 	
 	@Override
@@ -48,15 +44,17 @@ public abstract class SceneNodeImpl implements SceneNode {
 	}
 	
 	@Override
+	public boolean hasParent() {
+		return parent != null;
+	}
+	
+	@Override
 	public void setParent(ParentSceneNode newParent) {
-		if (parent != null) {
+		if (hasParent()) {
 			getParent().detachChild(this);
 		}
 		
 		parent = newParent;
-		if (parent != null) {
-			parent.attachChild(this);
-		}
 	}
 	
 	@Override
@@ -201,9 +199,5 @@ public abstract class SceneNodeImpl implements SceneNode {
 	
 	VisualNode getVisualNode() {
 		return visualNode;
-	}
-	
-	void setVisualNode(VisualNode newVisualNode) {
-		visualNode = newVisualNode;
 	}
 }

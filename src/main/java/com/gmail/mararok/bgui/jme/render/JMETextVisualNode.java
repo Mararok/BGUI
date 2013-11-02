@@ -5,13 +5,14 @@
 */
 package com.gmail.mararok.bgui.jme.render;
 
-import java.awt.Color;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 import java.util.LinkedList;
 
+import com.gmail.mararok.bgui.render.Glyph;
 import com.gmail.mararok.bgui.render.MemoryMesh;
 import com.gmail.mararok.bgui.render.QuadMemoryMesh;
+import com.gmail.mararok.bgui.render.RGBAColor;
 import com.gmail.mararok.bgui.spi.render.Font;
 import com.gmail.mararok.bgui.spi.render.TextVisualNode;
 import com.jme3.scene.Geometry;
@@ -19,9 +20,9 @@ import com.jme3.scene.Mesh;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
 
-public class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
+class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 	private Font font;
-	private Color color;
+	private RGBAColor color;
 	private String text;
 	
 	private LinkedList<QuadMemoryMesh> memoryMeshes;
@@ -31,7 +32,7 @@ public class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 	JMETextVisualNode(String id) {
 		spatial = new Geometry(id,new Mesh());
 		memoryMeshes = new LinkedList<QuadMemoryMesh>();
-		setColor(Color.WHITE);
+		setColor(new RGBAColor());
 	}
 	
 	@Override
@@ -46,25 +47,53 @@ public class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 	}
 
 	@Override
-	public Color getColor() {
+	public RGBAColor getColor() {
 		return color;
 	}
 
 	@Override
-	public void setColor(Color newColor) {
+	public void setColor(RGBAColor newColor) {
 		color = newColor;
 		updateGeometry();
 	}
 
 	@Override
 	public void setColor(float red, float green, float blue) {
-		setColor(new Color(red,green,blue));
+		setColor(new RGBAColor(red,green,blue));
 	}
 
 	@Override
 	public void setText(String newText) {
 		text = newText;
+		
 		memoryMeshes.clear();
+		char[] chars = newText.toCharArray();
+		QuadMemoryMesh charMesh;
+		Glyph glyph;
+		
+		float uMin,vMin;
+		float uMax,vMax;
+		
+		for (char ch : chars) {
+			charMesh = new QuadMemoryMesh();
+			glyph = font.getGlyph(ch);
+			uMin = glyph.getUMinTexture();
+			vMin = glyph.getVMinTexture();
+			uMax = glyph.getUMaxTexture();
+			vMax = glyph.getVMaxTexture();
+			
+			charMesh.setTextureCoordinates(0,uMin,vMin);
+			charMesh.setTextureCoordinates(1,uMax,vMin);
+			charMesh.setTextureCoordinates(2,uMax,vMax);
+			charMesh.setTextureCoordinates(3,uMin,vMax);
+			
+			charMesh.setColor(0,getColor());
+			charMesh.setColor(1,getColor());
+			charMesh.setColor(2,getColor());
+			charMesh.setColor(3,getColor());
+			memoryMeshes.add(charMesh);
+		}
+		
 		updateGeometry();
 	}
 

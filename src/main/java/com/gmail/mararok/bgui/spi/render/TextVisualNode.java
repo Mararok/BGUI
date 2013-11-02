@@ -5,15 +5,15 @@
 */
 package com.gmail.mararok.bgui.spi.render;
 
-import java.awt.Color;
+import com.gmail.mararok.bgui.render.RGBAColor;
 
 public interface TextVisualNode extends VisualNode {
 	
 	Font getFont();
 	void setFont(Font newFont);
 	
-	Color getColor();
-	void setColor(Color newColor);
+	RGBAColor getColor();
+	void setColor(RGBAColor newColor);
 	void setColor(float red, float green, float blue);
 	
 	void setText(String newText);

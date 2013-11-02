@@ -15,11 +15,11 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class AWTFont {
+public abstract class AWTFont implements com.gmail.mararok.bgui.spi.render.Font {
 	private Font font;
 	private int fontHeight;
 	private GlyphSet glyphs;
-	private BufferedImage fontImage;
+	protected BufferedImage fontImage;
 	
 	public AWTFont() {
 	}
@@ -28,10 +28,10 @@ public class AWTFont {
 		font = newFont;
 		fontHeight = font.getSize();
 		glyphs = new GlyphSet();
+		generate();
 	}
 	
-	public void generate() {
-		glyphs = new GlyphSet();
+	private void generate() {
 		generateStandardGlyphSet();
 		generateFontImage();
 	}
@@ -62,18 +62,16 @@ public class AWTFont {
 		
 		for (char ch = 32; ch < 127;++ch) {
 			Glyph glyph = glyphs.getGlyph(ch);
-			glyph.width = fm.charWidth(ch);
-			glyph.height = fm.getHeight();
+			glyph.setSize(fm.charWidth(ch),fm.getHeight());
 			
-			if (xPosition+glyph.width >= imageWidth) {
+			if (xPosition+glyph.getWidth() >= imageWidth) {
 				xPosition = 0;
 				yPosition += rowHeight;
 			}
 			
-			glyph.xOffset = xPosition;
-			glyph.yOffset = yPosition;
+			glyph.setOffset(xPosition,yPosition);
 			g.drawString(String.valueOf(ch),xPosition,yPosition);
-			xPosition += glyph.width;
+			xPosition += glyph.getWidth();
 		}
 		
 		File file = new File("test.png");
@@ -84,8 +82,34 @@ public class AWTFont {
 			e.printStackTrace();
 		}
 	}
-	
-	public GlyphSet getGlyphs() {
-		return glyphs;
+
+	@Override
+	public float getWidth(char character) {
+		return getGlyph(character).getWidth();
+	}
+
+	@Override
+	public float getLineWidth(String text) {
+		float width = 0;
+		for (char ch : text.toCharArray()) {
+			width += getGlyph(ch).getWidth();
+		}
+		
+		return width;
+	}
+
+	@Override
+	public float getHeight(char character) {
+		return getGlyph(character).getHeight();
+	}
+
+	@Override
+	public float getLineHeight(String text) {
+		return getHeight(text.charAt(0));
+	}
+
+	@Override
+	public Glyph getGlyph(char character) {
+		return glyphs.getGlyph(character);
 	}
 }

@@ -17,25 +17,37 @@ public class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNod
 	
 	public ParentSceneNodeImpl(String id) {
 		super(id);
+		children = new LinkedList<SceneNode>();
 	}
 
 	public ParentSceneNodeImpl(String id, ParentSceneNode parentNode) {
-		super(id,parentNode);
+		this(id);
+		parentNode.attachChild(this);
 	}
 	
 	public void attachChild(SceneNode child) {
-		if (children == null) {
-			children = new LinkedList<SceneNode>();
+		if (child == null) {
+			throw new IllegalArgumentException(
+					"Can't attach null child to parent: "+this.getID());
 		}
+		
+		child.setParent(this);
 		children.add(child);
-		getVisualNode();
 	}
 
 	public void detachChild(SceneNode child) {
-		if (children.isEmpty()) {
-			children = null;
+		if (child == null) {
+			throw new IllegalArgumentException(
+					"Can't detach null child from parent: "+this.getID());
 		}
 		
+		if (child.getParent() != this) {
+			throw new IllegalArgumentException(
+				"Can't detach child from illegal parent, child: "+child.getID()+", parent: "+this.getID());
+		}
+		
+		children.remove(child);
+		child.setParent(null);
 	}
 	
 	public SceneNode getChild(int childIndex) {

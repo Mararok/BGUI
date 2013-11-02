@@ -14,6 +14,7 @@ public interface SceneNode extends Styleable {
 	String getID();
 	
 	ParentSceneNode getParent();
+	boolean hasParent();
 	void setParent(ParentSceneNode newParent);
 	
 	Scene getScene();

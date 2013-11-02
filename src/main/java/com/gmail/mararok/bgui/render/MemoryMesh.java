@@ -6,7 +6,7 @@
 package com.gmail.mararok.bgui.render;
 
 public interface MemoryMesh {
-	public enum RenderMode {
+	enum RenderMode {
 		LINES,
 		LINE_STRIP,
 		POINTS,
@@ -15,32 +15,32 @@ public interface MemoryMesh {
 		TRIANGLE_STRIP
 	};
 	
-	public static final int VERTEX_COMPONENT_COUNT = 3;
-	public static final int COLOR_COMPONENT_COUNT = 4;
-	public static final int TEXTURE_COORDINATES_COUNT = 2;
+	static final int VERTEX_COMPONENT_COUNT = 3;
+	static final int COLOR_COMPONENT_COUNT = 4;
+	static final int TEXTURE_COORDINATES_COUNT = 2;
 	
-	public static final int TRIANGLE_VERTEX_COUNT = 3;
-	public static final int QUAD_VERTEX_COUNT = 4;
+	static final int TRIANGLE_VERTEX_COUNT = 3;
+	static final int QUAD_VERTEX_COUNT = 4;
 	
-	public float[] getVeritces();
+	float[] getVeritces();
+	void setVertices(float[] newVertices);
+	void setVertex(int vertexIndex, float x, float y, float z);
 	
-	public void setVertices(float[] newVertices);
-
-	public float[] getColors();
+	float[] getColors();
+	void setColors(float[] newColors);
+	void setColor(int vertexIndex, RGBAColor newColor);
 	
-	public void setColors(float[] newColors);
-
-	public float[] getTextureCooridnates();
+	float[] getTextureCooridnates();
+	void setTextureCoordinates(float[] newTextureCoordinates);
+	void setTextureCoordinates(int vertexIndex, float u, float v);
 	
-	public void setTextureCoordinates(float[] newTextureCoordinates);
-
-	public short[] getIndexes();
+	short[] getIndexes();
 	
-	public void setIndexes(short[] newIndexes);
+	void setIndexes(short[] newIndexes);
 	
-	public int getTriangleCount();
+	int getTriangleCount();
 	
-	public RenderMode getRenderMode();
+	RenderMode getRenderMode();
 	
-	public void setRenderMode(RenderMode newMode);
+	void setRenderMode(RenderMode newMode);
 }

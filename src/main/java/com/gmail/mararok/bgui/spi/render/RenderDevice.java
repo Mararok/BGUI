@@ -7,13 +7,13 @@ package com.gmail.mararok.bgui.spi.render;
 
 public interface RenderDevice {
 	
-	Font createFont(String filename);
+	Font createFont(String fontName,Font.Style style, int size);
 	Image createImage(String filename);
 	MouseCursor createMouseCursor(String filename, int hotspotX, int hotspotY);
 	
-	ParentVisualNode createParentNode();
-	GeometryVisualNode createGeometryNode();
-	TextVisualNode createTextNode();
+	ParentVisualNode createParentNode(String id);
+	GeometryVisualNode createGeometryNode(String id);
+	TextVisualNode createTextNode(String id);
 	
 	void enableMouseCursor();
 	void disableMouseCursor();

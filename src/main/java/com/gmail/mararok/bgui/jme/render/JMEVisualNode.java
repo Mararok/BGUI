@@ -14,7 +14,7 @@ import com.gmail.mararok.bgui.spi.render.VisualNode;
 import com.jme3.math.Quaternion;
 import com.jme3.scene.Spatial;
 
-public class JMEVisualNode implements VisualNode {
+class JMEVisualNode implements VisualNode {
 	protected Spatial spatial;
 	
 	private ParentVisualNode parent;

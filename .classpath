@@ -23,5 +23,6 @@
 			<attribute name="javadoc_location" value="http://jmonkeyengine.org/javadoc/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/GalacticCraft/libs/jME3-desktop.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

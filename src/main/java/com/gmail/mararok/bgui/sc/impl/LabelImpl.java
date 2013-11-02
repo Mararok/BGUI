@@ -5,11 +5,10 @@
 */
 package com.gmail.mararok.bgui.sc.impl;
 
-import java.awt.Color;
-
 import com.gmail.mararok.bgui.sc.Label;
 import com.gmail.mararok.bgui.scene.ParentSceneNode;
 import com.gmail.mararok.bgui.scene.impl.SceneNodeImpl;
+import com.gmail.mararok.bgui.spi.render.TextVisualNode;
 
 public class LabelImpl extends SceneNodeImpl implements Label {
 	
@@ -18,30 +17,17 @@ public class LabelImpl extends SceneNodeImpl implements Label {
 	}
 	
 	public LabelImpl(String id, ParentSceneNode parent) {
-		super(id,parent);
+		this(id);
+		parent.attachChild(this);
 	}
 
 	@Override
 	public void setText(String newText) {
-		// TODO Auto-generated method stub
-		
+		((TextVisualNode)visualNode).setText(newText);
 	}
 
 	@Override
 	public String getText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void setColor(Color color) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Color getColor() {
-		// TODO Auto-generated method stub
-		return null;
+		return ((TextVisualNode)visualNode).getText();
 	}
 }
