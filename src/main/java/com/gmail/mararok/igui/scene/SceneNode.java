@@ -5,13 +5,14 @@
 */
 package com.gmail.mararok.igui.scene;
 
-import javax.vecmath.Quat4f;
 import javax.vecmath.Vector3f;
 
 import com.gmail.mararok.igui.style.Styleable;
 
 public interface SceneNode extends Styleable {
+	
 	String getID();
+	void setID(String newID);
 	
 	ParentSceneNode getParent();
 	boolean hasParent();
@@ -39,11 +40,11 @@ public interface SceneNode extends Styleable {
 	void setLocalTranslation(float x, float y);
 	void setLocalTranslation(float x, float y, float z);
 	
-	Quat4f getLocalRotation();
-	void setLocalRotationX(float angle);
-	void setLocalRotationY(float angle);
-	void setLocalRotationZ(float angle);
-	void setLocalRotation(float xaxis, float yaxis, float zaxis, float angle);
+//	Quat4f getLocalRotation();
+//	void setLocalRotationX(float angle);
+//	void setLocalRotationY(float angle);
+//	void setLocalRotationZ(float angle);
+//	void setLocalRotation(float xaxis, float yaxis, float zaxis, float angle);
 	
 	Vector3f getLocalScale();
 	void setLocalScale(float scale);

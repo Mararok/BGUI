@@ -5,29 +5,28 @@
 */
 package com.gmail.mararok.igui.sc.impl;
 
+import com.gmail.mararok.igui.ImpactGUI;
+import com.gmail.mararok.igui.control.ControlBase;
 import com.gmail.mararok.igui.sc.Label;
-import com.gmail.mararok.igui.scene.ParentSceneNode;
-import com.gmail.mararok.igui.scene.impl.SceneNodeImpl;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 
-public class LabelImpl extends SceneNodeImpl implements Label {
+public class LabelImpl extends ControlBase implements Label {
+	private TextVisualNode labelTextNode;
+	private static int nextLabelID = 0;
 	
-	public LabelImpl(String id) {
-		super(id);
-	}
-	
-	public LabelImpl(String id, ParentSceneNode parent) {
-		this(id);
-		parent.attachChild(this);
+	public LabelImpl(ImpactGUI gui) {
+		super(gui);
+		labelTextNode = gui.getRenderDevice().createTextNode("LABEL:"+(++nextLabelID));
+		mainVisualNode.attachChild(labelTextNode);
 	}
 
 	@Override
 	public void setText(String newText) {
-		((TextVisualNode)visualNode).setText(newText);
+		labelTextNode.setText(newText);
 	}
 
 	@Override
 	public String getText() {
-		return ((TextVisualNode)visualNode).getText();
+		return labelTextNode.getText();
 	}
 }

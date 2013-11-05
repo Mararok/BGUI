@@ -7,7 +7,7 @@ package com.gmail.mararok.igui.spi.sound;
 
 public interface SoundDevice {
 	Sound loadMusic(String filename);
-	Sound loadSound(String filenam);
+	Sound loadSound(String filename);
 	
 	void update(int delta);
 }

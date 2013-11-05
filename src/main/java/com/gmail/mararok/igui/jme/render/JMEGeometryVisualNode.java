@@ -14,9 +14,11 @@ import com.jme3.scene.VertexBuffer.Type;
 
 class JMEGeometryVisualNode extends JMEVisualNode implements GeometryVisualNode {
 	private MemoryMesh mesh;
-	
-	JMEGeometryVisualNode(String id) {
+	private JMERenderDevice renderDevice;
+	JMEGeometryVisualNode(String id, JMERenderDevice renderDevice) {
 		spatial = new Geometry(id);
+		this.renderDevice = renderDevice;
+		getGeometry().setMaterial(renderDevice.getDefaultMaterial());
 		getGeometry().setMesh(new Mesh());
 	}
 
@@ -36,7 +38,7 @@ class JMEGeometryVisualNode extends JMEVisualNode implements GeometryVisualNode 
 		Mesh realMesh = getGeometry().getMesh();
 		realMesh.setBuffer(Type.Position,3,mesh.getVeritces());
 		realMesh.setBuffer(Type.Color,4,mesh.getColors());
-		realMesh.setBuffer(Type.TexCoord,2,mesh.getTextureCooridnates());
+		//realMesh.setBuffer(Type.TexCoord,2,mesh.getTextureCooridnates());
 		realMesh.setBuffer(Type.Index,1,mesh.getIndexes());
 		Mesh.Mode mode = Mode.TriangleStrip;
 		

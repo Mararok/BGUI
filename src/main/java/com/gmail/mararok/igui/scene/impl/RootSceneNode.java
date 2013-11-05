@@ -11,8 +11,9 @@ public class RootSceneNode extends ParentSceneNodeImpl {
 	private Scene scene;
 	
 	public RootSceneNode(Scene scene) {
-		super("");
+		super(scene.getSceneManager().getGUI());
 		this.scene = scene;
+		mainVisualNode = getGUI().getRenderDevice().getRootGUINode();
 	}
 	
 	@Override

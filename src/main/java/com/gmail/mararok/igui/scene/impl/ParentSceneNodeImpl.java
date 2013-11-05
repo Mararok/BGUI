@@ -9,20 +9,17 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 import com.gmail.mararok.igui.scene.SceneNode;
 
 public class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNode {
 	private List<SceneNode> children;
-	
-	public ParentSceneNodeImpl(String id) {
-		super(id);
+	private static int parentCounter = -1;
+	public ParentSceneNodeImpl(ImpactGUI gui) {
+		super(gui);
 		children = new LinkedList<SceneNode>();
-	}
-
-	public ParentSceneNodeImpl(String id, ParentSceneNode parentNode) {
-		this(id);
-		parentNode.attachChild(this);
+		mainVisualNode = gui.getRenderDevice().createParentNode("PARENT:"+parentCounter);
 	}
 	
 	public void attachChild(SceneNode child) {

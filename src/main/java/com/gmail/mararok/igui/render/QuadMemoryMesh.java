@@ -8,10 +8,10 @@ package com.gmail.mararok.igui.render;
 public class QuadMemoryMesh extends CustomMemoryMesh {
 	public QuadMemoryMesh() {
 		setVertices(new float[] {
-			-0.5f,-0.5f,0f,
-			0.5f,-0.5f,0f,
-			0.5f,0.5f,0f,
-			-0.5f,0.5f,0f
+			1f,1f,0f,
+			-1f,-1f,0f,
+			1f,-1f,0f,
+			-1f,1f,0f
 			
 		});
 		
@@ -24,7 +24,7 @@ public class QuadMemoryMesh extends CustomMemoryMesh {
 		
 		setIndexes(new short[] {
 			0,1,2,
-			2,3,0
+			1,3,0
 		});
 	}
 }

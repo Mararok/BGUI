@@ -5,10 +5,12 @@
 */
 package com.gmail.mararok.igui.control;
 
-import com.gmail.mararok.igui.scene.impl.SceneNodeImpl;
+import com.gmail.mararok.igui.ImpactGUI;
+import com.gmail.mararok.igui.scene.impl.ParentSceneNodeImpl;
 
-public class ControlBase extends SceneNodeImpl {
-	public ControlBase(String id) {
-		super(id);
+public class ControlBase extends ParentSceneNodeImpl {
+
+	public ControlBase(ImpactGUI gui) {
+		super(gui);
 	}
 }

@@ -18,8 +18,8 @@ public class SceneImpl implements Scene {
 	
 	public SceneImpl(String name, SceneManager sceneManager) {
 		this.name = name;
-		rootNode = new RootSceneNode(this);
 		this.sceneManager = sceneManager;
+		rootNode = new RootSceneNode(this);
 	}
 
 	@Override

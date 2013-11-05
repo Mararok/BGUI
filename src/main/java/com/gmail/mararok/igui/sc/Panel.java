@@ -5,6 +5,8 @@
 */
 package com.gmail.mararok.igui.sc;
 
-public interface Panel {
+import com.gmail.mararok.igui.control.Control;
+
+public interface Panel extends Control {
 
 }
