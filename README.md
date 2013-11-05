@@ -1,2 +1,2 @@
-BGUI (Better GUI)
+ImpactGUI
 Alternative for Nifty GUI

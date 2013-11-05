@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Name: com/gmail/mararok/igui/
+Specification-Title: ImpactGUI
+Specification-Version: @VERSION
+Specification-Vendor: Mararok
+Implementation-Title: com.gmail.mararok.igui
+Implementation-Version: @BUILD_NUMBER
+Implementation-Vendor: Mararok
