@@ -9,13 +9,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.gmail.mararok.igui.spi.render.ParentVisualNode;
+import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.gmail.mararok.igui.spi.render.VisualNode;
 import com.jme3.scene.Node;
 
 class JMEParentVisualNode extends JMEVisualNode implements ParentVisualNode {
 	private List<VisualNode> children;
 	
-	JMEParentVisualNode(String id) {
+	JMEParentVisualNode(String id, RenderDevice renderDevice) {
+		super(renderDevice);
 		children = new LinkedList<VisualNode>();
 		spatial = new Node(id);
 	}

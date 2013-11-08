@@ -11,19 +11,23 @@ import com.gmail.mararok.igui.jme.render.JMERenderDevice;
 import com.gmail.mararok.igui.sc.Panel;
 import com.gmail.mararok.igui.sc.impl.PanelImpl;
 import com.jme3.app.SimpleApplication;
-import com.jme3.scene.Node;
 
 public class TestJMEApplication extends SimpleApplication {
 	ImpactGUI impactGUI;
 	@Override
 	public void simpleInitApp() {
-		impactGUI = new ImpactGUI(new JMERenderDevice(guiNode,assetManager),new JMEInputDevice());
+		settings.setStencilBits(8);
+		impactGUI = new ImpactGUI(new JMERenderDevice(guiNode,assetManager,renderer),new JMEInputDevice());
 		impactGUI.getSceneManager().createScene("testScene");
 		impactGUI.getSceneManager().setCurrentScene("testScene");
 		Panel p = new PanelImpl(impactGUI);
-		p.setParent(impactGUI.getSceneManager().getCurrentScene().getRootNode());
-		p.setLocalTranslation(200,200);
-		System.out.println(((Node)((Node)guiNode.getChild(0)).getChild(0)).getChild(0));
+		impactGUI.getSceneManager().getCurrentScene().getRootNode().attachChild(p);
+		p.setPosition(50,50);
+		p.setSize(100,100);
+		Panel p2 = new PanelImpl(impactGUI);
+		p.attachChild(p2);
+		p2.setSize(200,200);
+		p2.setPosition(100,100);
 	}
 	
 	public static void main(String[] args) {

@@ -5,48 +5,44 @@
 */
 package com.gmail.mararok.igui.scene;
 
-import javax.vecmath.Vector3f;
+import com.gmail.mararok.igui.util.Rectangle;
 
-import com.gmail.mararok.igui.style.Styleable;
-
-public interface SceneNode extends Styleable {
+public interface SceneNode {
 	
 	String getID();
 	void setID(String newID);
 	
+	Rectangle getBoundsInLocal();
+	
 	ParentSceneNode getParent();
-	boolean hasParent();
 	void setParent(ParentSceneNode newParent);
+	boolean hasParent();
 	
 	Scene getScene();
 	
-	void setVisible(boolean visible);
 	void show();
 	void hide();
 	boolean isVisible();
 	
-	void setEnabled(boolean enabled);
-	void enable();
-	void disable();
-	boolean isEnabled();
-	
 	void onShow();
 	void onHide();
 	
-	void onEnable();
-	void onDisable();
+	int getX();
+	void setX(int newX);
 	
-	Vector3f getLocalTranslation();
-	void setLocalTranslation(float x, float y);
-	void setLocalTranslation(float x, float y, float z);
+	int getY();
+	void setY(int newY);
 	
-//	Quat4f getLocalRotation();
-//	void setLocalRotationX(float angle);
-//	void setLocalRotationY(float angle);
-//	void setLocalRotationZ(float angle);
-//	void setLocalRotation(float xaxis, float yaxis, float zaxis, float angle);
+	void setPosition(int newX, int newY);
 	
-	Vector3f getLocalScale();
-	void setLocalScale(float scale);
-	void setLocalScale(float xscale, float yscale, float zscale);
+	int getZ();
+	void setZ(int newZ);
+	
+	int getWidth();
+	void setWidth(int newWidth);
+	
+	int getHeight();
+	void setHeight(int newHeight);
+	
+	void setSize(int newWidth, int newHeight);
 }

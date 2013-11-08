@@ -13,13 +13,13 @@ import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 import com.gmail.mararok.igui.scene.SceneNode;
 
-public class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNode {
+public abstract class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNode {
 	private List<SceneNode> children;
-	private static int parentCounter = -1;
+	private static int parentCounter = 0;
 	public ParentSceneNodeImpl(ImpactGUI gui) {
 		super(gui);
 		children = new LinkedList<SceneNode>();
-		mainVisualNode = gui.getRenderDevice().createParentNode("PARENT:"+parentCounter);
+		mainVisualNode = gui.getRenderDevice().createParentNode("PARENT:"+(++parentCounter));
 	}
 	
 	public void attachChild(SceneNode child) {
@@ -27,7 +27,7 @@ public class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNod
 			throw new IllegalArgumentException(
 					"Can't attach null child to parent: "+this.getID());
 		}
-		
+	
 		child.setParent(this);
 		children.add(child);
 	}

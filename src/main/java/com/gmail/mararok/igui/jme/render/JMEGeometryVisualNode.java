@@ -14,10 +14,9 @@ import com.jme3.scene.VertexBuffer.Type;
 
 class JMEGeometryVisualNode extends JMEVisualNode implements GeometryVisualNode {
 	private MemoryMesh mesh;
-	private JMERenderDevice renderDevice;
 	JMEGeometryVisualNode(String id, JMERenderDevice renderDevice) {
+		super(renderDevice);
 		spatial = new Geometry(id);
-		this.renderDevice = renderDevice;
 		getGeometry().setMaterial(renderDevice.getDefaultMaterial());
 		getGeometry().setMesh(new Mesh());
 	}

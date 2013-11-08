@@ -20,6 +20,7 @@ public interface RenderDevice {
 	
 	int getWidth();
 	int getHeight();
+	void resize(int newWidth, int newHeight);
 	
 	ParentVisualNode getRootGUINode();
 }

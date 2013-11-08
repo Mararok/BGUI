@@ -14,6 +14,7 @@ import com.gmail.mararok.igui.render.MemoryMesh;
 import com.gmail.mararok.igui.render.QuadMemoryMesh;
 import com.gmail.mararok.igui.render.RGBAColor;
 import com.gmail.mararok.igui.spi.render.Font;
+import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
@@ -29,7 +30,8 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 	
 	private int currentIndexOffset = 0;
 	
-	JMETextVisualNode(String id) {
+	JMETextVisualNode(String id, RenderDevice renderDevice) {
+		super(renderDevice);
 		spatial = new Geometry(id,new Mesh());
 		memoryMeshes = new LinkedList<QuadMemoryMesh>();
 		setColor(new RGBAColor());

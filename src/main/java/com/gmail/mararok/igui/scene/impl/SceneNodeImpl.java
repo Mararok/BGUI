@@ -5,33 +5,26 @@
 */
 package com.gmail.mararok.igui.scene.impl;
 
-import java.util.List;
-
-import javax.vecmath.Vector3f;
-
 import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.scene.SceneNode;
 import com.gmail.mararok.igui.spi.render.ParentVisualNode;
-import com.gmail.mararok.igui.style.Styleable;
+import com.gmail.mararok.igui.util.Rectangle;
 
 public abstract class SceneNodeImpl implements SceneNode {
 	private String id;
+	private Rectangle localBounds;
+	private int z;
+	private boolean visible;
 	private ParentSceneNode parent;
 	
 	protected ParentVisualNode mainVisualNode;
-	
-	private boolean visible;
-	private boolean enabled;
-	
-	private String style;
-	private List<String> styleClasses;
-	
 	private ImpactGUI gui;
 	
 	public SceneNodeImpl(ImpactGUI gui) {
 		this.gui = gui;
+		localBounds = new Rectangle(0,0,0,0);
 	}
 	
 	@Override
@@ -42,6 +35,11 @@ public abstract class SceneNodeImpl implements SceneNode {
 	@Override
 	public void setID(String newID) {
 		id = newID;
+	}
+	
+	@Override
+	public Rectangle getBoundsInLocal() {
+		return localBounds;
 	}
 	
 	@Override
@@ -66,31 +64,6 @@ public abstract class SceneNodeImpl implements SceneNode {
 	}
 	
 	@Override
-	public String getStyle() {
-		return style;
-	}
-	
-	@Override
-	public void setStyle(String newStyle) {
-		style = newStyle;
-	}
-	
-	@Override
-	public List<String> getStyleClasses() {
-		return styleClasses;
-	}
-	
-	@Override
-	public Styleable getStyleableParent() {
-		return parent;
-	}
-	
-	@Override
-	public void setVisible(boolean visible) {
-		this.visible = visible;
-	}
-	
-	@Override
 	public void show() {
 		setVisible(true);
 	}
@@ -100,34 +73,24 @@ public abstract class SceneNodeImpl implements SceneNode {
 		setVisible(false);
 	}
 	
+	protected void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	
 	@Override
 	public boolean isVisible() {
+		if (hasParent()) {
+			return getParent().isVisible()&&visible;
+		}
+		
 		return visible;
 	}
 	
 	@Override
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-	
-	@Override
-	public void enable() {
-		setEnabled(true);
-	}
-	
-	@Override
-	public void disable() {
-		setEnabled(false);
-	}
-	
-	@Override
-	public boolean isEnabled() {
-		return enabled;
-	}
-	
-	@Override
 	public Scene getScene() {
-		return getParent().getScene();
+		if (hasParent())
+			return getParent().getScene();
+		return null;
 	}
 	
 	@Override
@@ -141,71 +104,71 @@ public abstract class SceneNodeImpl implements SceneNode {
 	}
 	
 	@Override
-	public void onEnable() {
+	public int getX() {
+		return localBounds.x;
+	}
+
+	@Override
+	public void setX(int newX) {
+		localBounds.x = newX;
 		
 	}
-	
+
 	@Override
-	public void onDisable() {
+	public int getY() {
+		return localBounds.y;
+	}
+
+	@Override
+	public void setY(int newY) {
+		localBounds.y = newY;
 		
 	}
-	
+
 	@Override
-	public Vector3f getLocalTranslation() {
-		return mainVisualNode.getLocalTranslation();
+	public void setPosition(int newX, int newY) {
+		setX(newX);
+		setY(newY);
 	}
-	
+
 	@Override
-	public void setLocalTranslation(float x, float y) {
-		setLocalTranslation(x,y,1f);
+	public int getZ() {
+		return z;
 	}
-	
+
 	@Override
-	public void setLocalTranslation(float x, float y, float z) {
-		mainVisualNode.setLocalTranslation(x,y,z);
+	public void setZ(int newZ) {
+		z = newZ;
 	}
-	
-//	@Override
-//	public Quat4f getLocalRotation() {
-//		return visualNode.getLocalRotation();
-//	}
-//	
-//	@Override
-//	public void setLocalRotationX(float angle) {
-//		setLocalRotation(1f,0f,0f,angle);
-//	}
-//	
-//	@Override
-//	public void setLocalRotationY(float angle) {
-//		setLocalRotation(0f,1f,0f,angle);
-//	}
-//	
-//	@Override
-//	public void setLocalRotationZ(float angle) {
-//		setLocalRotation(0f,0f,1f,angle);
-//	}
-//	
-//	@Override
-//	public void setLocalRotation(float xaxis, float yaxis, float zaxis, float angle) {
-//		visualNode.setLocalRotation(xaxis,yaxis,zaxis,angle);
-//	}
-	
+
 	@Override
-	public Vector3f getLocalScale() {
-		return mainVisualNode.getLocalScale();
+	public int getWidth() {
+		return localBounds.width;
 	}
-	
+
 	@Override
-	public void setLocalScale(float scale) {
-		setLocalScale(scale,scale,scale);
+	public void setWidth(int newWidth) {
+		localBounds.width = newWidth;
 	}
-	
+
 	@Override
-	public void setLocalScale(float xscale, float yscale, float zscale) {
-		mainVisualNode.setLocalScale(xscale,yscale,zscale);
+	public int getHeight() {
+		return localBounds.height;
 	}
-	
+
+	@Override
+	public void setHeight(int newHeight) {
+		localBounds.height = newHeight;
+	}
+
+	@Override
+	public void setSize(int newWidth, int newHeight) {
+		setWidth(newWidth);
+		setHeight(newHeight);
+	}
+
 	protected ImpactGUI getGUI() {
 		return gui;
 	}
+
 }
