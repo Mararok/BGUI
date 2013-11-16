@@ -3,9 +3,9 @@
  * all rights reserved
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
 */
-package com.gmail.mararok.igui.style;
+package com.gmail.mararok.igui.style.attribute;
 
-public enum StyleAttributeValueType {
+public enum AttributeValueType {
 	STRING,
 	INT,
 	FLOAT,

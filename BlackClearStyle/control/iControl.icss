@@ -1,0 +1,7 @@
+return {
+	".iControl" {
+		"color":"white",
+		"font":"arial",
+		"fontSize": 12
+	}
+};

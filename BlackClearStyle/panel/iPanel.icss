@@ -1,0 +1,7 @@
+return {
+	"iControl.iPanel": {
+		"backgroundColor": "black",
+		"borderRadius": "5",
+		"opacity": 70
+	}
+};

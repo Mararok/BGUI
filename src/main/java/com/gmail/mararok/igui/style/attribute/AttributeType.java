@@ -3,22 +3,24 @@
  * all rights reserved
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
 */
-package com.gmail.mararok.igui.style;
+package com.gmail.mararok.igui.style.attribute;
 
-public enum StyleAttributeType {
-	translation,
-	rotate,
-	scale,
-	
-	width,
-	height,
-	
+public enum AttributeType {
+	halign,
+	valign,
 	color,
-	textAlign,
 	
 	background,
 	backgroundColor,
 	backgroundImage,
+	
+	minWidth,
+	width,
+	maxWidth,
+	
+	minHeight,
+	height,
+	maxHeight,
 	
 	border,
 	borderColor,
@@ -28,7 +30,6 @@ public enum StyleAttributeType {
 	opacity,
 	
 	font,
-	fontFamily,
 	fontSize,
 	fontStyle,
 	

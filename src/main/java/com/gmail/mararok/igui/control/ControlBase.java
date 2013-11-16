@@ -6,45 +6,11 @@
 package com.gmail.mararok.igui.control;
 
 import com.gmail.mararok.igui.ImpactGUI;
-import com.gmail.mararok.igui.scene.impl.ParentSceneNodeImpl;
-import com.jme3.math.Vector2f;
 
-public abstract class ControlBase extends ParentSceneNodeImpl implements Control {
-	private Vector2f position;
-	private int width;
-	private int height;
+public abstract class ControlBase extends StyleableRegion implements Control {
 	
 	public ControlBase(ImpactGUI gui) {
 		super(gui);
-		position = new Vector2f();
-	}
-
-	@Override
-	public Vector2f getPosition() {
-		return position.clone();
-	}
-	
-	@Override
-	public void setPosition(int newX, int newY) {
-		position.set(newX,newY);
-		setTranslation(getWidth()/2+newX,getHeight()/2+newY);
-	}
-	
-	@Override
-	public int getWidth() {
-		return width;
-	}
-	
-	@Override
-	public int getHeight() {
-		return height;
-	}
-	
-	@Override
-	public void setSize(int newWidth, int newHeight) {
-		width = newWidth;
-		height = newHeight;
-		setScale(newWidth,newHeight,1);
 	}
 	
 	@Override
