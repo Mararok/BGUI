@@ -5,6 +5,6 @@
 */
 package com.gmail.mararok.igui.style.attribute;
 
-public interface Gradient {
+public interface Gradient extends Attribute {
 
 }

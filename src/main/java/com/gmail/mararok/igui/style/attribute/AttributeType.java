@@ -6,15 +6,15 @@
 package com.gmail.mararok.igui.style.attribute;
 
 public enum AttributeType {
-	halign,
-	valign,
-	color,
+	halign(HAlignAttribute.class),
+	valign(VAlignAttribute.class),
+	color(ColorAttribute.class),
 	
-	background,
-	backgroundColor,
-	backgroundImage,
+	background(BackgroundAttribute.class),
+	backgroundColor(background),
+	backgroundImage(background);
 	
-	minWidth,
+	/*minWidth,
 	width,
 	maxWidth,
 	
@@ -43,6 +43,34 @@ public enum AttributeType {
 	paddingLeft,
 	paddingTop,
 	paddingRgiht,
-	paddingBottom,
+	paddingBottom;*/
+
+	private Class<? extends Attribute> attributeClass;
+	private AttributeType mainType;
+	
+	private AttributeType(AttributeType mainType) {
+		this.mainType = mainType;
+	}
+	
+	private AttributeType(Class<? extends Attribute> attributeClass) {
+		this.attributeClass = attributeClass;
+	}
+	
+	public Attribute createValue() {
+		try {
+			return (Attribute) attributeClass.newInstance();
+		} catch (InstantiationException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public AttributeType getMainType() {
+		return mainType;
+	}
+	
+	public boolean isMain() {
+		return ( mainType == null );
+	}
 	
 }

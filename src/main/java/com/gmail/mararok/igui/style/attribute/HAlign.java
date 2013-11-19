@@ -6,5 +6,5 @@
 package com.gmail.mararok.igui.style.attribute;
 
 public enum HAlign {
-	LEFT,CENTER,RIGHT
+	LEFT,CENTER,RIGHT;
 }

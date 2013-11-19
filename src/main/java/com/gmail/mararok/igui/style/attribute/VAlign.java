@@ -5,7 +5,7 @@
 */
 package com.gmail.mararok.igui.style.attribute;
 
-public enum VAlign {
+public enum VAlign implements Attribute {
 	TOP,
 	CENTER,
 	BOTTOM

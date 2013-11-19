@@ -7,7 +7,7 @@ package com.gmail.mararok.igui.control;
 
 import com.gmail.mararok.igui.ImpactGUI;
 
-public abstract class ControlBase extends StyleableRegion implements Control {
+public abstract class ControlBase extends Region implements Control {
 	
 	public ControlBase(ImpactGUI gui) {
 		super(gui);
