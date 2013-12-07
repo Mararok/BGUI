@@ -7,15 +7,10 @@ package com.gmail.mararok.igui.style.attribute;
 
 import com.gmail.mararok.igui.style.Style;
 
-public class MarginAttribute extends Attribute {
-	private int left;
-	private int top;
-	
-	private int right;
-	private int bottom;
+public class OpactityAttribute extends Attribute {
 
-	public MarginAttribute(Style parentStyle) {
+	public OpactityAttribute(Style parentStyle) {
 		super(parentStyle);
 	}
-	
+
 }

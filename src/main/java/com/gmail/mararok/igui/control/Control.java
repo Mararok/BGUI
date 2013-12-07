@@ -20,15 +20,23 @@ public interface Control extends ParentSceneNode {
 	void onKeyDown();
 	void onKeyUp();
 	
-	void onChange();
+	void onChanged();
 	void onSelect();
 	
 	void setEnabled(boolean enabled);
 	void enable();
 	void disable();
-	boolean isEnabled();
+	boolean isEnable();
 	
 	void onEnable();
 	void onDisable();
+	
+	void setVisibled(boolean visible);
+	void show();
+	void hide();
+	boolean isVisible();
+	
+	void onShow();
+	void onHide();
 	
 }

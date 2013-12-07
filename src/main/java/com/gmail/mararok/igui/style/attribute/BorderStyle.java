@@ -11,5 +11,5 @@ public enum BorderStyle {
 	DASHED,
 	DOUBLE,
 	INSET,
-	OUTSET,
+	OUTSET
 }

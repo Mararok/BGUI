@@ -6,26 +6,36 @@
 package com.gmail.mararok.igui.style.attribute;
 
 import com.gmail.mararok.igui.render.RGBAColor;
+import com.gmail.mararok.igui.style.Style;
 
-public class Border {
+public class BorderAttribute extends Attribute {
+
 	private RGBAColor color = RGBAColor.BLACK;
 	private BorderStyle style = BorderStyle.SOLID;
 	private int radius;
 	
-	void setColor(RGBAColor newColor) {
-		color = newColor;
+	public BorderAttribute(Style parentStyle) {
+		super(parentStyle);
 	}
 	
 	RGBAColor getColor() {
 		return color;
 	}
 	
-	void setStyle(BorderStyle newStyle) {
-		style = newStyle;
+	void setColor(RGBAColor newColor) {
+		color = newColor;
 	}
 	
 	BorderStyle getStyle() {
 		return style;
+	}
+	
+	void setStyle(BorderStyle newStyle) {
+		style = newStyle;
+	}
+	
+	int getRadius() {
+		return radius;
 	}
 	
 	void setRadius(int newRadius) {
@@ -33,8 +43,5 @@ public class Border {
 			radius = newRadius;
 		}
 	}
-	
-	int getRadius() {
-		return radius;
-	}
+
 }

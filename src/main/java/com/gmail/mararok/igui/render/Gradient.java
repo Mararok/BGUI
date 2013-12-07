@@ -3,7 +3,8 @@
  * all rights reserved
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
 */
-package com.gmail.mararok.igui.style;
+package com.gmail.mararok.igui.render;
 
-public class Theme {
+public class Gradient {
+
 }

@@ -5,30 +5,21 @@
 */
 package com.gmail.mararok.igui.style.attribute;
 
+import com.gmail.mararok.igui.control.ControlRegion;
 import com.gmail.mararok.igui.style.Style;
 
 public abstract class Attribute {
 	private Style parentStyle;
-	private String value;
 	
 	public Attribute(Style parentStyle) {
 		this.parentStyle = parentStyle;
 	}
 	
-	public String getValue() {
-		return value;
+	public Style getParent() {
+		return parentStyle;
 	}
 	
-	public void setValue(AttributeType type, String newValue) throws IllegalArgumentException {
-		if (type.isMain()) {
-			value = newValue;
-		} else {
-			throw new IllegalArgumentException("Attribute type: "+type+" isn't main type");
-		}
-	}
-	
-	public void setValue(String newValue) throws IllegalArgumentException {
-		value = newValue;
-	}
+	public abstract void setValue(AttributeValue newValue);
 
+	public abstract void updateRegion(ControlRegion region);
 }

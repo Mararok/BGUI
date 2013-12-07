@@ -6,11 +6,11 @@
 package com.gmail.mararok.igui.sc.impl;
 
 import com.gmail.mararok.igui.ImpactGUI;
-import com.gmail.mararok.igui.control.Region;
+import com.gmail.mararok.igui.control.ControlRegion;
 import com.gmail.mararok.igui.sc.Label;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 
-public class LabelImpl extends Region implements Label {
+public class LabelImpl extends ControlRegion implements Label {
 	private TextVisualNode labelTextNode;
 	private static int nextLabelID = 0;
 	

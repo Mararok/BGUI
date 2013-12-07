@@ -5,21 +5,44 @@
 */
 package com.gmail.mararok.igui.style;
 
-import java.util.HashMap;
+import java.util.List;
 
-public class StyleClass {
+import com.gmail.mararok.igui.control.ControlRegion;
+import com.gmail.mararok.igui.style.attribute.Attribute;
+import com.gmail.mararok.igui.style.attribute.AttributeType;
+
+public class StyleClass extends Style {
 	private String name;
-	private Style style;
-	
 	private StyleClass superClass;
-	private HashMap<String, StyleClass> subclasses;
+	private StyleClass[] subClasses;
+	//private EnumMap<PseudoClass,Style> pseudoClasses;
 	
-	public StyleClass(String className) {
-		name = className;
-		style = new Style();
+	private List<ControlRegion> regions;
+	
+	public StyleClass(String name, StyleClass superClass) {
+		this(name,superClass,null);
 	}
 	
-	public Style getStyle() {
-		return style;
+	public StyleClass(String name, StyleClass superClass, StyleClass[] subClasses) {
+		this.name = name;
+		this.superClass = superClass;
+		this.subClasses = subClasses;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public StyleClass getSuperClass() {
+		return superClass;
+	}
+	
+	StyleClass[] getSubClasses() {
+		return subClasses;
+	}
+	
+	@Override
+	public void updateAttribute(AttributeType attributeType) {
+		
 	}
 }

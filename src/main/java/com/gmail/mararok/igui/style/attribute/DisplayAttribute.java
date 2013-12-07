@@ -5,18 +5,17 @@
 */
 package com.gmail.mararok.igui.style.attribute;
 
-import com.gmail.mararok.igui.render.RGBAColor;
 import com.gmail.mararok.igui.style.Style;
 
-public class ColorAttribute extends Attribute {
-	private RGBAColor color;
+public class DisplayAttribute extends Attribute {
 	
-	public ColorAttribute(Style parentStyle) {
+	public DisplayAttribute(Style parentStyle) {
 		super(parentStyle);
 	}
-	
-	public RGBAColor getColor() {
-		return color;
+
+	@Override
+	public void setValue(AttributeValue newValue) {
+
 	}
-	
+
 }

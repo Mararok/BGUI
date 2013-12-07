@@ -5,14 +5,10 @@
 */
 package com.gmail.mararok.igui.scene;
 
-import com.gmail.mararok.igui.util.Rectangle;
-
 public interface SceneNode {
 	
 	String getID();
 	void setID(String newID);
-	
-	Rectangle getBoundsInLocal();
 	
 	ParentSceneNode getParent();
 	void setParent(ParentSceneNode newParent);
@@ -20,7 +16,7 @@ public interface SceneNode {
 	
 	Scene getScene();
 	
-	void show();
+	/*void show();
 	void hide();
 	boolean isVisible();
 	
@@ -44,5 +40,5 @@ public interface SceneNode {
 	int getHeight();
 	void setHeight(int newHeight);
 	
-	void setSize(int newWidth, int newHeight);
+	void setSize(int newWidth, int newHeight);*/
 }

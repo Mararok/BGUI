@@ -5,6 +5,9 @@
 */
 package com.gmail.mararok.igui.style.attribute;
 
-public interface Gradient extends Attribute {
-
+public enum DisplayStyle {
+	NONE,
+	HIDEN,
+	INLINE,
+	BLOCK;
 }

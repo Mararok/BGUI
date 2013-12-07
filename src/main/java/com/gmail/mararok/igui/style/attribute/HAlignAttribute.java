@@ -9,7 +9,7 @@ import com.gmail.mararok.igui.style.Style;
 
 public class HAlignAttribute extends Attribute {
 	
-	private HAlign align = HAlign.LEFT;
+	private HAlign align = HAlign.left;
 	
 	public HAlignAttribute(Style parentStyle) {
 		super(parentStyle);

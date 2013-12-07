@@ -7,111 +7,71 @@ package com.gmail.mararok.igui.control;
 
 import com.gmail.mararok.igui.ImpactGUI;
 
-public abstract class ControlBase extends Region implements Control {
+public abstract class ControlBase extends ControlRegion implements Control {
+	private boolean enabled;
+	private boolean visibled;
 	
 	public ControlBase(ImpactGUI gui) {
 		super(gui);
 	}
-	
-	@Override
-	public void onClick() {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
-	public void onDoubleClick() {
-		// TODO Auto-generated method stub
+	public void setEnabled(boolean enable) {
+		if (enabled == enable) {
+			return;
+		}
 		
-	}
-
-	@Override
-	public void onMouseDown() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onMouseUp() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onMouseMove() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onMouseOver() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onKeyPress() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onKeyDown() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onKeyUp() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onChange() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void onSelect() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setEnabled(boolean enabled) {
-		// TODO Auto-generated method stub
-		
+		enabled = enable;
+		if (enable) {
+			onEnable();
+		} else {
+			onDisable();
+		}
 	}
 
 	@Override
 	public void enable() {
-		// TODO Auto-generated method stub
-		
+		setEnabled(true);
 	}
 
 	@Override
 	public void disable() {
-		// TODO Auto-generated method stub
-		
+		setEnabled(false);
 	}
 
 	@Override
-	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean isEnable() {
+		return enabled;
+	}
+	
+	
+	@Override
+	public void setVisibled(boolean visible) {
+		if (visibled == visible) {
+			return;
+		}
+		
+		visibled = visible;
+		if (visible) {
+			onShow();
+		} else {
+			onHide();
+		}
 	}
 
 	@Override
-	public void onEnable() {
-		// TODO Auto-generated method stub
-		
+	public void show() {
+		setVisibled(true);
 	}
 
 	@Override
-	public void onDisable() {
-		// TODO Auto-generated method stub
-		
+	public void hide() {
+		setVisibled(false);
 	}
+
+	@Override
+	public boolean isVisible() {
+		return enabled;
+	}
+
 }

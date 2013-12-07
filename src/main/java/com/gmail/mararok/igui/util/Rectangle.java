@@ -5,34 +5,52 @@
 */
 package com.gmail.mararok.igui.util;
 
-public class Rectangle implements Cloneable {
-	public int x;
-	public int y;
-	public int width;
-	public int height;
+public class Rectangle {
+	private int x;
+	private int y;
+	private int width;
+	private int height;
 	
-	public Rectangle(int x, int y, int width, int height) {
-		this.x = x;
-		this.y = y;
-		
-		this.width = width;
-		this.height = height;
+	public int getX() {
+		return x;
 	}
 	
-	public Rectangle clone() {
-        try {
-            return (Rectangle) super.clone();
-        } catch (CloneNotSupportedException e) {        
-            e.printStackTrace();
-            throw new RuntimeException();
-        }
-    }
-
-	public void set(int newX, int newY, int newWidth, int newHeight) {
+	public void setX(int newX) {
 		x = newX;
+	}
+	
+	public int getY() {
+		return y;
+	}
+	
+	public void setY(int newY) {
 		y = newY;
+	}
+	
+	public void setPosition(int newX, int newY) {
+		setX(newX);
+		setY(newY);
+	}
+	
+	public int getWidth() {
+		return width;
+	}
+	
+	public void setWidth(int newWidth) {
 		width = newWidth;
+	}
+	
+	public int getHeight() {
+		return height;
+	}
+	
+	public void setHeight(int newHeight) {
 		height = newHeight;
+	}
+	
+	public void setSize(int newWidth, int newHeight) {
+		setWidth(newWidth);
+		setHeight(newHeight);
 	}
 	
 }

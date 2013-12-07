@@ -6,17 +6,16 @@
 package com.gmail.mararok.igui.style.attribute;
 
 import com.gmail.mararok.igui.render.RGBAColor;
+import com.gmail.mararok.igui.spi.render.Font;
 import com.gmail.mararok.igui.style.Style;
 
-public class ColorAttribute extends Attribute {
+public class FontAttribute extends Attribute {
+	private Font font;
 	private RGBAColor color;
+	private FontStyle style;
 	
-	public ColorAttribute(Style parentStyle) {
+	public FontAttribute(Style parentStyle) {
 		super(parentStyle);
 	}
-	
-	public RGBAColor getColor() {
-		return color;
-	}
-	
+
 }

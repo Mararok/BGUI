@@ -5,58 +5,62 @@
 */
 package com.gmail.mararok.igui.style;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.EnumMap;
 
-import com.gmail.mararok.igui.control.Region;
+import com.gmail.mararok.igui.control.ControlRegion;
 import com.gmail.mararok.igui.style.attribute.Attribute;
 import com.gmail.mararok.igui.style.attribute.AttributeType;
+import com.gmail.mararok.igui.style.attribute.AttributeValue;
 
 public class Style {
-	private HashMap<AttributeType,Attribute> attributes;
+	private EnumMap<AttributeType,Attribute> attributes;
+	
+	private ControlRegion region;
 	
 	public Style() {
-		attributes = new HashMap<AttributeType,Attribute>();
+		attributes = new EnumMap<AttributeType,Attribute>(AttributeType.class);
 	}
 	
-	public Attribute getAttribute(AttributeType attributeType) {
-		if (attributeType.isMain())
-			return attributes.get(attributeType);
-		else {
-			return attributes.get(attributeType.getMainType());
-		}
+	public Style(ControlRegion region) {
+		attributes = new EnumMap<AttributeType,Attribute>(AttributeType.class);
+		this.region = region;
 	}
 	
-	public Attribute addAttribute(AttributeType attributeType) {
-		if (attributeType.isMain()) {
-			return attributes.put(attributeType,attributeType.createValue());
-		} else {
-			return attributes.put(attributeType.getMainType(),attributeType.createValue());
-		}
+	public Attribute getAttribute(AttributeType type) {
+		return attributes.get(type);
 	}
 	
-	public void setAttribute(AttributeType attributeType, String newValue) {
-		Attribute attribute = getAttribute(attributeType);
+	public boolean hasAttribute(AttributeType type)  {
+		return getAttribute(type) != null;
+	}
+	
+	public void setAttribute(AttributeType type, AttributeValue newValue) {
+		Attribute attribute = getAttribute(type);
 		if (attribute == null) {
-			attribute = addAttribute(attributeType);
-			attribute.setValue(newValue);
-			
-			notifyRegions(attributeType);
+			if (newValue != null) {
+				addAttribute(type).setValue(newValue);
+			}
+		} else {
+			if (newValue == null) {
+				removeAttribute(type);
+			} else {
+				attribute.setValue(newValue);
+			}
 		}
+		updateAttribute(type);
 	}
 	
-	private void notifyRegions(AttributeType attributeType) {
-		for (Region region : regionsUsedStyle) {
-			region.updateStyleAttribute(attributeType);
-		}
+	public void updateAttribute(AttributeType type) {
+		region.updateAttribute(type);
+	}
+	
+	private Attribute addAttribute(AttributeType attributeType) {
+		return attributes.put(attributeType,attributeType.createValue());
+	}
+	
+	private void removeAttribute(AttributeType attributeType) {
+		attributes.remove(attributeType);
 	}
 
-	public void addRegion(Region region) {
-		regionsUsedStyle.add(region);
-	}
-	
-	public void removeRegion(Region region) {
-		regionsUsedStyle.remove(region);
-	}
 
 }

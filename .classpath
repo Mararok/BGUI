@@ -28,5 +28,10 @@
 	<classpathentry kind="lib" path="/GalacticCraft/libs/jME3-lwjgl.jar"/>
 	<classpathentry kind="lib" path="/GalacticCraft/libs/jinput.jar"/>
 	<classpathentry kind="lib" path="/GalacticCraft/libs/lwjgl.jar"/>
+	<classpathentry kind="lib" path="libs/trove-3.0.3.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/ImpactGUI/libs/trove-javadoc.zip!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
