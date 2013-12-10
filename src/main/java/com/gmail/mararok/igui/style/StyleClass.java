@@ -7,9 +7,7 @@ package com.gmail.mararok.igui.style;
 
 import java.util.List;
 
-import com.gmail.mararok.igui.control.ControlRegion;
-import com.gmail.mararok.igui.style.attribute.Attribute;
-import com.gmail.mararok.igui.style.attribute.AttributeType;
+import com.gmail.mararok.igui.control.RegionImpl;
 
 public class StyleClass extends Style {
 	private String name;
@@ -17,7 +15,7 @@ public class StyleClass extends Style {
 	private StyleClass[] subClasses;
 	//private EnumMap<PseudoClass,Style> pseudoClasses;
 	
-	private List<ControlRegion> regions;
+	private List<RegionImpl> regions;
 	
 	public StyleClass(String name, StyleClass superClass) {
 		this(name,superClass,null);
@@ -39,10 +37,5 @@ public class StyleClass extends Style {
 	
 	StyleClass[] getSubClasses() {
 		return subClasses;
-	}
-	
-	@Override
-	public void updateAttribute(AttributeType attributeType) {
-		
 	}
 }

@@ -3,10 +3,8 @@
  * all rights reserved
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
 */
-package com.gmail.mararok.igui.style.attribute;
+package com.gmail.mararok.igui.style.attributes;
 
-public enum VAlign {
-	top,
-	center,
-	bottom
+public enum HAlign {
+	left,center,right;
 }

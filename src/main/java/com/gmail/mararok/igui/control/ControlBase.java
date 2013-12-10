@@ -7,9 +7,9 @@ package com.gmail.mararok.igui.control;
 
 import com.gmail.mararok.igui.ImpactGUI;
 
-public abstract class ControlBase extends ControlRegion implements Control {
+public abstract class ControlBase extends RegionImpl implements Control {
 	private boolean enabled;
-	private boolean visibled;
+	private boolean visible;
 	
 	public ControlBase(ImpactGUI gui) {
 		super(gui);
@@ -23,9 +23,9 @@ public abstract class ControlBase extends ControlRegion implements Control {
 		
 		enabled = enable;
 		if (enable) {
-			onEnable();
+			//onEnable();
 		} else {
-			onDisable();
+			//onDisable();
 		}
 	}
 
@@ -46,27 +46,27 @@ public abstract class ControlBase extends ControlRegion implements Control {
 	
 	
 	@Override
-	public void setVisibled(boolean visible) {
-		if (visibled == visible) {
+	public void setVisible(boolean visible) {
+		if (this.visible == visible) {
 			return;
 		}
 		
-		visibled = visible;
+		this.visible = visible;
 		if (visible) {
-			onShow();
+			//onShow();
 		} else {
-			onHide();
+			//onHide();
 		}
 	}
 
 	@Override
 	public void show() {
-		setVisibled(true);
+		setVisible(true);
 	}
 
 	@Override
 	public void hide() {
-		setVisibled(false);
+		setVisible(false);
 	}
 
 	@Override

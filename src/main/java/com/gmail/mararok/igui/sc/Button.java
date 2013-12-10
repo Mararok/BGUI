@@ -5,7 +5,7 @@
 */
 package com.gmail.mararok.igui.sc;
 
-public interface Button {
+public interface Button extends Label {
 	void setCaption(String newCaption);
 	String getCaption();
 }

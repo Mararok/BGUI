@@ -83,6 +83,7 @@ public abstract class AWTFont implements com.gmail.mararok.igui.spi.render.Font 
 		}
 	}
 
+	setNativeImage
 	@Override
 	public float getWidth(char character) {
 		return getGlyph(character).getWidth();

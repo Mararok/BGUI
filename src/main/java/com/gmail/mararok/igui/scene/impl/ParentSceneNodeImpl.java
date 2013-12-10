@@ -18,7 +18,6 @@ public abstract class ParentSceneNodeImpl extends SceneNodeImpl implements Paren
 	private static int parentCounter = 0;
 	public ParentSceneNodeImpl(ImpactGUI gui) {
 		super(gui);
-		children = new LinkedList<SceneNode>();
 		mainVisualNode = gui.getRenderDevice().createParentNode("PARENT:"+(++parentCounter));
 	}
 	
@@ -28,6 +27,9 @@ public abstract class ParentSceneNodeImpl extends SceneNodeImpl implements Paren
 					"Can't attach null child to parent: "+this.getID());
 		}
 	
+		if (children == null) {
+			children = new LinkedList<SceneNode>();
+		}
 		child.setParent(this);
 		children.add(child);
 	}
@@ -44,6 +46,9 @@ public abstract class ParentSceneNodeImpl extends SceneNodeImpl implements Paren
 		}
 		
 		children.remove(child);
+		if (children.size() == 0) {
+			children = null;
+		}
 		child.setParent(null);
 	}
 	

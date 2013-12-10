@@ -7,21 +7,21 @@ package com.gmail.mararok.igui.style;
 
 import java.util.EnumMap;
 
-import com.gmail.mararok.igui.control.ControlRegion;
-import com.gmail.mararok.igui.style.attribute.Attribute;
-import com.gmail.mararok.igui.style.attribute.AttributeType;
-import com.gmail.mararok.igui.style.attribute.AttributeValue;
+import com.gmail.mararok.igui.control.RegionImpl;
+import com.gmail.mararok.igui.style.attributes.Attribute;
+import com.gmail.mararok.igui.style.attributes.AttributeType;
+import com.gmail.mararok.igui.style.attributes.AttributeValue;
 
 public class Style {
 	private EnumMap<AttributeType,Attribute> attributes;
 	
-	private ControlRegion region;
+	private RegionImpl region;
 	
 	public Style() {
 		attributes = new EnumMap<AttributeType,Attribute>(AttributeType.class);
 	}
 	
-	public Style(ControlRegion region) {
+	public Style(RegionImpl region) {
 		attributes = new EnumMap<AttributeType,Attribute>(AttributeType.class);
 		this.region = region;
 	}
@@ -50,8 +50,8 @@ public class Style {
 		updateAttribute(type);
 	}
 	
-	public void updateAttribute(AttributeType type) {
-		region.updateAttribute(type);
+	private void updateAttribute(AttributeType type) {
+		getAttribute(type).updateRegion(region);
 	}
 	
 	private Attribute addAttribute(AttributeType attributeType) {

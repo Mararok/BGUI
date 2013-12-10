@@ -26,6 +26,7 @@ class JMEFont extends AWTFont implements Font {
 		ImageToAwt.convert(fontImage,Format.RGBA8,data);
 		nativeFontImage = new JMEImage(new Texture2D(
 			new com.jme3.texture.Image(Format.RGBA8,fontImage.getWidth(),fontImage.getHeight(),data)));
+		setNativeImage(nativeFontImage);
 	}
 	
 	@Override

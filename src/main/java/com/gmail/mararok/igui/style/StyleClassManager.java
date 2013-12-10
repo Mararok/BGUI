@@ -5,13 +5,14 @@
 */
 package com.gmail.mararok.igui.style;
 
-import java.util.HashMap;
+import gnu.trove.map.hash.THashMap;
+
 
 public class StyleClassManager {
-	private HashMap<String,Style> styleClasses;
+	private THashMap<String,Style> styleClasses;
 	
 	public StyleClassManager() {
-		styleClasses = new HashMap<String,Style>();
+		styleClasses = new THashMap<String,Style>();
 	}
 	
 	public void addClass(String className, Style classStyle) {

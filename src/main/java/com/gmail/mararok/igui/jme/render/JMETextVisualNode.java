@@ -23,8 +23,8 @@ import com.jme3.util.BufferUtils;
 
 class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 	private Font font;
-	private RGBAColor color;
-	private String text;
+	private RGBAColor color = RGBAColor.WHITE;
+	private String text = "";
 	
 	private LinkedList<QuadMemoryMesh> memoryMeshes;
 	
@@ -34,7 +34,6 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 		super(renderDevice);
 		spatial = new Geometry(id,new Mesh());
 		memoryMeshes = new LinkedList<QuadMemoryMesh>();
-		setColor(new RGBAColor());
 	}
 	
 	@Override
@@ -44,7 +43,8 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 
 	@Override
 	public void setFont(Font newFont) {
-		setFont(newFont);
+		font = newFont;
+		setText(getText());
 		updateGeometry();
 	}
 
@@ -105,6 +105,10 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 	}
 
 	private void updateGeometry() {
+		if (getFont() == null || getText() == null || getText() == "") {
+			return;
+		}
+		
 		Mesh realMesh = getGeometry().getMesh();
 		FloatBuffer positionBuffer = BufferUtils.createFloatBuffer(
 			getText().length()*MemoryMesh.VERTEX_COMPONENT_COUNT*MemoryMesh.QUAD_VERTEX_COUNT);

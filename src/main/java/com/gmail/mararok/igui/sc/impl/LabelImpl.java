@@ -6,26 +6,48 @@
 package com.gmail.mararok.igui.sc.impl;
 
 import com.gmail.mararok.igui.ImpactGUI;
-import com.gmail.mararok.igui.control.ControlRegion;
+import com.gmail.mararok.igui.render.RGBAColor;
 import com.gmail.mararok.igui.sc.Label;
+import com.gmail.mararok.igui.spi.render.Font;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 
-public class LabelImpl extends ControlRegion implements Label {
-	private TextVisualNode labelTextNode;
+public class LabelImpl extends PanelImpl implements Label {
+	private TextVisualNode textNode;
 	private static int nextLabelID = 0;
 	
 	public LabelImpl(ImpactGUI gui) {
 		super(gui);
-		labelTextNode = gui.getRenderDevice().createTextNode("LABEL:"+(++nextLabelID));
+		textNode = getGUI().getRenderDevice().createTextNode("LABEL:"+(++nextLabelID));
+		mainVisualNode.attachChild(textNode);
 	}
 
 	@Override
 	public void setText(String newText) {
-		labelTextNode.setText(newText);
+		textNode.setText(newText);
 	}
 
 	@Override
 	public String getText() {
-		return labelTextNode.getText();
+		return textNode.getText();
+	}
+
+	@Override
+	public void setColor(RGBAColor newColor) {
+		textNode.setColor(newColor);
+	}
+
+	@Override
+	public RGBAColor getColor() {
+		return textNode.getColor();
+	}
+
+	@Override
+	public Font getFont() {
+		return textNode.getFont();
+	}
+	
+	@Override
+	public void setFont(Font newFont) {
+		textNode.setFont(newFont);
 	}
 }

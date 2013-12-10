@@ -6,6 +6,9 @@
 package com.gmail.mararok.igui.sc;
 
 import com.gmail.mararok.igui.control.Control;
+import com.gmail.mararok.igui.render.RGBAColor;
 
 public interface Panel extends Control {
+
+	void setBackgroundColor(RGBAColor newColor);
 }

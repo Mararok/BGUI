@@ -5,13 +5,13 @@
 */
 package com.gmail.mararok.igui.render;
 
-import java.util.HashMap;
+import gnu.trove.map.hash.THashMap;
 
 public class GlyphSet {
-	private HashMap<Character,Glyph> glyphs;
+	private THashMap<Character,Glyph> glyphs;
 	
 	public GlyphSet() {
-		glyphs = new HashMap<Character,Glyph>();
+		glyphs = new THashMap<Character,Glyph>();
 	}
 	
 	public Glyph getGlyph(char character) {

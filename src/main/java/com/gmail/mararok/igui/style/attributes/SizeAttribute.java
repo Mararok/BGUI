@@ -3,8 +3,9 @@
  * all rights reserved
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
 */
-package com.gmail.mararok.igui.style.attribute;
+package com.gmail.mararok.igui.style.attributes;
 
+import com.gmail.mararok.igui.control.RegionImpl;
 import com.gmail.mararok.igui.style.Style;
 
 public class SizeAttribute extends Attribute {
@@ -30,6 +31,16 @@ public class SizeAttribute extends Attribute {
 	}
 	
 	public void setMaxWidth(int newMaxWidth) {
+		
+	}
+
+	@Override
+	public void setValue(AttributeValue newValue) {
+		
+	}
+
+	@Override
+	public void updateRegion(RegionImpl region) {
 		
 	}
 }

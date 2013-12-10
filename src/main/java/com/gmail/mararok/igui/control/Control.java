@@ -7,9 +7,9 @@ package com.gmail.mararok.igui.control;
 
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 
-public interface Control extends ParentSceneNode {
+public interface Control extends ParentSceneNode,Region {
 	
-	void onClick();
+	/*void onClick();
 	void onDoubleClick();
 	void onMouseDown();
 	void onMouseUp();
@@ -22,21 +22,21 @@ public interface Control extends ParentSceneNode {
 	
 	void onChanged();
 	void onSelect();
-	
+	*/
 	void setEnabled(boolean enabled);
 	void enable();
 	void disable();
 	boolean isEnable();
 	
-	void onEnable();
-	void onDisable();
+	//void onEnable();
+	//void onDisable();
 	
-	void setVisibled(boolean visible);
+	void setVisible(boolean visible);
 	void show();
 	void hide();
 	boolean isVisible();
 	
-	void onShow();
-	void onHide();
+	//void onShow();
+	//void onHide();
 	
 }

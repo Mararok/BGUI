@@ -16,12 +16,15 @@ public class CustomMemoryMesh implements MemoryMesh {
 	
 	private RenderMode renderMode = RenderMode.TRIANGLE_STRIP;
 	
+	@Override
 	public float[] getVeritces() {
 		return vertices;
 	}
 	
+	@Override
 	public void setVertices(float[] newVertices) {
 		vertices = newVertices;
+		triangleCount = vertices.length/9;
 	}
 
 	@Override
@@ -32,10 +35,19 @@ public class CustomMemoryMesh implements MemoryMesh {
 		vertices[offset+2] = z;
 	}
 	
+	@Override
 	public float[] getColors() {
 		return colors;
 	}
 	
+	@Override
+	public void setColors(RGBAColor newColor) {
+		for (int i = 0; i < getVerticeCount();++i) {
+			setColor(i,newColor);
+		}
+	}
+	
+	@Override
 	public void setColors(float[] newColors) {
 		colors = newColors;
 	}
@@ -49,36 +61,49 @@ public class CustomMemoryMesh implements MemoryMesh {
 		colors[offset+3] = newColor.a();
 	}
 	
+	@Override
 	public float[] getTextureCooridnates() {
 		return textureCoordinates;
 	}
 	
+	@Override
 	public void setTextureCoordinates(float[] newTextureCoordinates) {
 		textureCoordinates = newTextureCoordinates;
 	}
 
+	@Override
 	public void setTextureCoordinates(int vertexIndex, float u, float v) {
 		int offset = vertexIndex*TEXTURE_COORDINATES_COUNT;
 		textureCoordinates[offset] = u;
 		textureCoordinates[offset+1] = v;
 	}
 	
+	@Override
 	public short[] getIndexes() {
 		return indexes;
 	}
 	
+	@Override
 	public void setIndexes(short[] newIndexes) {
 		indexes = newIndexes;
 	}
 	
+	@Override
 	public int getTriangleCount() {
 		return triangleCount;
 	}
 	
+	@Override
+	public int getVerticeCount() {
+		return vertices.length/3;
+	}
+	
+	@Override
 	public RenderMode getRenderMode() {
 		return renderMode;
 	}
 	
+	@Override
 	public void setRenderMode(RenderMode newMode) {
 		renderMode = newMode;
 	}

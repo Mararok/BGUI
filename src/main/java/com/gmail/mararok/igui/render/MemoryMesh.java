@@ -27,6 +27,7 @@ public interface MemoryMesh {
 	void setVertex(int vertexIndex, float x, float y, float z);
 	
 	float[] getColors();
+	void setColors(RGBAColor newColor);
 	void setColors(float[] newColors);
 	void setColor(int vertexIndex, RGBAColor newColor);
 	
@@ -39,6 +40,7 @@ public interface MemoryMesh {
 	void setIndexes(short[] newIndexes);
 	
 	int getTriangleCount();
+	int getVerticeCount();
 	
 	RenderMode getRenderMode();
 	
