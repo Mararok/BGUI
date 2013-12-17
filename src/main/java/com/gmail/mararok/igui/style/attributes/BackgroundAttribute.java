@@ -8,7 +8,6 @@ package com.gmail.mararok.igui.style.attributes;
 import com.gmail.mararok.igui.render.Gradient;
 import com.gmail.mararok.igui.render.RGBAColor;
 import com.gmail.mararok.igui.render.SolidGradient;
-import com.gmail.mararok.igui.spi.render.Image;
 import com.gmail.mararok.igui.style.Style;
 
 public class BackgroundAttribute extends Attribute {
@@ -41,7 +40,8 @@ public class BackgroundAttribute extends Attribute {
 
 	@Override
 	public void setValue(AttributeValue newValue) {
-		// TODO Auto-generated method stub
-		
+		if (newValue.getValue() instanceof RGBAColor) {
+			setColor((RGBAColor)newValue.getValue());
+		}
 	}
 }

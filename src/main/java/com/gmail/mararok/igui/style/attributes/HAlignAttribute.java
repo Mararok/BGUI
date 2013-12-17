@@ -15,12 +15,17 @@ public class HAlignAttribute extends Attribute {
 		super(parentStyle);
 	}
 	
-	@Override
-	public void setValue(String newValue) throws IllegalArgumentException {
-		align = HAlign.valueOf(newValue);
-	}
-	
 	public HAlign getAlign() {
 		return align;
+	}
+	
+	public void setAlign(HAlign newAlign) {
+		align = newAlign;
+	}
+
+	@Override
+	public void setValue(AttributeValue newValue) {
+		// TODO Auto-generated method stub
+		
 	}
 }

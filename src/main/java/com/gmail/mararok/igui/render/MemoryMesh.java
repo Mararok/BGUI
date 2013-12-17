@@ -45,4 +45,8 @@ public interface MemoryMesh {
 	RenderMode getRenderMode();
 	
 	void setRenderMode(RenderMode newMode);
+	
+	void translateLocal(float xOffset, float yOffset, float zOffset);
+	
+	void scaleLocal(float xScale, float yScale, float zScale);
 }

@@ -70,6 +70,7 @@ public abstract class AWTFont implements com.gmail.mararok.igui.spi.render.Font 
 			}
 			
 			glyph.setOffset(xPosition,yPosition);
+			glyph.calcTextureCoordinates(fontImage);
 			g.drawString(String.valueOf(ch),xPosition,yPosition);
 			xPosition += glyph.getWidth();
 		}
@@ -82,8 +83,7 @@ public abstract class AWTFont implements com.gmail.mararok.igui.spi.render.Font 
 			e.printStackTrace();
 		}
 	}
-
-	setNativeImage
+	
 	@Override
 	public float getWidth(char character) {
 		return getGlyph(character).getWidth();

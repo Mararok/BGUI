@@ -17,5 +17,43 @@ public class MarginAttribute extends Attribute {
 	public MarginAttribute(Style parentStyle) {
 		super(parentStyle);
 	}
+
+	@Override
+	public void setValue(AttributeValue newValue) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public int getLeft() {
+		return left;
+	}
+
+	public void setLeft(int newLeft) {
+		left = newLeft;
+	}
+
+	public int getTop() {
+		return top;
+	}
+
+	public void setTop(int newTop) {
+		top = newTop;
+	}
+
+	public int getRight() {
+		return right;
+	}
+
+	public void setRight(int newRight) {
+		right = newRight;
+	}
+
+	public int getBottom() {
+		return bottom;
+	}
+
+	public void setBottom(int newBottom) {
+		bottom = newBottom;
+	}
 	
 }

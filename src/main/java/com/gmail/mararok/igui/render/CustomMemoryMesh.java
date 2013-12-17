@@ -109,4 +109,23 @@ public class CustomMemoryMesh implements MemoryMesh {
 	}
 	
 	
+	@Override
+	public void translateLocal(float xOffset, float yOffset, float zOffset) {
+		int len  = vertices.length;
+		for (int i = 0; i < len; i += 3) {
+			vertices[i] += xOffset;
+			vertices[i+1] += yOffset;
+			vertices[i+2] += zOffset;
+		}
+	}
+	
+	@Override
+	public void scaleLocal(float xScale, float yScale, float zScale) {
+		int len  = vertices.length;
+		for (int i = 0; i < len; i += 3) {
+			vertices[i] *= xScale;
+			vertices[i+1] *= yScale;
+			vertices[i+2] *= zScale;
+		}
+	}
 }

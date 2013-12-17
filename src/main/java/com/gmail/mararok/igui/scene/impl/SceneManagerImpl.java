@@ -35,8 +35,8 @@ public class SceneManagerImpl implements SceneManager {
 	
 	@Override
 	public void removeScene(String sceneName) {
-		if (currentScene != null && currentScene.getName() == sceneName) {
-			currentScene.onDisable();
+		if (currentScene != null && currentScene.getID() == sceneName) {
+			//currentScene.onDisable();
 			currentScene = null;
 		}
 		
@@ -49,7 +49,7 @@ public class SceneManagerImpl implements SceneManager {
 	@Override
 	public void setCurrentScene(String sceneName) {
 		if (currentScene != null) {
-			currentScene.onDisable();
+			//currentScene.onDisable();
 		}
 		
 		currentScene = scenes.get(sceneName);

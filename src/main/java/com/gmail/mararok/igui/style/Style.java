@@ -51,7 +51,7 @@ public class Style {
 	}
 	
 	private void updateAttribute(AttributeType type) {
-		getAttribute(type).updateRegion(region);
+		region.updateAttribute(type,getAttribute(type));
 	}
 	
 	private Attribute addAttribute(AttributeType attributeType) {

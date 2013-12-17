@@ -14,12 +14,18 @@ import com.gmail.mararok.igui.spi.render.VisualNode;
 import com.jme3.scene.Node;
 
 class JMEParentVisualNode extends JMEVisualNode implements ParentVisualNode {
+	private static int ParentCounter = -1;
 	private List<VisualNode> children;
 	
-	JMEParentVisualNode(String id, RenderDevice renderDevice) {
+	public JMEParentVisualNode(Node node, RenderDevice renderDevice) {
 		super(renderDevice);
 		children = new LinkedList<VisualNode>();
-		spatial = new Node(id);
+		spatial = node;
+	}
+	JMEParentVisualNode(RenderDevice renderDevice) {
+		super(renderDevice);
+		children = new LinkedList<VisualNode>();
+		spatial = new Node("PN"+(++ParentCounter));
 	}
 	@Override
 	public void attachChild(VisualNode child) {

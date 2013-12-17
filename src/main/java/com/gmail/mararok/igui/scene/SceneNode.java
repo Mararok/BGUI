@@ -6,7 +6,6 @@
 package com.gmail.mararok.igui.scene;
 
 public interface SceneNode {
-	
 	String getID();
 	void setID(String newID);
 	
@@ -16,29 +15,6 @@ public interface SceneNode {
 	
 	Scene getScene();
 	
-	/*void show();
-	void hide();
-	boolean isVisible();
-	
-	void onShow();
-	void onHide();
-	
-	int getX();
-	void setX(int newX);
-	
-	int getY();
-	void setY(int newY);
-	
-	void setPosition(int newX, int newY);
-	
-	int getZ();
-	void setZ(int newZ);
-	
-	int getWidth();
-	void setWidth(int newWidth);
-	
-	int getHeight();
-	void setHeight(int newHeight);
-	
-	void setSize(int newWidth, int newHeight);*/
+	void setFocus(boolean focus);
+	boolean hasFocus();
 }

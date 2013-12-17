@@ -7,7 +7,7 @@ package com.gmail.mararok.igui.jme.render;
 
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
-import java.util.LinkedList;
+import java.util.Arrays;
 
 import com.gmail.mararok.igui.render.Glyph;
 import com.gmail.mararok.igui.render.MemoryMesh;
@@ -18,22 +18,21 @@ import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
+import com.jme3.scene.Mesh.Mode;
 import com.jme3.scene.VertexBuffer.Type;
 import com.jme3.util.BufferUtils;
 
 class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
-	private Font font;
+	private JMEFont font;
 	private RGBAColor color = RGBAColor.WHITE;
 	private String text = "";
 	
-	private LinkedList<QuadMemoryMesh> memoryMeshes;
-	
-	private int currentIndexOffset = 0;
+	private QuadMemoryMesh[] memoryMeshes;
 	
 	JMETextVisualNode(String id, RenderDevice renderDevice) {
 		super(renderDevice);
 		spatial = new Geometry(id,new Mesh());
-		memoryMeshes = new LinkedList<QuadMemoryMesh>();
+		spatial.setMaterial(((JMERenderDevice)(renderDevice)).getDefaultMaterial());
 	}
 	
 	@Override
@@ -43,9 +42,9 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 
 	@Override
 	public void setFont(Font newFont) {
-		font = newFont;
+		font = (JMEFont)newFont;
+		spatial.setMaterial(font.getFontMaterial());
 		setText(getText());
-		updateGeometry();
 	}
 
 	@Override
@@ -56,44 +55,57 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 	@Override
 	public void setColor(RGBAColor newColor) {
 		color = newColor;
-		updateGeometry();
+		setText(getText());
 	}
 
 	@Override
 	public void setColor(float red, float green, float blue) {
 		setColor(new RGBAColor(red,green,blue));
+		setText(getText());
 	}
 
 	@Override
 	public void setText(String newText) {
 		text = newText;
+		if (text == "" || text == null) {
+			memoryMeshes = null;
+			return;
+		}
 		
-		memoryMeshes.clear();
 		char[] chars = newText.toCharArray();
+		memoryMeshes = new QuadMemoryMesh[chars.length];
+		
 		QuadMemoryMesh charMesh;
 		Glyph glyph;
 		
 		float uMin,vMin;
 		float uMax,vMax;
-		
-		for (char ch : chars) {
+		int len = memoryMeshes.length;
+		int lastCharOffset = 0;
+		for (int i = 0; i < len; ++i) {
 			charMesh = new QuadMemoryMesh();
-			glyph = font.getGlyph(ch);
+			glyph = font.getGlyph(chars[i]);
+			//charMesh.translateLocal(lastCharOffset+glyph.getWidth(),0f,0f);
+			//charMesh.scaleLocal(glyph.getWidth()/2,glyph.getHeight()/2,1);
+			lastCharOffset += glyph.getWidth();
 			uMin = glyph.getUMinTexture();
 			vMin = glyph.getVMinTexture();
 			uMax = glyph.getUMaxTexture();
 			vMax = glyph.getVMaxTexture();
 			
-			charMesh.setTextureCoordinates(0,uMin,vMin);
-			charMesh.setTextureCoordinates(1,uMax,vMin);
-			charMesh.setTextureCoordinates(2,uMax,vMax);
-			charMesh.setTextureCoordinates(3,uMin,vMax);
+			charMesh.setTextureCoordinates(new float[] {
+					0,0,
+					0,1,
+					1,1,
+					1,0
+					/*uMax,vMax,
+					uMin,vMin,
+					uMax,vMin,
+					uMin,vMax*/
+			});
 			
-			charMesh.setColor(0,getColor());
-			charMesh.setColor(1,getColor());
-			charMesh.setColor(2,getColor());
-			charMesh.setColor(3,getColor());
-			memoryMeshes.add(charMesh);
+			charMesh.setColors(getColor());
+			memoryMeshes[i] = charMesh;
 		}
 		
 		updateGeometry();
@@ -105,13 +117,11 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 	}
 
 	private void updateGeometry() {
-		if (getFont() == null || getText() == null || getText() == "") {
-			return;
-		}
-		
 		Mesh realMesh = getGeometry().getMesh();
+		
 		FloatBuffer positionBuffer = BufferUtils.createFloatBuffer(
 			getText().length()*MemoryMesh.VERTEX_COMPONENT_COUNT*MemoryMesh.QUAD_VERTEX_COUNT);
+		
 		FloatBuffer colorBuffer = BufferUtils.createFloatBuffer(
 				getText().length()*MemoryMesh.COLOR_COMPONENT_COUNT*MemoryMesh.QUAD_VERTEX_COUNT);
 		
@@ -120,15 +130,30 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 		
 		ShortBuffer indexBuffer = BufferUtils.createShortBuffer(getText().length()*6);
 		
-		currentIndexOffset = 0;
+		int currentIndexOffset = 0;
 		for (QuadMemoryMesh memoryMesh : memoryMeshes) {
 			positionBuffer.put(memoryMesh.getVeritces());
+			
+			System.out.print("V: ");
+			System.out.println(Arrays.toString(memoryMesh.getVeritces()));
+			
 			colorBuffer.put(memoryMesh.getColors());
+			
+			System.out.print("C: ");
+			System.out.println(Arrays.toString(memoryMesh.getColors()));
+			
 			texCoordBuffer.put(memoryMesh.getTextureCooridnates());
+			System.out.print("T: ");
+			System.out.println(Arrays.toString(memoryMesh.getTextureCooridnates()));
+			
 			short[] indexes = memoryMesh.getIndexes();
+			System.out.print("I: ");
 			for (int j = 0; j < indexes.length; ++j) {
 				indexBuffer.put((short)(indexes[j]+currentIndexOffset));
+				System.out.print((short)(indexes[j]+currentIndexOffset));
+				System.out.print(" ");
 			}
+			System.out.println();
 			currentIndexOffset += 4;
 		}
 
@@ -136,11 +161,11 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 		realMesh.setBuffer(Type.Color,4,colorBuffer);
 		realMesh.setBuffer(Type.TexCoord,2,texCoordBuffer);
 		realMesh.setBuffer(Type.Index,1,indexBuffer);
-		
-		//realMesh.setMode(Mesh.Mode.TriangleStrip);
+		realMesh.setMode(Mode.TriangleStrip);
+		setScale(300,60,1);
 	}
 	
-	private Geometry getGeometry() {
+	Geometry getGeometry() {
 		return (Geometry)spatial;
 	}
 }

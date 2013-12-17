@@ -8,111 +8,98 @@ package com.gmail.mararok.igui.jme.render;
 import com.gmail.mararok.igui.spi.render.Font;
 import com.gmail.mararok.igui.spi.render.GeometryVisualNode;
 import com.gmail.mararok.igui.spi.render.Image;
-import com.gmail.mararok.igui.spi.render.MouseCursor;
 import com.gmail.mararok.igui.spi.render.ParentVisualNode;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 import com.jme3.asset.AssetManager;
 import com.jme3.material.Material;
-import com.jme3.renderer.Renderer;
+import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
 
 public class JMERenderDevice implements RenderDevice {
-	private Node guiNode;
 	private JMEParentVisualNode rootGUINode;
 	private AssetManager assetManager;
-	//private Renderer renderer;
+	private Camera currentCamera;
+	
+	//private MouseCursor mainMouseCursor;
+	private Font defaultFont;
 	private Material defaultMaterial;
 	
-	private int width;
-	private int height;
-	
-	public JMERenderDevice(Node guiNode, AssetManager assetManager, Renderer renderer) {
-		this.guiNode = guiNode;
-		rootGUINode = new JMEParentVisualNode("rootGUI",this);
-		width = 800;
-		height = 600;
-		
-		this.guiNode.attachChild(rootGUINode.getNode());
+	public JMERenderDevice(Node guiNode, AssetManager assetManager,Camera camera) {
+		rootGUINode = new JMEParentVisualNode(guiNode,this);
 		this.assetManager = assetManager;
-		//this.renderer = renderer;
+		currentCamera = camera;
+		
 		defaultMaterial = new Material(assetManager,"Common/MatDefs/Misc/Unshaded.j3md");
 		defaultMaterial.setBoolean("VertexColor",true);
-		
+		defaultFont = createFont("Interface/Fonts/Console.fnt");
+	}
+	
+	@Override
+	public Font createFont(String fontName) {
+		return new JMEFontAC(assetManager.loadFont(fontName));
 	}
 	
 	@Override
 	public Font createFont(String fontName, Font.Style style, int size) {
-		JMEFont font = new JMEFont();
-		font.setFont(new java.awt.Font(fontName,style.toAWTStyle(),size));
-		return font;
+		return createFont(fontName);
 	}
 
 	@Override
 	public Image createImage(String filename) {
-		// TODO Auto-generated method stub
-		return null;
+		return new JMEImage(assetManager.loadTexture(filename));
 	}
 
 	@Override
-	public MouseCursor createMouseCursor(String filename, int hotspotX,
-			int hotspotY) {
-		// TODO Auto-generated method stub
-		return null;
+	public ParentVisualNode createParentNode() {
+		return new JMEParentVisualNode(this);
 	}
 
 	@Override
-	public ParentVisualNode createParentNode(String id) {
-		return new JMEParentVisualNode(id,this);
+	public GeometryVisualNode createGeometryNode() {
+		return new JMEGeometryVisualNode(this);
 	}
 
 	@Override
-	public GeometryVisualNode createGeometryNode(String id) {
-		return new JMEGeometryVisualNode(id,this);
+	public TextVisualNode createTextNode() {
+		return new JMETextVisualNodeAC(this);
 	}
 
 	@Override
-	public TextVisualNode createTextNode(String id) {
-		return new JMETextVisualNode(id,this);
-	}
-
-	@Override
-	public void enableMouseCursor() {
-		// TODO Auto-generated method stub
+	public void showMouseCursor() {
 		
 	}
 
 	@Override
-	public void disableMouseCursor() {
-		// TODO Auto-generated method stub
+	public void hideMouseCursor() {
 		
 	}
 
 	@Override
 	public int getWidth() {
-		return width;
+		return currentCamera.getWidth();
 	}
 
 	@Override
 	public int getHeight() {
-		return height;
+		return currentCamera.getHeight();
 	}
 	
-	@Override
-	public void resize(int newWidth, int newHeight) {
-		width = newWidth;
-		height = newHeight;
-	}
 	public JMEParentVisualNode getRootGUINode() {
 		return rootGUINode;
 	}
 	
-	public AssetManager getAssetManager() {
+	AssetManager getAssetManager() {
 		return assetManager;
 	}
 	
-	public Material getDefaultMaterial() {
+	Material getDefaultMaterial() {
 		return defaultMaterial;
+	}
+
+	@Override
+	public Font getDefaultFont() {
+		return defaultFont;
 	}
 
 }

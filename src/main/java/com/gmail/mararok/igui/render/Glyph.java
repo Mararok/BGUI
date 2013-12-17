@@ -5,7 +5,7 @@
 */
 package com.gmail.mararok.igui.render;
 
-import com.gmail.mararok.igui.spi.render.Image;
+import java.awt.image.BufferedImage;
 
 public class Glyph {
 	private int xOffset;
@@ -13,11 +13,23 @@ public class Glyph {
 	private int width;
 	private int height;
 	
-	private Image fontImage;
+	private float uMin;
+	private float vMin;
+	
+	private float uMax;
+	private float vMax;
 	
 	public void setOffset(int newXOffset, int newYOffset) {
 		xOffset = newXOffset;
 		yOffset = newYOffset;
+	}
+	
+	public void calcTextureCoordinates(BufferedImage fontImage) {
+		uMin = (float)xOffset/(float)fontImage.getWidth();
+		vMin = (float)yOffset/(float)fontImage.getHeight();
+		
+		uMax = (float)(xOffset+width)/(float)fontImage.getWidth();
+		vMax = (float)(yOffset+height)/(float)fontImage.getHeight();
 	}
 	
 	public void setSize(int newWidth, int newHeight) {
@@ -41,24 +53,20 @@ public class Glyph {
 		return height;
 	}
 	
-	public void setFontImage(Image newFontImage) {
-		fontImage = newFontImage;
-	}
-	
 	public float getUMinTexture() {
-		return xOffset/(float)fontImage.getWidth();
+		return uMin;
 	}
 	
 	public float getVMinTexture() {
-		return yOffset/(float)fontImage.getHeight();
+		return vMin;
 	}
 	
 	public float getUMaxTexture() {
-		return (xOffset+width)/(float)fontImage.getWidth();
+		return uMax;
 	}
 	
 	public float getVMaxTexture() {
-		return (yOffset+height)/(float)fontImage.getHeight();
+		return vMax;
 	}
 
 }

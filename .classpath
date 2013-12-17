@@ -33,5 +33,9 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/ImpactGUI/libs/trove-javadoc.zip!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/GalacticCraft/libs/guava-15.0.jar"/>
+	<classpathentry kind="lib" path="/GalacticCraft/libs/javassist.jar"/>
+	<classpathentry kind="lib" path="/GalacticCraft/libs/reflections-0.9.9-RC1.jar"/>
+	<classpathentry kind="lib" path="libs/BUTJ.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

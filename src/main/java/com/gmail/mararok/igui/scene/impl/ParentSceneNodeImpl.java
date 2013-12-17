@@ -15,10 +15,9 @@ import com.gmail.mararok.igui.scene.SceneNode;
 
 public abstract class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNode {
 	private List<SceneNode> children;
-	private static int parentCounter = 0;
 	public ParentSceneNodeImpl(ImpactGUI gui) {
 		super(gui);
-		mainVisualNode = gui.getRenderDevice().createParentNode("PARENT:"+(++parentCounter));
+		mainVisualNode = gui.getRenderDevice().createParentNode();
 	}
 	
 	public void attachChild(SceneNode child) {

@@ -13,11 +13,12 @@ import com.gmail.mararok.igui.spi.render.TextVisualNode;
 
 public class LabelImpl extends PanelImpl implements Label {
 	private TextVisualNode textNode;
-	private static int nextLabelID = 0;
 	
 	public LabelImpl(ImpactGUI gui) {
 		super(gui);
-		textNode = getGUI().getRenderDevice().createTextNode("LABEL:"+(++nextLabelID));
+		textNode = getGUI().getRenderDevice().createTextNode();
+		textNode.setTranslation(0,0,1);
+		mainVisualNode.detachAllChildren();
 		mainVisualNode.attachChild(textNode);
 	}
 

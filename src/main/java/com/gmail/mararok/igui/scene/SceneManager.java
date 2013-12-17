@@ -19,6 +19,7 @@ public interface SceneManager {
 	void setCurrentScene(String sceneName);
 	
 	ImpactGUI getGUI();
+	
 	RenderDevice getRenderDevice();
 	InputDevice getInputDevice();
 	SoundDevice getSoundDevice();

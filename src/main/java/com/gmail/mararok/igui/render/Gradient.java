@@ -7,4 +7,9 @@ package com.gmail.mararok.igui.render;
 
 public class Gradient {
 
+	public RGBAColor getAsColor() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

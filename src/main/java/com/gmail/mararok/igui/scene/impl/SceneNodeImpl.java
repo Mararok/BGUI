@@ -17,6 +17,7 @@ public abstract class SceneNodeImpl implements SceneNode {
 	
 	protected ParentVisualNode mainVisualNode;
 	private ImpactGUI gui;
+	private Scene currentScene;
 	
 	public SceneNodeImpl(ImpactGUI gui) {
 		this.gui = gui;
@@ -51,17 +52,35 @@ public abstract class SceneNodeImpl implements SceneNode {
 		
 		parent = newParent;
 		((ParentSceneNodeImpl)getParent()).mainVisualNode.attachChild(mainVisualNode);
+		currentScene = parent.getScene();
 	}
 	
 	@Override
 	public Scene getScene() {
-		if (hasParent())
-			return getParent().getScene();
-		return null;
+		return  currentScene;
 	}
 
 	protected ImpactGUI getGUI() {
 		return gui;
+	}
+
+	@Override
+	public void setFocus(boolean focus) {
+		if (getScene() == null) {
+			return;
+		}
+		
+		if (focus) {
+			currentScene.setFocusedNode(this);
+		} else if (hasFocus()) {
+			currentScene.setFocusedNode(null);
+		}
+		
+	}
+
+	@Override
+	public boolean hasFocus() {
+		return (currentScene != null && currentScene.getFocusedNode() == this);
 	}
 
 }

@@ -13,10 +13,9 @@ import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.scene.impl.ParentSceneNodeImpl;
 import com.gmail.mararok.igui.style.Style;
 import com.gmail.mararok.igui.style.StyleClass;
-import com.gmail.mararok.igui.style.Styleable;
 import com.gmail.mararok.igui.util.Rectangle;
 
-public abstract class RegionImpl extends ParentSceneNodeImpl implements Styleable {
+public abstract class RegionImpl extends ParentSceneNodeImpl implements Region {
 	private Style style;
 	private List<StyleClass> styleClasses;
 	
@@ -82,77 +81,79 @@ public abstract class RegionImpl extends ParentSceneNodeImpl implements Styleabl
 		}
 	}
 	
+	@Override
 	public int getLocalCenterX() {
 		return localBounds.getCenterX();
 	}
 	
+	@Override
 	public int getLocalCenterY() {
 		return localBounds.getCenterY();
 	}
 	
+	@Override
+	public int getLocalX() {
+		return localBounds.getX();
+	}
+	
+	@Override
+	public void setLocalX(int newX) {
+		localBounds.setX(newX);
+		updateBounds();
+	}
+	
+	@Override
+	public int getLocalY() {
+		return localBounds.getY();
+	}
+	
+	@Override
+	public void setLocalY(int newY) {
+		localBounds.setY(newY);
+		updateBounds();
+	}
+	
+	@Override
+	public void setLocalPosition(int newX, int newY) {
+		localBounds.setX(newX);
+		localBounds.setY(newY);
+		updateBounds();
+	}
+	
+	@Override
 	public int getLocalZ() {
 		return localZ;
 	}
 	
+	@Override
 	public void setLocalZ(int newZ) {
 		localZ = newZ;
 		updateBounds();
 	}
 	
-	public int getLocalLeft() {
-		return localBounds.getLeft();
-	}
-	
-	public void setLocalLeft(int newLeft) {
-		localBounds.setLeft(newLeft);
-		updateBounds();
-	}
-	
-	public int getLocalTop() {
-		return localBounds.getTop();
-	}
-	
-	public void setLocalTop(int newTop) {
-		localBounds.setTop(newTop);
-		updateBounds();
-	}
-	
-	public int getLocalRight() {
-		return localBounds.getRight();
-	}
-	
-	public void setLocalRight(int newRight) {
-		localBounds.setRight(newRight);
-		updateBounds();
-	}
-	
-	public int getLocalBottom() {
-		return localBounds.getBottom();
-	}
-	
-	public void setLocalBottom(int newBottom) {
-		localBounds.setBottom(newBottom);
-		updateBounds();
-	}
-	
+	@Override
 	public int getWidth() {
 		return localBounds.getWidth();
 	}
 	
+	@Override
 	public void setWidth(int newWidth) {
 		localBounds.setWidth(newWidth);
 		updateBounds();
 	}
 	
+	@Override
 	public int getHeight() {
 		return localBounds.getHeight();
 	}
 	
+	@Override
 	public void setHeight(int newHeight) {
 		localBounds.setHeight(newHeight);
 		
 	}
 	
+	@Override
 	public void setSize(int newWidth, int newHeight) {
 		localBounds.setWidth(newWidth);
 		localBounds.setHeight(newHeight);
@@ -163,4 +164,5 @@ public abstract class RegionImpl extends ParentSceneNodeImpl implements Styleabl
 		mainVisualNode.setTranslation(getLocalCenterX(),getGUI().getRenderDevice().getHeight()-getLocalCenterY(),getLocalZ());
 		mainVisualNode.setScale(getWidth()/2,getHeight()/2,1);
 	}
+
 }

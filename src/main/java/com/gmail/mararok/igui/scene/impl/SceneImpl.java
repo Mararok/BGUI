@@ -8,27 +8,29 @@ package com.gmail.mararok.igui.scene.impl;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.scene.SceneManager;
+import com.gmail.mararok.igui.scene.SceneNode;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
 
 public class SceneImpl implements Scene {
-	private String name;
+	private String id;
 	private RootSceneNode rootNode;
-	
+	private SceneNode focusedNode;
 	private SceneManager sceneManager;
 	
-	public SceneImpl(String name, SceneManager sceneManager) {
-		this.name = name;
+	public SceneImpl(String id, SceneManager sceneManager) {
+		this.id = id;
 		this.sceneManager = sceneManager;
 		rootNode = new RootSceneNode(this);
+		focusedNode = rootNode;
 	}
 
 	@Override
-	public String getName() {
-		return name;
+	public String getID() {
+		return id;
 	}
 
 	@Override
-	public ParentSceneNode getRootNode() {
+	public ParentSceneNode getRoot() {
 		return rootNode;
 	}
 
@@ -41,14 +43,30 @@ public class SceneImpl implements Scene {
 	public RenderDevice getRenderDevice() {
 		return getSceneManager().getRenderDevice();
 	}
-	
+
 	@Override
-	public void onEnable() {
+	public void attachChild(SceneNode child) {
+		getRoot().attachChild(child);
 	}
 
 	@Override
-	public void onDisable() {
+	public void detachChild(SceneNode child) {
+		getRoot().detachChild(child);
+		
 	}
 
+	@Override
+	public SceneNode getFocusedNode() {
+		return focusedNode;
+	}
+
+	@Override
+	public void setFocusedNode(SceneNode sceneNode) {
+		if (sceneNode == null) {
+			focusedNode = rootNode;
+		} else if (sceneNode.getScene() == this) {
+			focusedNode = sceneNode;
+		}
+	}
 
 }

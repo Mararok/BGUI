@@ -44,4 +44,9 @@ public class BorderAttribute extends Attribute {
 		}
 	}
 
+	@Override
+	public void setValue(AttributeValue newValue) {
+		
+	}
+
 }

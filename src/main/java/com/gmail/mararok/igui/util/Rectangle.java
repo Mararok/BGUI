@@ -6,55 +6,52 @@
 package com.gmail.mararok.igui.util;
 
 public final class Rectangle {
-	private int left;
-	private int top;
-	private int right;
-	private int bottom;
+	private int x;
+	private int y;
+	private int width;
+	private int height;
 	
-	public int getLeft() {
-		return left;
+	public Rectangle() {
+		
 	}
 	
-	public void setLeft(int newLeft) {
-		left = newLeft;
+	public Rectangle(int x, int y, int width, int height) {
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
 	}
 	
-	public int getTop() {
-		return top;
+	public Rectangle(int x, int y, int size) {
+		this.x = x;
+		this.y = y;
+		this.width = size;
+		this.height = size;
 	}
 	
-	public void setTop(int newTop) {
-		top = newTop;
+	public int getX() {
+		return x;
 	}
 	
-	public void setLeftTop(int newLeft, int newTop) {
-		setLeft(newLeft);
-		setLeft(newTop);
+	public void setX(int newX) {
+		x = newX;
 	}
 	
-	public int getRight() {
-		return right;
+	public int getY() {
+		return y;
 	}
 	
-	public void setRight(int newRight) {
-		right = newRight;
+	public void setY(int newY) {
+		y = newY;
 	}
 	
-	public int getBottom() {
-		return bottom;
-	}
-	
-	public void setBottom(int newBottom) {
-		bottom = newBottom;
-	}
-	
-	public void setRightBottom(int newRight, int newBottom) {
-		setRight(newRight);
-		setBottom(newBottom);
+	public void setPosition(int newX, int newY) {
+		setX(newX);
+		setY(newY);
 	}
 	
 	public int getWidth() {
-		return getRight() - getLeft();
+		return width;
 	}
 	
 	public int getHalfWidth() {
@@ -62,11 +59,11 @@ public final class Rectangle {
 	}
 	
 	public void setWidth(int newWidth) {
-		setRight(getLeft()+newWidth);
+		width = newWidth;
 	}
 
 	public int getHeight() {
-		return getBottom() - getTop();
+		return height;
 	}
 	
 	public int getHalfHeight() {
@@ -74,14 +71,39 @@ public final class Rectangle {
 	}
 	
 	public void setHeight(int newHeight) {
-		setBottom(getTop()+newHeight);
+		height = newHeight;
+	}
+	
+	public void setSize(int newWidth, int newHeight) {
+		setWidth(newWidth);
+		setHeight(newHeight);
 	}
 	
 	public int getCenterX() {
-		return getLeft()+getHalfWidth();
+		return getX()+getHalfWidth();
 	}
 	
 	public int getCenterY() {
-		return getTop()+getHalfHeight();
+		return getY()+getHalfHeight();
+	}
+	
+	public int getLeft() {
+		return x;
+	}
+	
+	public int getTop() {
+		return y;
+	}
+	
+	public int getRight() {
+		return x+width;
+	}
+	
+	public int getBottom() {
+		return y+height;
+	}
+	
+	public boolean contains(int px, int py) {
+		return (px >= getLeft() && py >= getTop() && px <= getRight() && py <= getBottom());
 	}
 }

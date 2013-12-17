@@ -5,7 +5,6 @@
 */
 package com.gmail.mararok.igui.style.attributes;
 
-import com.gmail.mararok.igui.control.RegionImpl;
 import com.gmail.mararok.igui.style.Style;
 
 public abstract class Attribute {
@@ -20,6 +19,4 @@ public abstract class Attribute {
 	}
 	
 	public abstract void setValue(AttributeValue newValue);
-
-	public abstract void updateRegion(RegionImpl region);
 }
