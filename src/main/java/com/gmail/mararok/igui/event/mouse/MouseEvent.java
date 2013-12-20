@@ -5,21 +5,17 @@
 */
 package com.gmail.mararok.igui.event.mouse;
 
+import com.gmail.mararok.igui.event.EventsType;
 import com.gmail.mararok.igui.event.ImpactEvent;
 
-public class MouseEvent implements ImpactEvent {
+public abstract class MouseEvent extends ImpactEvent {
 	private int x;
 	private int y;
 	
-	private int dx;
-	private int dy;
-	
-	public MouseEvent(int x, int y, int dx, int dy) {
+	public MouseEvent(EventsType type, long time, int x, int y) {
+		super(type,time);
 		this.x = x;
 		this.y = y;
-		
-		this.dx = dx;
-		this.dy = dy;
 	}
 	
 	public int getX() {
@@ -28,13 +24,5 @@ public class MouseEvent implements ImpactEvent {
 
 	public int getY() {
 		return y;
-	}
-	
-	public int getDX() {
-		return dx;
-	}
-	
-	public int getDY() {
-		return dy;
 	}
 }

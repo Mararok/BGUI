@@ -24,6 +24,7 @@ public abstract class RegionImpl extends ParentSceneNodeImpl implements Region {
 	
 	public RegionImpl(ImpactGUI gui) {
 		super(gui);
+		createVisualNode();
 		localBounds = new Rectangle();
 	}
 

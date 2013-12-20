@@ -10,16 +10,23 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.gmail.mararok.igui.ImpactGUI;
+import com.gmail.mararok.igui.event.ImpactEvent;
+import com.gmail.mararok.igui.event.mouse.MouseClickeEvent;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 import com.gmail.mararok.igui.scene.SceneNode;
+import com.gmail.mararok.igui.spi.render.ParentVisualNode;
 
-public abstract class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNode {
+public class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNode {
 	private List<SceneNode> children;
+	
 	public ParentSceneNodeImpl(ImpactGUI gui) {
 		super(gui);
-		mainVisualNode = gui.getRenderDevice().createParentNode();
 	}
 	
+	public ParentSceneNodeImpl(ImpactGUI gui, ParentVisualNode visualNode) {
+		this(gui);
+		mainVisualNode = visualNode;
+	}
 	public void attachChild(SceneNode child) {
 		if (child == null) {
 			throw new IllegalArgumentException(
@@ -30,7 +37,7 @@ public abstract class ParentSceneNodeImpl extends SceneNodeImpl implements Paren
 			children = new LinkedList<SceneNode>();
 		}
 		child.setParent(this);
-		children.add(child);
+		children.add((SceneNodeImpl) child);
 	}
 
 	public void detachChild(SceneNode child) {
@@ -58,4 +65,12 @@ public abstract class ParentSceneNodeImpl extends SceneNodeImpl implements Paren
 	public Iterator<SceneNode> getIterator() {
 		return children.iterator();
 	}
+	
+	@Override
+	public void onEvent(ImpactEvent event) {
+		for (SceneNode child : children) {
+			((SceneNodeImpl)child).onEvent(event);
+		}
+	}
+	
 }

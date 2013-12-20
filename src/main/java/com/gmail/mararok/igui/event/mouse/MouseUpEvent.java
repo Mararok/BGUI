@@ -7,8 +7,8 @@ package com.gmail.mararok.igui.event.mouse;
 
 import com.gmail.mararok.igui.event.EventsType;
 
-public class MouseClickEvent extends MouseButtonEvent {
-	public MouseClickEvent(long time, int x, int y, MouseButton button) {
-		super(EventsType.MouseClickEvent,time,x,y,button);
+public class MouseUpEvent extends MouseButtonEvent {
+	public MouseUpEvent(long time, int x, int y, MouseButton button) {
+		super(EventsType.MouseUpEvent,time,x,y,button);
 	}
 }

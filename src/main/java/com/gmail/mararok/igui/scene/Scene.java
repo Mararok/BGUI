@@ -5,6 +5,7 @@
 */
 package com.gmail.mararok.igui.scene;
 
+import com.gmail.mararok.igui.control.Controller;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
 
 public interface Scene {
@@ -18,4 +19,7 @@ public interface Scene {
 	ParentSceneNode getRoot();
 	void attachChild(SceneNode child);
 	void detachChild(SceneNode child);
+	
+	Controller getController(String name);
+	void setController(String name, Controller controller);
 }

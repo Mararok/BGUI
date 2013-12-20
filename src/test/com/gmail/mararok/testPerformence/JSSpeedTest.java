@@ -3,7 +3,7 @@
  * all rights reserved
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
 */
-package com.gmail.mararok.globalTests;
+package com.gmail.mararok.testPerformence;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;

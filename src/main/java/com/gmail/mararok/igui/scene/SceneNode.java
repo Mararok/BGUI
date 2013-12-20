@@ -15,6 +15,16 @@ public interface SceneNode {
 	
 	Scene getScene();
 	
-	void setFocus(boolean focus);
+	void setFocused(boolean value);
 	boolean hasFocus();
+	
+	void setEnabled(boolean value);
+	void enable();
+	void disable();
+	boolean isEnabled();
+	
+	void setVisible(boolean value);
+	void show();
+	void hide();
+	boolean isVisible();
 }

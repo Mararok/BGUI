@@ -1,0 +1,12 @@
+Styles.import('BlackClearStyle');
+return {
+	id:'TestScene',
+	controllers:['TestController'],
+	children: [
+		{type:Controls.Panel, children: [
+			{type:Controls.Button, events:{
+				onClick: 'TestController.onClickButton'
+			}}
+		]}
+	]
+}

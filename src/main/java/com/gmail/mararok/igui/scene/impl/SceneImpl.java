@@ -5,6 +5,10 @@
 */
 package com.gmail.mararok.igui.scene.impl;
 
+import gnu.trove.map.hash.THashMap;
+
+import com.gmail.mararok.igui.control.Controller;
+import com.gmail.mararok.igui.event.ImpactEvent;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.scene.SceneManager;
@@ -13,14 +17,18 @@ import com.gmail.mararok.igui.spi.render.RenderDevice;
 
 public class SceneImpl implements Scene {
 	private String id;
-	private RootSceneNode rootNode;
+	private ParentSceneNode rootNode;
 	private SceneNode focusedNode;
+	
+	private THashMap<String,Controller> controllers; 
+	
 	private SceneManager sceneManager;
 	
 	public SceneImpl(String id, SceneManager sceneManager) {
 		this.id = id;
 		this.sceneManager = sceneManager;
-		rootNode = new RootSceneNode(this);
+		
+		rootNode = new ParentSceneNodeImpl(sceneManager.getGUI(),sceneManager.getRenderDevice().getRootGUINode());
 		focusedNode = rootNode;
 	}
 
@@ -68,5 +76,19 @@ public class SceneImpl implements Scene {
 			focusedNode = sceneNode;
 		}
 	}
+	
+	@Override
+	public Controller getController(String name) {
+		return controllers.get(name);
+	}
 
+	@Override
+	public void setController(String name, Controller controller) {
+		controllers.put(name,controller);
+		
+	}
+	
+	public void onEvent(ImpactEvent event) {
+		
+	}
 }

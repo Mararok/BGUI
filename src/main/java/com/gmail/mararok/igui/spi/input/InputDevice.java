@@ -5,6 +5,7 @@
 */
 package com.gmail.mararok.igui.spi.input;
 
+import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.spi.render.MouseCursor;
 import com.jme3.math.Vector2f;
 
@@ -15,4 +16,6 @@ public interface InputDevice {
 	
 	void setDefaultMouseCursor();
 	void setMouseCursor(MouseCursor newMouseCursor);
+	
+	void setGUI(ImpactGUI gui);
 }
