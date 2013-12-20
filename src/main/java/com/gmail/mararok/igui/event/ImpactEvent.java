@@ -5,6 +5,10 @@
 */
 package com.gmail.mararok.igui.event;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import com.gmail.mararok.igui.scene.SceneNode;
 
 public class ImpactEvent {
@@ -51,7 +55,9 @@ public class ImpactEvent {
 		StringBuilder sb = new StringBuilder("EVENT[ ");
 		sb.append(type.toString());
 		sb.append(" at ");
-		sb.append(time);
+		Date date = new Date(time);
+	    Format format = new SimpleDateFormat("HH:mm:ss");
+		sb.append(format.format(date).toString());
 		sb.append(" for ");
 		sb.append(target);
 		sb.append(" ]");

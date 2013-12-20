@@ -11,7 +11,6 @@ import java.util.List;
 
 import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.event.ImpactEvent;
-import com.gmail.mararok.igui.event.mouse.MouseClickeEvent;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 import com.gmail.mararok.igui.scene.SceneNode;
 import com.gmail.mararok.igui.spi.render.ParentVisualNode;

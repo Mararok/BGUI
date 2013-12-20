@@ -8,11 +8,6 @@
 			<attribute name="javadoc_location" value="http://docs.oracle.com/cd/E17802_01/j2se/javase/technologies/desktop/java3d/forDevelopers/j3dapi"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="libs/gson/gson-2.2.4.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/ImpactGUI/libs/gson/gson-2.2.4-javadoc.jar!/"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="libs/eventbus/eventbus-2.1.0-beta-1.jar">
 		<attributes>
 			<attribute name="javadoc_location" value="jar:platform:/resource/ImpactGUI/libs/eventbus/eventbus-2.1.0-beta-1-javadoc.jar!/"/>

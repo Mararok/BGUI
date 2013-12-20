@@ -9,7 +9,6 @@ import java.util.HashMap;
 
 import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.event.ImpactEvent;
-import com.gmail.mararok.igui.event.mouse.MouseMotionEvent;
 import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.scene.SceneManager;
 import com.gmail.mararok.igui.spi.input.InputDevice;

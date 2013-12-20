@@ -7,14 +7,10 @@ package com.gmail.mararok.igui.scene.impl;
 
 import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.event.ImpactEvent;
-import com.gmail.mararok.igui.event.mouse.MouseClickeEvent;
-import com.gmail.mararok.igui.event.mouse.MouseMotionEvent;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.scene.SceneNode;
 import com.gmail.mararok.igui.spi.render.ParentVisualNode;
-
-import de.greenrobot.event.EventBus;
 
 public abstract class SceneNodeImpl implements SceneNode {
 	private String id;
@@ -95,9 +91,7 @@ public abstract class SceneNodeImpl implements SceneNode {
 		
 		enabled = value;
 		if (enabled) {
-			onEnable();
 		} else {
-			onDisable();
 		}
 	}
 
@@ -129,7 +123,6 @@ public abstract class SceneNodeImpl implements SceneNode {
 			}
 			
 		} else {
-			onHide();
 		}
 		
 	}

@@ -33,6 +33,7 @@ public class ImpactGUI {
 		this.renderDevice = renderDevice;
 		this.soundDevice = soundDevice;
 		this.inputDevice = inputDevice;
+		inputDevice.setGUI(this);
 		this.timeProvider = timeProvider;
 		sceneManager = new SceneManagerImpl(this);
 		

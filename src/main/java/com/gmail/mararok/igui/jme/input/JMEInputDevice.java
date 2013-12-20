@@ -91,10 +91,10 @@ public class JMEInputDevice implements InputDevice {
 
 		@Override
 		public void onMouseMotionEvent(com.jme3.input.event.MouseMotionEvent event) {
-			MouseMotionEvent newEvent = new MouseMotionEvent(igui.getTimeProvider().getMiliTime(),
+			MouseMotionEvent newEvent = new MouseMotionEvent(gui.getTimeProvider().getMiliTime(),
 					event.getX(),event.getX(),event.getDX(),event.getDX()
 			);
-			((SceneManagerImpl)igui.getSceneManager()).onEvent(newEvent);
+			((SceneManagerImpl)gui.getSceneManager()).onEvent(newEvent);
 		}
 
 		@Override
