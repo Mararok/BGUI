@@ -3,11 +3,11 @@
  * all rights reserved
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
 */
-package com.gmail.mararok.igui.sc.impl;
+package com.gmail.mararok.igui.control.standard.impl;
 
 import com.gmail.mararok.igui.ImpactGUI;
+import com.gmail.mararok.igui.control.standard.Label;
 import com.gmail.mararok.igui.render.RGBAColor;
-import com.gmail.mararok.igui.sc.Label;
 import com.gmail.mararok.igui.spi.render.Font;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 

@@ -3,7 +3,7 @@
  * all rights reserved
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
 */
-package com.gmail.mararok.igui.control;
+package com.gmail.mararok.igui.style;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -11,8 +11,8 @@ import java.util.List;
 
 import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.scene.impl.ParentSceneNodeImpl;
-import com.gmail.mararok.igui.style.Style;
-import com.gmail.mararok.igui.style.StyleClass;
+import com.gmail.mararok.igui.style.attributes.Attribute;
+import com.gmail.mararok.igui.style.attributes.AttributeType;
 import com.gmail.mararok.igui.util.Rectangle;
 
 public abstract class RegionImpl extends ParentSceneNodeImpl implements Region {
@@ -28,7 +28,6 @@ public abstract class RegionImpl extends ParentSceneNodeImpl implements Region {
 		localBounds = new Rectangle();
 	}
 
-	//@Override
 	public Style getStyle() {
 		if (style == null) {
 			style = new Style(this);
@@ -36,7 +35,11 @@ public abstract class RegionImpl extends ParentSceneNodeImpl implements Region {
 		
 		return style;
 	}
-
+	
+	public void updateAttribute(AttributeType type, Attribute attribute) {
+		
+	}
+	
 	@Override
 	public void setStyle(Style newStyle) {
 		style = newStyle;
@@ -164,6 +167,10 @@ public abstract class RegionImpl extends ParentSceneNodeImpl implements Region {
 	private void updateBounds() {
 		mainVisualNode.setTranslation(getLocalCenterX(),getGUI().getRenderDevice().getHeight()-getLocalCenterY(),getLocalZ());
 		mainVisualNode.setScale(getWidth()/2,getHeight()/2,1);
+	}
+	
+	public boolean contains(int px, int py) {
+		return localBounds.contains(px, py);
 	}
 
 }

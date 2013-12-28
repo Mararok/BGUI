@@ -11,23 +11,17 @@ import java.util.Date;
 
 import com.gmail.mararok.igui.scene.SceneNode;
 
-public class ImpactEvent {
-	private EventsType type;
+abstract public class ImpactEvent {
 	private long time;
 	private SceneNode target;
 	
-	public ImpactEvent(EventsType type, long time) {
-		this(type,time,null);
+	public ImpactEvent(long time) {
+		this(time,null);
 	}
 	
-	public ImpactEvent(EventsType type, long time, SceneNode target) {
-		this.type = type;
+	public ImpactEvent(long time, SceneNode target) {
 		this.time = time;
 		this.target = target;
-	}
-	
-	public EventsType getType() {
-		return type;
 	}
 	
 	public long getTime() {
@@ -50,16 +44,21 @@ public class ImpactEvent {
 		return (target != null);
 	}
 	
+	abstract public String getName();
+	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder("EVENT[ ");
-		sb.append(type.toString());
+		sb.append(getName()+" ]");
 		sb.append(" at ");
 		Date date = new Date(time);
-	    Format format = new SimpleDateFormat("HH:mm:ss");
+	    Format format = new SimpleDateFormat("HH:mm:ss:ms");
 		sb.append(format.format(date).toString());
-		sb.append(" for ");
-		sb.append(target);
+		if (target != null) {
+			sb.append(" for ");
+			sb.append(target);
+		}
+		
 		sb.append(" ]");
 		return sb.toString();
 	}

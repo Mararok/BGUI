@@ -26,6 +26,8 @@ public class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNod
 		this(gui);
 		mainVisualNode = visualNode;
 	}
+	
+	@Override
 	public void attachChild(SceneNode child) {
 		if (child == null) {
 			throw new IllegalArgumentException(
@@ -39,6 +41,7 @@ public class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNod
 		children.add((SceneNodeImpl) child);
 	}
 
+	@Override
 	public void detachChild(SceneNode child) {
 		if (child == null) {
 			throw new IllegalArgumentException(
@@ -57,18 +60,28 @@ public class ParentSceneNodeImpl extends SceneNodeImpl implements ParentSceneNod
 		child.setParent(null);
 	}
 	
+	@Override
 	public SceneNode getChild(int childIndex) {
 		return children.get(childIndex);
 	}
 	
+	@Override
 	public Iterator<SceneNode> getIterator() {
 		return children.iterator();
 	}
 	
 	@Override
+	public boolean hasChildren() {
+		return children != null;
+	}
+	
+	@Override
 	public void onEvent(ImpactEvent event) {
-		for (SceneNode child : children) {
-			((SceneNodeImpl)child).onEvent(event);
+		event.setTarget(this);
+		if (children != null) {
+			for (SceneNode child : children) {
+				((SceneNodeImpl)child).onEvent(event);
+			}
 		}
 	}
 	

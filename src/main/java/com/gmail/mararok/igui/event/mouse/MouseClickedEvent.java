@@ -5,14 +5,14 @@
 */
 package com.gmail.mararok.igui.event.mouse;
 
-public class MouseDownEvent extends MouseButtonEvent {
-	
-	public MouseDownEvent(long time, int x, int y, MouseButton button) {
+
+public class MouseClickedEvent extends MouseButtonEvent {
+	public MouseClickedEvent(long time, int x, int y, MouseButton button) {
 		super(time,x,y,button);
 	}
 
 	@Override
 	public String getName() {
-		return "MouseDownEvent";
+		return "MouseClickedEvent";
 	}
 }

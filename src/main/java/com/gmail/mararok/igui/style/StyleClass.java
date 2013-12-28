@@ -7,8 +7,6 @@ package com.gmail.mararok.igui.style;
 
 import java.util.List;
 
-import com.gmail.mararok.igui.control.RegionImpl;
-
 public class StyleClass extends Style {
 	private String name;
 	private StyleClass superClass;

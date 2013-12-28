@@ -5,13 +5,12 @@
 */
 package com.gmail.mararok.igui.event.mouse;
 
-import com.gmail.mararok.igui.event.EventsType;
 
-public class MouseButtonEvent extends MouseEvent {
+abstract public class MouseButtonEvent extends MouseEvent {
 	private MouseButton button;
 	
-	public MouseButtonEvent(EventsType type, long time, int x, int y, MouseButton button) {
-		super(type, time, x, y);
+	public MouseButtonEvent(long time, int x, int y, MouseButton button) {
+		super(time,x,y);
 	}
 
 	public MouseButton getButton() {

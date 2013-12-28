@@ -148,8 +148,12 @@ public abstract class SceneNodeImpl implements SceneNode {
 		mainVisualNode = getGUI().getRenderDevice().createParentNode();
 	}
 	
-	
 	protected ImpactGUI getGUI() {
 		return gui;
+	}
+	
+	@Override
+	public String toString() {
+		return id;
 	}
 }

@@ -7,8 +7,9 @@ package com.gmail.mararok.igui.scene.impl;
 
 import gnu.trove.map.hash.THashMap;
 
-import com.gmail.mararok.igui.control.Controller;
+import com.gmail.mararok.igui.event.Controller;
 import com.gmail.mararok.igui.event.ImpactEvent;
+import com.gmail.mararok.igui.event.keyboard.KeyboardEvent;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
 import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.scene.SceneManager;
@@ -17,7 +18,7 @@ import com.gmail.mararok.igui.spi.render.RenderDevice;
 
 public class SceneImpl implements Scene {
 	private String id;
-	private ParentSceneNode rootNode;
+	private ParentSceneNodeImpl rootNode;
 	private SceneNode focusedNode;
 	
 	private THashMap<String,Controller> controllers; 
@@ -89,6 +90,12 @@ public class SceneImpl implements Scene {
 	}
 	
 	public void onEvent(ImpactEvent event) {
-		
+		if (event instanceof KeyboardEvent) {
+			if (focusedNode != null) {
+				focusedNode.onEvent(event);
+			}
+		} else {
+			rootNode.onEvent(event);
+		}
 	}
 }

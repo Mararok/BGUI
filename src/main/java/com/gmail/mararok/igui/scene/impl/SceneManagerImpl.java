@@ -5,7 +5,7 @@
 */
 package com.gmail.mararok.igui.scene.impl;
 
-import java.util.HashMap;
+import gnu.trove.map.hash.THashMap;
 
 import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.event.ImpactEvent;
@@ -17,19 +17,19 @@ import com.gmail.mararok.igui.spi.sound.SoundDevice;
 import com.gmail.mararok.igui.spi.time.TimeProvider;
 
 public class SceneManagerImpl implements SceneManager {
-	private HashMap<String,Scene> scenes;
-	private Scene currentScene;
+	private THashMap<String,Scene> scenes;
+	private SceneImpl currentScene;
 	
 	private ImpactGUI gui;
 	
 	public SceneManagerImpl(ImpactGUI gui) {
-		scenes = new HashMap<String,Scene>();
+		scenes = new THashMap<String,Scene>();
 		this.gui = gui;
 	}
 	
 	@Override
 	public Scene createScene(String sceneName) {
-		Scene scene = (Scene) new SceneImpl(sceneName,this);
+		Scene scene = new SceneImpl(sceneName,this);
 		scenes.put(sceneName,scene);
 		return scene;
 	}
@@ -37,7 +37,6 @@ public class SceneManagerImpl implements SceneManager {
 	@Override
 	public void removeScene(String sceneName) {
 		if (currentScene != null && currentScene.getID() == sceneName) {
-			//currentScene.onDisable();
 			currentScene = null;
 		}
 		
@@ -49,11 +48,7 @@ public class SceneManagerImpl implements SceneManager {
 	}
 	@Override
 	public void setCurrentScene(String sceneName) {
-		if (currentScene != null) {
-			//currentScene.onDisable();
-		}
-		
-		currentScene = scenes.get(sceneName);
+		currentScene = (SceneImpl)scenes.get(sceneName);
 	}
 
 	@Override
@@ -82,7 +77,10 @@ public class SceneManagerImpl implements SceneManager {
 	}
 
 	public void onEvent(ImpactEvent event) {
-		System.out.println(event);
+		//System.out.println(event);
+		if (currentScene != null) {
+			currentScene.onEvent(event);
+		}
 		
 	}
 }

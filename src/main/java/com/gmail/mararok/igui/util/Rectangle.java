@@ -106,4 +106,8 @@ public final class Rectangle {
 	public boolean contains(int px, int py) {
 		return (px >= getLeft() && py >= getTop() && px <= getRight() && py <= getBottom());
 	}
+	
+	public String toString() {
+		return String.format("RB[%d,%d,%d,%d]",x,y,width,height);
+	}
 }

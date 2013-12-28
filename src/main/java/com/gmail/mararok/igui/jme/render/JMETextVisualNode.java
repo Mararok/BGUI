@@ -5,12 +5,12 @@
 */
 package com.gmail.mararok.igui.jme.render;
 
-import java.nio.FloatBuffer;
+/*import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 import java.util.Arrays;
 
 import com.gmail.mararok.igui.render.Glyph;
-import com.gmail.mararok.igui.render.MemoryMesh;
+import com.gmail.mararok.igui.render.MemoryMesh;*/
 import com.gmail.mararok.igui.render.QuadMemoryMesh;
 import com.gmail.mararok.igui.render.RGBAColor;
 import com.gmail.mararok.igui.spi.render.Font;
@@ -18,9 +18,9 @@ import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Mesh;
-import com.jme3.scene.Mesh.Mode;
+/*import com.jme3.scene.Mesh.Mode;
 import com.jme3.scene.VertexBuffer.Type;
-import com.jme3.util.BufferUtils;
+import com.jme3.util.BufferUtils;*/
 
 class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 	private JMEFont font;
@@ -66,7 +66,7 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 
 	@Override
 	public void setText(String newText) {
-		text = newText;
+		/*text = newText;
 		if (text == "" || text == null) {
 			memoryMeshes = null;
 			return;
@@ -98,17 +98,17 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 					0,1,
 					1,1,
 					1,0
-					/*uMax,vMax,
+					uMax,vMax,
 					uMin,vMin,
 					uMax,vMin,
-					uMin,vMax*/
+					uMin,vMax
 			});
 			
 			charMesh.setColors(getColor());
 			memoryMeshes[i] = charMesh;
 		}
 		
-		updateGeometry();
+		updateGeometry();*/
 	}
 
 	@Override
@@ -116,7 +116,7 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 		return text;
 	}
 
-	private void updateGeometry() {
+	/*private void updateGeometry() {
 		Mesh realMesh = getGeometry().getMesh();
 		
 		FloatBuffer positionBuffer = BufferUtils.createFloatBuffer(
@@ -163,7 +163,7 @@ class JMETextVisualNode extends JMEVisualNode implements TextVisualNode {
 		realMesh.setBuffer(Type.Index,1,indexBuffer);
 		realMesh.setMode(Mode.TriangleStrip);
 		setScale(300,60,1);
-	}
+	}*/
 	
 	Geometry getGeometry() {
 		return (Geometry)spatial;

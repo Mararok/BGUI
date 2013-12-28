@@ -14,4 +14,5 @@ public interface ParentSceneNode extends SceneNode {
 	
 	SceneNode getChild(int childIndex);
 	Iterator<SceneNode> getIterator();
+	boolean hasChildren();
 }

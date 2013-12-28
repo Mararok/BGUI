@@ -5,6 +5,8 @@
 */
 package com.gmail.mararok.igui.scene;
 
+import com.gmail.mararok.igui.event.ImpactEvent;
+
 public interface SceneNode {
 	String getID();
 	void setID(String newID);
@@ -27,4 +29,6 @@ public interface SceneNode {
 	void show();
 	void hide();
 	boolean isVisible();
+	
+	void onEvent(ImpactEvent event);
 }

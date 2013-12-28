@@ -5,14 +5,12 @@
 */
 package com.gmail.mararok.igui.event.mouse;
 
-import com.gmail.mararok.igui.event.EventsType;
-
-public class MouseMotionEvent extends MouseEvent {
+public class MouseMovedEvent extends MouseEvent {
 	private int dx;
 	private int dy;
 	
-	public MouseMotionEvent(long time, int x, int y, int dx, int dy) {
-		super(EventsType.MouseMotionEvent,time,x,y);
+	public MouseMovedEvent(long time, int x, int y, int dx, int dy) {
+		super(time,x,y);
 		this.dx = dx;
 		this.dy = dy;
 	}
@@ -23,6 +21,11 @@ public class MouseMotionEvent extends MouseEvent {
 	
 	public int getDY() {
 		return dy;
+	}
+
+	@Override
+	public String getName() {
+		return "MouseMovedEvent";
 	}
 
 }

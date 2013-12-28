@@ -6,11 +6,11 @@
 package com.gmail.mararok.igui.test.sc;
 
 import com.gmail.mararok.igui.ImpactGUI;
+import com.gmail.mararok.igui.control.standard.Panel;
+import com.gmail.mararok.igui.control.standard.impl.PanelImpl;
 import com.gmail.mararok.igui.jme.input.JMEInputDevice;
 import com.gmail.mararok.igui.jme.render.JMERenderDevice;
 import com.gmail.mararok.igui.render.RGBAColor;
-import com.gmail.mararok.igui.sc.Panel;
-import com.gmail.mararok.igui.sc.impl.PanelImpl;
 import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.jme3.app.SimpleApplication;
@@ -22,17 +22,18 @@ public class SCTestApplication extends SimpleApplication {
 	public void simpleInitApp() {
 		igui = new ImpactGUI(new JMERenderDevice(guiNode,assetManager,cam),new JMEInputDevice(inputManager));
 		testScene = igui.getSceneManager().createScene("TestScene");
-		igui.getSceneManager().setCurrentScene("testScene");
-		
+		igui.getSceneManager().setCurrentScene("TestScene");
+		inputManager.setCursorVisible(true);
 		Panel leftPanel = new PanelImpl(getIGUI());
 		Panel rightPanel = new PanelImpl(getIGUI());
 		leftPanel.setBackgroundColor(RGBAColor.RED);
 		leftPanel.setSize(400,600);
+		leftPanel.setID("leftPanel");
 		
 		rightPanel.setBackgroundColor(RGBAColor.BLUE);
 		rightPanel.setSize(400,600);
 		rightPanel.setLocalX(400);
-		
+		rightPanel.setID("rightPanel");
 		testScene.attachChild(leftPanel);
 		testScene.attachChild(rightPanel);
 	}

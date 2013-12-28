@@ -7,7 +7,6 @@ package com.gmail.mararok.igui.style;
 
 import java.util.EnumMap;
 
-import com.gmail.mararok.igui.control.RegionImpl;
 import com.gmail.mararok.igui.style.attributes.Attribute;
 import com.gmail.mararok.igui.style.attributes.AttributeType;
 import com.gmail.mararok.igui.style.attributes.AttributeValue;

@@ -3,8 +3,8 @@
  * all rights reserved
  * Copyright (C) 2013 Mararok <mararok@gmail.com>
 */
-package com.gmail.mararok.igui.control;
+package com.gmail.mararok.igui.event.keyboard;
 
-public interface Controller {
-
+public enum KeyModifierType {
+	CONTROL,ALT,SHIFT
 }

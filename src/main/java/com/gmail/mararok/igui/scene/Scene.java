@@ -5,7 +5,7 @@
 */
 package com.gmail.mararok.igui.scene;
 
-import com.gmail.mararok.igui.control.Controller;
+import com.gmail.mararok.igui.event.Controller;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
 
 public interface Scene {
