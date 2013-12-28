@@ -5,20 +5,20 @@
 */
 package com.gmail.mararok.igui.style;
 
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
+import javax.script.ScriptContext;
+
+import com.gmail.mararok.igui.script.GUIScriptEngine;
 
 public class StyleScriptEngine {
-	private ScriptEngineManager scriptEngineManager;
-	private ScriptEngine scriptEngine;
+	private GUIScriptEngine scriptEngine;
+	private ScriptContext styleScriptContext;
 	
-	public StyleScriptEngine() {
-		System.setProperty("rhino.opt.level","9");
-		scriptEngineManager = new ScriptEngineManager();
-		scriptEngine = scriptEngineManager.getEngineByExtension("js");
+	public StyleScriptEngine(GUIScriptEngine scriptEngine) {
+		this.scriptEngine = scriptEngine;
+		styleScriptContext = scriptEngine.newScriptContext();
 	}
 	
-	public void parseStyle(String styleSource) {
-		
+	public void parseStyle(String style) {
+		scriptEngine.eval(style,styleScriptContext);
 	}
 }

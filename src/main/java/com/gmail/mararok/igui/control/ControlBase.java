@@ -9,6 +9,7 @@ import gnu.trove.map.hash.THashMap;
 
 import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.event.EventHandler;
+import com.gmail.mararok.igui.event.EventType;
 import com.gmail.mararok.igui.event.ImpactEvent;
 import com.gmail.mararok.igui.event.mouse.MouseEvent;
 import com.gmail.mararok.igui.style.RegionImpl;
@@ -26,6 +27,10 @@ public class ControlBase extends RegionImpl {
 		}
 		
 		eventHandlers.put(eventName,handler);
+	}
+	
+	public void registerHandler(EventType eventType, EventHandler handler) {
+		registerHandler(eventType.toString(),handler);
 	}
 	
 	@Override

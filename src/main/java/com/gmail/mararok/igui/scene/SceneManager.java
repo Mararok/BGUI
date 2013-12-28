@@ -5,6 +5,8 @@
 */
 package com.gmail.mararok.igui.scene;
 
+import java.nio.file.Path;
+
 import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.spi.input.InputDevice;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
@@ -14,6 +16,7 @@ import com.gmail.mararok.igui.spi.time.TimeProvider;
 public interface SceneManager {
 	Scene createScene(String sceneName);
 	void removeScene(String sceneName);
+	Scene loadScene(Path path);
 	
 	Scene getCurrentScene();
 	void setCurrentScene(String sceneName);

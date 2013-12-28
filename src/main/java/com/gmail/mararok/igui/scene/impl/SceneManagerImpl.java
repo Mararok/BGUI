@@ -5,6 +5,8 @@
 */
 package com.gmail.mararok.igui.scene.impl;
 
+import java.nio.file.Path;
+
 import gnu.trove.map.hash.THashMap;
 
 import com.gmail.mararok.igui.ImpactGUI;
@@ -42,6 +44,13 @@ public class SceneManagerImpl implements SceneManager {
 		
 		scenes.remove(sceneName);
 	}
+	
+	@Override
+	public Scene loadScene(Path path) {
+		return null;
+	}
+	
+	
 	@Override
 	public Scene getCurrentScene() {
 		return currentScene;
@@ -77,10 +86,8 @@ public class SceneManagerImpl implements SceneManager {
 	}
 
 	public void onEvent(ImpactEvent event) {
-		//System.out.println(event);
 		if (currentScene != null) {
 			currentScene.onEvent(event);
 		}
-		
 	}
 }
