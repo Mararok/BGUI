@@ -18,7 +18,7 @@ import com.gmail.mararok.igui.event.mouse.MouseDownEvent;
 import com.gmail.mararok.igui.event.mouse.MouseMovedEvent;
 import com.gmail.mararok.igui.event.mouse.MouseUpEvent;
 import com.gmail.mararok.igui.jme.render.JMEMouseCursor;
-import com.gmail.mararok.igui.scene.impl.SceneManagerImpl;
+import com.gmail.mararok.igui.scene.SceneManager;
 import com.gmail.mararok.igui.spi.input.InputDevice;
 import com.gmail.mararok.igui.spi.render.MouseCursor;
 import com.jme3.input.InputManager;
@@ -84,7 +84,7 @@ public class JMEInputDevice implements InputDevice {
 					keyModifiers.set(KeyModifierType.SHIFT.ordinal());
 				}
 				
-				((SceneManagerImpl)gui.getSceneManager()).onEvent(newEvent);
+				((SceneManager)gui.getSceneManager()).onEvent(newEvent);
 				
 			} else if (event.isReleased()) {
 				newEvent = new KeyUpEvent(gui.getTimeProvider().getMiliTime(),event.getKeyCode(),keyModifiers);
@@ -97,11 +97,11 @@ public class JMEInputDevice implements InputDevice {
 					keyModifiers.clear(KeyModifierType.SHIFT.ordinal());
 				}
 				
-				((SceneManagerImpl)gui.getSceneManager()).onEvent(newEvent);
+				((SceneManager)gui.getSceneManager()).onEvent(newEvent);
 				
 			}
 			
-			((SceneManagerImpl)gui.getSceneManager()).onEvent(newEvent);
+			((SceneManager)gui.getSceneManager()).onEvent(newEvent);
 		}
 
 		@Override
@@ -111,18 +111,18 @@ public class JMEInputDevice implements InputDevice {
 				newEvent = new MouseDownEvent(gui.getTimeProvider().getMiliTime(),
 						event.getX(),event.getY(),MouseButton.fromIndex(event.getButtonIndex())
 				);
-				((SceneManagerImpl)gui.getSceneManager()).onEvent(newEvent);
+				((SceneManager)gui.getSceneManager()).onEvent(newEvent);
 			} else if (event.isReleased()) {
 				
 				newEvent = new MouseUpEvent(gui.getTimeProvider().getMiliTime(),
 						event.getX(),event.getY(),MouseButton.fromIndex(event.getButtonIndex())
 				);
-				((SceneManagerImpl)gui.getSceneManager()).onEvent(newEvent);
+				((SceneManager)gui.getSceneManager()).onEvent(newEvent);
 				
 				newEvent = new MouseClickedEvent(gui.getTimeProvider().getMiliTime(),
 						event.getX(),event.getY(),MouseButton.fromIndex(event.getButtonIndex())
 				);
-				((SceneManagerImpl)gui.getSceneManager()).onEvent(newEvent);
+				((SceneManager)gui.getSceneManager()).onEvent(newEvent);
 			}
 			
 		}
@@ -132,7 +132,7 @@ public class JMEInputDevice implements InputDevice {
 			MouseMovedEvent newEvent = new MouseMovedEvent(gui.getTimeProvider().getMiliTime(),
 					event.getX(),event.getX(),event.getDX(),event.getDX()
 			);
-			((SceneManagerImpl)gui.getSceneManager()).onEvent(newEvent);
+			((SceneManager)gui.getSceneManager()).onEvent(newEvent);
 		}
 
 		@Override

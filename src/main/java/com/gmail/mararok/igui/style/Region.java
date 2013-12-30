@@ -5,28 +5,47 @@
 */
 package com.gmail.mararok.igui.style;
 
-import com.gmail.mararok.igui.scene.ParentSceneNode;
+import com.gmail.mararok.igui.style.attributes.Attribute;
+import com.gmail.mararok.igui.style.attributes.AttributeType;
 
-public interface Region extends ParentSceneNode, Styleable {
-	public int getLocalCenterX();
-	public int getLocalCenterY();
+public interface Region extends Styleable {
 	
-	public int getLocalX();
-	public void setLocalX(int newX);
+	int getCenterX();
+	int getCenterY();
 	
-	public int getLocalY();
-	public void setLocalY(int newY);
+	int getX();
+	void setX(int newX);
 	
-	public void setLocalPosition(int newX, int newY);
+	int getY();
+	void setY(int newY);
 	
-	public int getLocalZ();
-	public void setLocalZ(int newZ);
+	void setPosition(int newX, int newY);
 	
-	public int getWidth();
-	public void setWidth(int newWidth);
+	int getZ();
+	void setZ(int newZ);
 	
-	public int getHeight();
-	public void setHeight(int newHeight);
 	
-	public void setSize(int newWidth, int newHeight);
+	int getLocalCenterX();
+	int getLocalCenterY();
+	
+	int getLocalX();
+	void setLocalX(int newX);
+	
+	int getLocalY();
+	void setLocalY(int newY);
+	
+	void setLocalPosition(int newX, int newY);
+	
+	int getLocalZ();
+	void setLocalZ(int newZ);
+	
+	int getWidth();
+	void setWidth(int newWidth);
+	
+	int getHeight();
+	void setHeight(int newHeight);
+	
+	void setSize(int newWidth, int newHeight);
+	
+	void updateAttribute(AttributeType type, Attribute attribute);
 }

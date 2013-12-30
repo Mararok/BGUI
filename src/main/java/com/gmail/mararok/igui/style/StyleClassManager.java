@@ -23,8 +23,4 @@ public class StyleClassManager {
 		return styleClasses.get(className);
 	}
 
-	
-	public void loadTheme(String themeName) {
-		
-	}
 }

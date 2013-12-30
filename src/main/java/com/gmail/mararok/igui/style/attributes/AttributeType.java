@@ -20,8 +20,6 @@ public enum AttributeType {
 	
 	border(BorderAttribute.class),
 	
-	opacity(OpactityAttribute.class),
-	
 	font(FontAttribute.class),
 	
 	margin(MarginAttribute.class),

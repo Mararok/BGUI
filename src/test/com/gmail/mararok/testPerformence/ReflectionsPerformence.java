@@ -7,13 +7,11 @@ package com.gmail.mararok.testPerformence;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.concurrent.TimeUnit;
 
 import com.esotericsoftware.reflectasm.MethodAccess;
 
 public class ReflectionsPerformence {
 	public void testMethod() {
-		int t = 10;
 	}
 	
 	public static void main(String[] args) {

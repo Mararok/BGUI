@@ -7,24 +7,82 @@ package com.gmail.mararok.igui.scene;
 
 import java.nio.file.Path;
 
+import gnu.trove.map.hash.THashMap;
+
 import com.gmail.mararok.igui.ImpactGUI;
+import com.gmail.mararok.igui.event.ImpactEvent;
+import com.gmail.mararok.igui.scene.SceneManager;
 import com.gmail.mararok.igui.spi.input.InputDevice;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.gmail.mararok.igui.spi.sound.SoundDevice;
 import com.gmail.mararok.igui.spi.time.TimeProvider;
 
-public interface SceneManager {
-	Scene createScene(String sceneName);
-	void removeScene(String sceneName);
-	Scene loadScene(Path path);
+public class SceneManager {
+	private THashMap<String,Scene> scenes;
+	private Scene currentScene;
 	
-	Scene getCurrentScene();
-	void setCurrentScene(String sceneName);
+	private ImpactGUI gui;
 	
-	ImpactGUI getGUI();
+	public SceneManager(ImpactGUI gui) {
+		scenes = new THashMap<String,Scene>();
+		this.gui = gui;
+	}
 	
-	RenderDevice getRenderDevice();
-	InputDevice getInputDevice();
-	SoundDevice getSoundDevice();
-	TimeProvider getTimeProvider();
+	public Scene createScene(String sceneName) {
+		Scene scene = new Scene(sceneName,this);
+		scenes.put(sceneName,scene);
+		return scene;
+	}
+	
+	public void removeScene(String sceneName) {
+		if (currentScene != null && currentScene.getID() == sceneName) {
+			currentScene = null;
+		}
+		
+		scenes.remove(sceneName);
+	}
+	
+	public Scene loadScene(Path path) {
+		return null;
+	}
+	
+	
+	public Scene getCurrentScene() {
+		return currentScene;
+	}
+	
+	public void setCurrentScene(String sceneName) {
+		currentScene = (Scene)scenes.get(sceneName);
+	}
+
+	
+	public ImpactGUI getGUI() {
+		return gui;
+	}
+	
+	
+	public RenderDevice getRenderDevice() {
+		return gui.getRenderDevice();
+	}
+
+	
+	public InputDevice getInputDevice() {
+		return gui.getInputDevice();
+	}
+
+	
+	public SoundDevice getSoundDevice() {
+		return gui.getSoundDevice();
+	}
+
+	
+	public TimeProvider getTimeProvider() {
+		return gui.getTimeProvider();
+	}
+
+	public void onEvent(ImpactEvent event) {
+		if (currentScene != null) {
+			currentScene.onEvent(event);
+		}
+	}
 }

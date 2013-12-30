@@ -8,15 +8,29 @@ package com.gmail.mararok.igui.style.attributes;
 import com.gmail.mararok.igui.style.Style;
 
 public abstract class Attribute {
-	private Style parentStyle;
+	private Style style;
 	
-	public Attribute(Style parentStyle) {
-		this.parentStyle = parentStyle;
+	public Attribute() {}
+	
+	public Style getStyle() {
+		return style;
 	}
 	
-	public Style getParent() {
-		return parentStyle;
+	public void setStyle(Style newStyle) {
+		style = newStyle;
+	}
+	
+	public abstract AttributeType getType();
+	
+	public void updateStyle() {
+		if (style != null) {
+			style.updateAttribute(getType());
+		}
 	}
 	
 	public abstract void setValue(AttributeValue newValue);
+
+	public void setValue(Object newValue) {
+		
+	}
 }

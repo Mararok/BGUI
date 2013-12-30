@@ -6,7 +6,8 @@
 package com.gmail.mararok.igui.control;
 
 import com.gmail.mararok.igui.ImpactGUI;
+import com.gmail.mararok.igui.scene.SceneNode;
 
-public abstract class ControlBuilder<T extends ControlBase> {
+public abstract class ControlBuilder<T extends SceneNode> {
 	public abstract T build(ImpactGUI igui);
 }

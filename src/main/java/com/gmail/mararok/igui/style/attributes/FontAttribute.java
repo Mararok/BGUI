@@ -6,18 +6,12 @@
 package com.gmail.mararok.igui.style.attributes;
 
 import com.gmail.mararok.igui.render.RGBAColor;
-import com.gmail.mararok.igui.style.Style;
 
 public class FontAttribute extends Attribute {
 	private String font;
 	private RGBAColor color;
 	private FontStyle style;
-	
-	public FontAttribute(Style parentStyle) {
-		super(parentStyle);
-	}
 
-	
 	public String getFont() {
 		return font;
 	}
@@ -38,7 +32,7 @@ public class FontAttribute extends Attribute {
 	}
 
 
-	public FontStyle getStyle() {
+	public FontStyle getFontStyle() {
 		return style;
 	}
 
@@ -51,6 +45,12 @@ public class FontAttribute extends Attribute {
 	@Override
 	public void setValue(AttributeValue newValue) {
 		
+	}
+
+
+	@Override
+	public AttributeType getType() {
+		return AttributeType.font;
 	}
 
 }

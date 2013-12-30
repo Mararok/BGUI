@@ -8,14 +8,13 @@ package com.gmail.mararok.igui.style.attributes;
 import com.gmail.mararok.igui.render.Gradient;
 import com.gmail.mararok.igui.render.RGBAColor;
 import com.gmail.mararok.igui.render.SolidGradient;
-import com.gmail.mararok.igui.style.Style;
 
 public class BackgroundAttribute extends Attribute {
 	private Gradient color;
 	private String image;
 	
-	public BackgroundAttribute(Style parentStyle) {
-		super(parentStyle);
+	public BackgroundAttribute() {
+		super();
 	}
 	
 	public Gradient getColor() {
@@ -28,6 +27,7 @@ public class BackgroundAttribute extends Attribute {
 	
 	public void setColor(Gradient newColor) {
 		color = newColor;
+		updateStyle();
 	}
 	
 	public String getImage() {
@@ -36,6 +36,7 @@ public class BackgroundAttribute extends Attribute {
 	
 	public void setImage(String newImage) {
 		image = newImage;
+		updateStyle();
 	}
 
 	@Override
@@ -43,5 +44,17 @@ public class BackgroundAttribute extends Attribute {
 		if (newValue.getValue() instanceof RGBAColor) {
 			setColor((RGBAColor)newValue.getValue());
 		}
+	}
+
+	@Override
+	public void setValue(Object newValue) {
+		if (newValue instanceof RGBAColor) {
+			setColor((RGBAColor) newValue);
+		}
+	}
+	
+	@Override
+	public AttributeType getType() {
+		return AttributeType.background;
 	}
 }

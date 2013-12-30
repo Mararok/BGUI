@@ -1,12 +1,19 @@
 Styles.import('BlackClearStyle');
 return {
 	id:'TestScene',
-	controllers:['TestController'],
+	controllers:'TestController',
 	children: [
-		{type:Controls.Panel, children: [
-			{type:Controls.Button, events:{
-				onClick: 'TestController.onClickButton'
-			}}
-		]}
+		{
+			type:Controls.Panel, 
+			children: [
+				{
+					type: Controls.Button,
+					text: "TEST",
+					events:{
+						onClick: 'TestController.onClickButton'
+					}
+				}
+			]
+		}
 	]
-}
+};

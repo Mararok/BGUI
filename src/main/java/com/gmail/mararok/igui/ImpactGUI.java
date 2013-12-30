@@ -6,7 +6,6 @@
 package com.gmail.mararok.igui;
 
 import com.gmail.mararok.igui.scene.SceneManager;
-import com.gmail.mararok.igui.scene.impl.SceneManagerImpl;
 import com.gmail.mararok.igui.spi.input.InputDevice;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.gmail.mararok.igui.spi.sound.NullSoundDevice;
@@ -35,7 +34,7 @@ public class ImpactGUI {
 		this.inputDevice = inputDevice;
 		inputDevice.setGUI(this);
 		this.timeProvider = timeProvider;
-		sceneManager = new SceneManagerImpl(this);
+		sceneManager = new SceneManager(this);
 		
 		styleClassManager = new StyleClassManager();
 	}

@@ -5,16 +5,10 @@
 */
 package com.gmail.mararok.igui.style.attributes;
 
-import com.gmail.mararok.igui.style.Style;
-
 public class PositionAttribute extends Attribute {
 	private int x;
 	private int y;
 	private int z;
-	
-	public PositionAttribute(Style parentStyle) {
-		super(parentStyle);
-	}
 	
 	public int getX() {
 		return x;
@@ -71,5 +65,10 @@ public class PositionAttribute extends Attribute {
 				setZ((int)values[2]);
 			}
 		}
+	}
+
+	@Override
+	public AttributeType getType() {
+		return AttributeType.position;
 	}
 }

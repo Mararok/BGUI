@@ -5,18 +5,12 @@
 */
 package com.gmail.mararok.igui.style.attributes;
 
-import com.gmail.mararok.igui.style.Style;
-
 public class MarginAttribute extends Attribute {
 	private int left;
 	private int top;
 	
 	private int right;
 	private int bottom;
-
-	public MarginAttribute(Style parentStyle) {
-		super(parentStyle);
-	}
 
 	@Override
 	public void setValue(AttributeValue newValue) {
@@ -54,6 +48,11 @@ public class MarginAttribute extends Attribute {
 
 	public void setBottom(int newBottom) {
 		bottom = newBottom;
+	}
+
+	@Override
+	public AttributeType getType() {
+		return AttributeType.margin;
 	}
 	
 }

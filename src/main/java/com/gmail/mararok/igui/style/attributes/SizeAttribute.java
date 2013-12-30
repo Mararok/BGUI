@@ -5,8 +5,6 @@
 */
 package com.gmail.mararok.igui.style.attributes;
 
-import com.gmail.mararok.igui.style.Style;
-
 public class SizeAttribute extends Attribute {
 	
 	private int minWidth;
@@ -16,10 +14,6 @@ public class SizeAttribute extends Attribute {
 	private int minHeight;
 	private int height;
 	private int maxHeight;
-	
-	public SizeAttribute(Style parentStyle) {
-		super(parentStyle);
-	}
 
 	public int getMinWidth() {
 		return minWidth;
@@ -73,6 +67,11 @@ public class SizeAttribute extends Attribute {
 	public void setValue(AttributeValue newValue) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public AttributeType getType() {
+		return AttributeType.size;
 	}
 	
 }

@@ -5,5 +5,5 @@
 */
 package com.gmail.mararok.igui.control.standard;
 
-public interface Button extends Label {
+public class Button extends Label {
 }

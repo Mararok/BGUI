@@ -8,20 +8,11 @@ package com.gmail.mararok.igui.style.attributes;
 import com.gmail.mararok.igui.render.Gradient;
 import com.gmail.mararok.igui.render.RGBAColor;
 import com.gmail.mararok.igui.render.SolidGradient;
-import com.gmail.mararok.igui.style.Style;
 
 public class ColorAttribute extends Attribute {
 	private Gradient color;
 	
-	public ColorAttribute(Style parentStyle) {
-		super(parentStyle);
-	}
-
-	public RGBAColor getColor() {
-		return color.getAsColor();
-	}
-	
-	public Gradient getColorAsGradient() {
+	public Gradient getColor() {
 		return color;
 	}
 	
@@ -38,6 +29,11 @@ public class ColorAttribute extends Attribute {
 		if (newValue.getValue() instanceof RGBAColor) {
 			setColor((RGBAColor)newValue.getValue());
 		}
+	}
+
+	@Override
+	public AttributeType getType() {
+		return AttributeType.color;
 	}
 	
 }

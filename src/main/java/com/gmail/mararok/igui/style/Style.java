@@ -7,26 +7,26 @@ package com.gmail.mararok.igui.style;
 
 import java.util.EnumMap;
 
+import com.gmail.mararok.igui.scene.SceneNode;
 import com.gmail.mararok.igui.style.attributes.Attribute;
 import com.gmail.mararok.igui.style.attributes.AttributeType;
 import com.gmail.mararok.igui.style.attributes.AttributeValue;
 
 public class Style {
 	private EnumMap<AttributeType,Attribute> attributes;
+	private Region region;
 	
-	private RegionImpl region;
-	
-	public Style() {
-		attributes = new EnumMap<AttributeType,Attribute>(AttributeType.class);
-	}
-	
-	public Style(RegionImpl region) {
+	public Style(SceneNode region) {
 		attributes = new EnumMap<AttributeType,Attribute>(AttributeType.class);
 		this.region = region;
 	}
 	
 	public Attribute getAttribute(AttributeType type) {
-		return attributes.get(type);
+		Attribute attribute = attributes.get(type);
+		if (attribute == null) {
+			attribute = addAttribute(type);
+		}
+		return attribute;
 	}
 	
 	public boolean hasAttribute(AttributeType type)  {
@@ -34,31 +34,30 @@ public class Style {
 	}
 	
 	public void setAttribute(AttributeType type, AttributeValue newValue) {
-		Attribute attribute = getAttribute(type);
-		if (attribute == null) {
-			if (newValue != null) {
-				addAttribute(type).setValue(newValue);
-			}
-		} else {
-			if (newValue == null) {
+		if (newValue == null) {
+			if (hasAttribute(type)) {
 				removeAttribute(type);
-			} else {
-				attribute.setValue(newValue);
 			}
+			return;
 		}
-		updateAttribute(type);
+		
+		Attribute attribute = getAttribute(type);
+		attribute.setValue(newValue);
 	}
 	
-	private void updateAttribute(AttributeType type) {
+	public void updateAttribute(AttributeType type) {
 		region.updateAttribute(type,getAttribute(type));
 	}
 	
-	private Attribute addAttribute(AttributeType attributeType) {
-		return attributes.put(attributeType,attributeType.createValue());
+	private Attribute addAttribute(AttributeType type) {
+		Attribute newValue = type.createValue();
+		newValue.setStyle(this);
+		attributes.put(type,newValue);
+		return newValue;
 	}
 	
-	private void removeAttribute(AttributeType attributeType) {
-		attributes.remove(attributeType);
+	private void removeAttribute(AttributeType type) {
+		attributes.remove(type);
 	}
 
 

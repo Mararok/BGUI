@@ -5,9 +5,13 @@
 */
 package com.gmail.mararok.igui.render;
 
-public class SolidGradient extends Gradient {
-
-	public SolidGradient(RGBAColor newColor) {
+public class SolidGradient implements Gradient {
+	public RGBAColor color;
+	public SolidGradient(RGBAColor color) {
+		this.color = color;
 	}
 
+	public RGBAColor getColor() {
+		return color;
+	}
 }

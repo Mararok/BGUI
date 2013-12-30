@@ -10,6 +10,10 @@ import com.esotericsoftware.reflectasm.MethodAccess;
 public class Controller {
 	private MethodAccess methods;
 	
+	public Controller() {
+		methods = MethodAccess.get(getClass());
+	}
+	
 	int getMethodIndex(String methodName) {
 		return methods.getIndex(methodName);
 	}
