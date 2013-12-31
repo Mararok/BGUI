@@ -11,9 +11,7 @@ public final class Rectangle {
 	private int width;
 	private int height;
 	
-	public Rectangle() {
-		
-	}
+	public Rectangle() {}
 	
 	public Rectangle(int x, int y, int width, int height) {
 		this.x = x;
@@ -108,6 +106,6 @@ public final class Rectangle {
 	}
 	
 	public String toString() {
-		return String.format("RB[%d,%d,%d,%d]",x,y,width,height);
+		return String.format("Rectangle[%d,%d,%d,%d]",x,y,width,height);
 	}
 }

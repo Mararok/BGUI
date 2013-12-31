@@ -45,13 +45,6 @@ public class BackgroundAttribute extends Attribute {
 			setColor((RGBAColor)newValue.getValue());
 		}
 	}
-
-	@Override
-	public void setValue(Object newValue) {
-		if (newValue instanceof RGBAColor) {
-			setColor((RGBAColor) newValue);
-		}
-	}
 	
 	@Override
 	public AttributeType getType() {

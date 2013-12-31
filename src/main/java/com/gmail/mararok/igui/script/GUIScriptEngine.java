@@ -5,11 +5,11 @@
 */
 package com.gmail.mararok.igui.script;
 
-import javax.script.ScriptContext;
+import java.io.Reader;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
-import javax.script.SimpleScriptContext;
 
 public class GUIScriptEngine {
 	private ScriptEngineManager scriptEngineManager;
@@ -20,26 +20,26 @@ public class GUIScriptEngine {
 		scriptEngineManager = new ScriptEngineManager();
 		scriptEngine = scriptEngineManager.getEngineByExtension("js");
 	}
-
-	public ScriptContext newScriptContext() {
-		return new SimpleScriptContext();
-	}
 	
-	public Object eval(String script) {
+	Object eval(String script, ScriptEngineContext context) {
+		Object ret = null;
 		try {
-			return scriptEngine.eval(script);
+			ret = scriptEngine.eval(script,context.getRealContext());
 		} catch (ScriptException e) {
 			e.printStackTrace();
 		}
-		return null;
+		
+		return ret;
 	}
 	
-	public Object eval(String script, ScriptContext newContext) {
+	Object eval(Reader reader, ScriptEngineContext context) {
+		Object ret = null;
 		try {
-			return scriptEngine.eval(script);
+			ret = scriptEngine.eval(reader,context.getRealContext());
 		} catch (ScriptException e) {
 			e.printStackTrace();
 		}
-		return null;
+		
+		return ret;
 	}
 }

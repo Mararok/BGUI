@@ -13,9 +13,4 @@ public class KeyPressedEvent extends KeyboardEvent {
 		super(time,keyCode,modifiers);
 	}
 
-	@Override
-	public String getName() {
-		return "KeyPressedEvent";
-	}
-
 }

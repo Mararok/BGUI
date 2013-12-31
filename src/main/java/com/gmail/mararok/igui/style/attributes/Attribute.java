@@ -29,8 +29,4 @@ public abstract class Attribute {
 	}
 	
 	public abstract void setValue(AttributeValue newValue);
-
-	public void setValue(Object newValue) {
-		
-	}
 }

@@ -22,24 +22,33 @@ public class Panel extends ParentSceneNode {
 	public void updateAttribute(AttributeType type, Attribute value) {
 		switch (type) {
 		case background: {
-			setBackgroundColor(((BackgroundAttribute)value).getColor());
+			setBackgroundColor((BackgroundAttribute)value);
 		}
 		default:
 			break;
 		}
 	}
 	
-	private void setBackgroundColor(Gradient newColor) {
-		backgroundColor = newColor;
+	private void setBackgroundColor(BackgroundAttribute attribute) {
+		backgroundColor = attribute.getColor();
 		if (getScene() == null) {
 			return;
 		}
 		
-		if (newColor == null && panelGeometry != null) {
+		if (backgroundColor == null && panelGeometry != null) {
 			getScene().getVisualRoot().detachChild(panelGeometry);
 			panelGeometry = null;
 		} else {
-			createPanelGeometry();
+			if (panelGeometry != null) {
+				if (backgroundColor != null) {
+					if (backgroundColor instanceof SolidGradient) {
+						panelGeometry.getMesh().setColors(((SolidGradient) backgroundColor).getColor());
+					}
+					panelGeometry.updateGeometry();
+				}
+			} else {
+				createPanelGeometry();
+			}
 		}
 	}
 	
@@ -50,19 +59,21 @@ public class Panel extends ParentSceneNode {
 		createPanelGeometry();
 	}
 
-	protected void createPanelGeometry() {
+	private void createPanelGeometry() {
+		if (backgroundColor == null) {
+			return;
+		}
+		
 		panelGeometry = getScene().getRenderDevice().createGeometryNode();
 		panelGeometry.setMesh(new QuadMemoryMesh());
 		
-		panelGeometry.setTranslation(getCenterX(),getCenterY(),getZ());
+		panelGeometry.setTranslation(getCenterX(),getScene().getRenderDevice().getHeight()-getCenterY(),getZ());
 		panelGeometry.setScale(getWidth()/2,getHeight()/2,1);
 			
-		if (backgroundColor != null) {
-			if (backgroundColor instanceof SolidGradient) {
-				panelGeometry.getMesh().setColors(((SolidGradient) backgroundColor).getColor());
-			}
-			panelGeometry.updateGeometry();
+		if (backgroundColor instanceof SolidGradient) {
+			panelGeometry.getMesh().setColors(((SolidGradient) backgroundColor).getColor());
 		}
+		panelGeometry.updateGeometry();
 		
 		getScene().getVisualRoot().attachChild(panelGeometry);
 	}
@@ -82,7 +93,7 @@ public class Panel extends ParentSceneNode {
 		destroyPanelGeometry();
 	}
 	
-	protected void destroyPanelGeometry() {
+	private void destroyPanelGeometry() {
 		if (panelGeometry != null) {
 			getScene().getVisualRoot().detachChild(panelGeometry);
 			panelGeometry = null;

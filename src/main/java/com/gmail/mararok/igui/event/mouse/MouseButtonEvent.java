@@ -11,6 +11,7 @@ abstract public class MouseButtonEvent extends MouseEvent {
 	
 	public MouseButtonEvent(long time, int x, int y, MouseButton button) {
 		super(time,x,y);
+		this.button = button;
 	}
 
 	public MouseButton getButton() {

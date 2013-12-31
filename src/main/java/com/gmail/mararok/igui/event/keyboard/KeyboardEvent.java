@@ -16,6 +16,7 @@ public abstract class KeyboardEvent extends ImpactEvent {
 	public KeyboardEvent(long time, int keyCode, BitSet modifiers) {
 		super(time);
 		this.keyCode = keyCode;
+		this.modifiers = modifiers;
 	}
 
 	public int getKeyCode() {
@@ -40,6 +41,12 @@ public abstract class KeyboardEvent extends ImpactEvent {
 	
 	private boolean isModifierDown(KeyModifierType modifier) {
 		return modifiers.get(modifier.ordinal());
+		
+	}
+	
+	public String toString() {
+		return String.format("%s, kc: %s, kch:%s, km:C%b|A%b|S%b",
+			super.toString(),getKeyCode(),getKeyChar(),isControlDown(),isAltDown(), isShiftDown());
 		
 	}
 }

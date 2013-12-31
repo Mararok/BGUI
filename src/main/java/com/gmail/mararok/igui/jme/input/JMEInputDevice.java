@@ -11,6 +11,7 @@ import com.gmail.mararok.igui.ImpactGUI;
 import com.gmail.mararok.igui.event.ImpactEvent;
 import com.gmail.mararok.igui.event.keyboard.KeyDownEvent;
 import com.gmail.mararok.igui.event.keyboard.KeyModifierType;
+import com.gmail.mararok.igui.event.keyboard.KeyPressedEvent;
 import com.gmail.mararok.igui.event.keyboard.KeyUpEvent;
 import com.gmail.mararok.igui.event.mouse.MouseButton;
 import com.gmail.mararok.igui.event.mouse.MouseClickedEvent;
@@ -99,9 +100,11 @@ public class JMEInputDevice implements InputDevice {
 				
 				((SceneManager)gui.getSceneManager()).onEvent(newEvent);
 				
+				newEvent = new KeyPressedEvent(gui.getTimeProvider().getMiliTime(),event.getKeyCode(),keyModifiers);
+				((SceneManager)gui.getSceneManager()).onEvent(newEvent);
+				
 			}
 			
-			((SceneManager)gui.getSceneManager()).onEvent(newEvent);
 		}
 
 		@Override

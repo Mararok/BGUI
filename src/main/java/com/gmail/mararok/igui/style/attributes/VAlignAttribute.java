@@ -24,7 +24,7 @@ public class VAlignAttribute extends Attribute {
 
 	@Override
 	public AttributeType getType() {
-		return AttributeType.valign;
+		return null;//AttributeType.valign;
 	}
 
 }

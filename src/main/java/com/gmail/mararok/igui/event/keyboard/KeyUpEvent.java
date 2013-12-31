@@ -12,10 +12,4 @@ public class KeyUpEvent extends KeyboardEvent {
 	public KeyUpEvent(long time, int keyCode, BitSet modifiers) {
 		super(time,keyCode,modifiers);
 	}
-
-	@Override
-	public String getName() {
-		return "KeyUpEvent";
-	}
-
 }

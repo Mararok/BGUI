@@ -7,9 +7,6 @@ package com.gmail.mararok.igui.style.attributes;
 
 
 public enum AttributeType {
-	halign(HAlignAttribute.class),
-	valign(VAlignAttribute.class),
-	
 	color(ColorAttribute.class),
 	
 	background(BackgroundAttribute.class),
@@ -26,6 +23,7 @@ public enum AttributeType {
 	
 	padding(PaddingAttribute.class);
 
+	
 	private Class<? extends Attribute> attributeClass;
 	
 	private AttributeType(Class<? extends Attribute> attributeClass) {

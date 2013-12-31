@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import com.gmail.mararok.igui.event.EventHandler;
-import com.gmail.mararok.igui.event.EventType;
 import com.gmail.mararok.igui.event.ImpactEvent;
 import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.style.Region;
@@ -195,11 +194,23 @@ public abstract class SceneNode implements Region {
 		}
 		
 		parent = (ParentSceneNode)newParent;
-		boolean hasScene = scene != null;
+		Scene lastScene = scene;
+		
+		if (parent == null) {
+			if (lastScene != null) {
+				onDetachFromScene();
+			}
+			return;
+		}
+		
 		scene = parent.getScene();
-		if (scene == null && hasScene) {
-			onDetachFromScene();
-		} else if (scene != null && !hasScene) {
+		
+		if (lastScene != null) {
+			if (lastScene != scene) {
+				onDetachFromScene();
+				onAttachToScene();
+			}
+		} else if (scene != null) {
 			onAttachToScene();
 		}
 	}
@@ -314,16 +325,12 @@ public abstract class SceneNode implements Region {
 		}
 	}
 
-	public void registerHandler(String eventName, EventHandler handler) {
+	public void registerHandler(String eventTypeName, EventHandler handler) {
 		if (eventHandlers == null) {
 			eventHandlers = new THashMap<String,EventHandler>();
 		}
 		
-		eventHandlers.put(eventName,handler);
-	}
-	
-	public void registerHandler(EventType eventType, EventHandler handler) {
-		registerHandler(eventType.toString(),handler);
+		eventHandlers.put(eventTypeName,handler);
 	}
 	
 	public abstract void onEvent(ImpactEvent event);

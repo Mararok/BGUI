@@ -13,9 +13,4 @@ public class MouseOverEvent extends MouseEvent {
 		super(time,x,y,target);
 	}
 
-	@Override
-	public String getName() {
-		return "MouseOverEvent";
-	}
-
 }

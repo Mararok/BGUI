@@ -44,7 +44,9 @@ abstract public class ImpactEvent {
 		return (target != null);
 	}
 	
-	abstract public String getName();
+	public String getName() {
+		return getClass().getSimpleName();
+	}
 	
 	@Override
 	public String toString() {

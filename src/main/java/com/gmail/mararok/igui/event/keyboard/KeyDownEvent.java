@@ -13,9 +13,4 @@ public class KeyDownEvent extends KeyboardEvent {
 		super(time,keyCode,modifiers);
 	}
 
-	@Override
-	public String getName() {
-		return "KeyDownEvent";
-	}
-
 }

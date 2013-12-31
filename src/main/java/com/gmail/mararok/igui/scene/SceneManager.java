@@ -5,6 +5,9 @@
 */
 package com.gmail.mararok.igui.scene;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 import gnu.trove.map.hash.THashMap;
@@ -20,11 +23,13 @@ import com.gmail.mararok.igui.spi.time.TimeProvider;
 public class SceneManager {
 	private THashMap<String,Scene> scenes;
 	private Scene currentScene;
+	private SceneScriptEngineContext scriptContext;
 	
 	private ImpactGUI gui;
 	
 	public SceneManager(ImpactGUI gui) {
 		scenes = new THashMap<String,Scene>();
+		scriptContext = new SceneScriptEngineContext(gui.getScriptEngine());
 		this.gui = gui;
 	}
 	
@@ -43,7 +48,15 @@ public class SceneManager {
 	}
 	
 	public Scene loadScene(Path path) {
-		return null;
+		Scene scene = null;
+		try {
+			Object rawScene = scriptContext.eval(Files.newBufferedReader(path,Charset.defaultCharset()));
+			// TODO proccess raw scene data.
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return scene;
 	}
 	
 	
@@ -52,7 +65,12 @@ public class SceneManager {
 	}
 	
 	public void setCurrentScene(String sceneName) {
-		currentScene = (Scene)scenes.get(sceneName);
+		if (sceneName == null) {
+			currentScene = null;
+			return;
+		}
+		
+		currentScene = scenes.get(sceneName);
 	}
 
 	
@@ -81,6 +99,7 @@ public class SceneManager {
 	}
 
 	public void onEvent(ImpactEvent event) {
+		System.out.println(event);
 		if (currentScene != null) {
 			currentScene.onEvent(event);
 		}

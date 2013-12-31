@@ -10,9 +10,4 @@ public class MouseDownEvent extends MouseButtonEvent {
 	public MouseDownEvent(long time, int x, int y, MouseButton button) {
 		super(time,x,y,button);
 	}
-
-	@Override
-	public String getName() {
-		return "MouseDownEvent";
-	}
 }

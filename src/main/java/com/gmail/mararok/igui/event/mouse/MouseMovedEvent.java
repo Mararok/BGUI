@@ -23,9 +23,4 @@ public class MouseMovedEvent extends MouseEvent {
 		return dy;
 	}
 
-	@Override
-	public String getName() {
-		return "MouseMovedEvent";
-	}
-
 }

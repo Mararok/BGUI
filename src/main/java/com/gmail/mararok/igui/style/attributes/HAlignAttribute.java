@@ -25,6 +25,6 @@ public class HAlignAttribute extends Attribute {
 
 	@Override
 	public AttributeType getType() {
-		return AttributeType.halign;
+		return null;// AttributeType.halign;
 	}
 }

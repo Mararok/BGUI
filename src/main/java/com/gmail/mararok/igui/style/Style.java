@@ -21,12 +21,14 @@ public class Style {
 		this.region = region;
 	}
 	
-	public Attribute getAttribute(AttributeType type) {
+	@SuppressWarnings("unchecked")
+	public <T extends Attribute> T getAttribute(AttributeType type) {
 		Attribute attribute = attributes.get(type);
 		if (attribute == null) {
 			attribute = addAttribute(type);
 		}
-		return attribute;
+		
+		return (T)attribute;
 	}
 	
 	public boolean hasAttribute(AttributeType type)  {

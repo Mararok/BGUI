@@ -5,7 +5,6 @@
 */
 package com.gmail.mararok.igui.event;
 
-
 public class EventHandler {
 	private Controller controller;
 	private String callbackName;

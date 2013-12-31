@@ -9,9 +9,4 @@ public class MouseUpEvent extends MouseButtonEvent {
 	public MouseUpEvent(long time, int x, int y, MouseButton button) {
 		super(time,x,y,button);
 	}
-
-	@Override
-	public String getName() {
-		return "MouseUpEvent";
-	}
 }
