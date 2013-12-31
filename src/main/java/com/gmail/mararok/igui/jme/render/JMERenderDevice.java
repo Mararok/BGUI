@@ -12,6 +12,7 @@ import com.gmail.mararok.igui.spi.render.ParentVisualNode;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 import com.jme3.asset.AssetManager;
+import com.jme3.font.BitmapFont;
 import com.jme3.material.Material;
 import com.jme3.renderer.Camera;
 import com.jme3.scene.Node;
@@ -37,12 +38,11 @@ public class JMERenderDevice implements RenderDevice {
 	
 	@Override
 	public Font createFont(String fontName) {
-		return new JMEFontAC(assetManager.loadFont(fontName));
-	}
-	
-	@Override
-	public Font createFont(String fontName, Font.Style style, int size) {
-		return createFont(fontName);
+		BitmapFont realFont = assetManager.loadFont(fontName);
+		if (realFont == null) {
+			System.out.println("Can't load font: "+fontName);
+		}
+		return new JMEFontAC(fontName,realFont);
 	}
 
 	@Override

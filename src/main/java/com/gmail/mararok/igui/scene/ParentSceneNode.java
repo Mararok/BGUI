@@ -9,12 +9,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.gmail.mararok.igui.event.ImpactEvent;
-import com.gmail.mararok.igui.style.attributes.Attribute;
-import com.gmail.mararok.igui.style.attributes.AttributeType;
+import com.gmail.mararok.igui.event.mouse.MouseEvent;
 
-public class ParentSceneNode extends SceneNode {
-	private List<SceneNode> children;
+public abstract class ParentSceneNode extends SceneNode {
+	protected List<SceneNode> children;
 	
 	public void attachChild(SceneNode child) {
 		if (child == null) {
@@ -26,6 +24,7 @@ public class ParentSceneNode extends SceneNode {
 			children = new LinkedList<SceneNode>();
 		}
 		child.setParent(this);
+		child.updateBounds();
 		children.add((SceneNode) child);
 	}
 
@@ -59,19 +58,16 @@ public class ParentSceneNode extends SceneNode {
 		return children != null;
 	}
 	
-	public void onEvent(ImpactEvent event) {
+	@Override
+	protected void onMouseEvent(MouseEvent event) {
+		super.onMouseEvent(event);
 		if (children != null) {
 			for (SceneNode child : children) {
 				((SceneNode)child).onEvent(event);
 			}
 		}
 	}
-
-	@Override
-	public void updateAttribute(AttributeType type, Attribute attribute) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	@Override
 	protected void updateBounds() {
@@ -79,19 +75,22 @@ public class ParentSceneNode extends SceneNode {
 	}
 
 	@Override
-	protected void onAttachToScene() {
+	protected void onAttachToScene(Scene newScene) {
+		super.onAttachToScene(newScene);
 		if (children != null)
 			for (SceneNode child : children) {
-				child.onAttachToScene();
+				child.onAttachToScene(newScene);
 			}
 		
 	}
 
 	@Override
 	protected void onDetachFromScene() {
+		super.onDetachFromScene();
+		
 		if (children != null)
 			for (SceneNode child : children) {
-				child.onAttachToScene();
+				child.onDetachFromScene();
 			}
 	}
 	

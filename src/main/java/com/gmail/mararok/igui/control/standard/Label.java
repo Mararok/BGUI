@@ -5,134 +5,139 @@
 */
 package com.gmail.mararok.igui.control.standard;
 
-import com.gmail.mararok.igui.event.ImpactEvent;
 import com.gmail.mararok.igui.render.Gradient;
 import com.gmail.mararok.igui.render.QuadMemoryMesh;
 import com.gmail.mararok.igui.render.RGBAColor;
 import com.gmail.mararok.igui.render.SolidGradient;
+import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.scene.SceneNode;
-import com.gmail.mararok.igui.spi.render.Font;
 import com.gmail.mararok.igui.spi.render.GeometryVisualNode;
 import com.gmail.mararok.igui.spi.render.TextVisualNode;
 import com.gmail.mararok.igui.style.attributes.Attribute;
 import com.gmail.mararok.igui.style.attributes.AttributeType;
 import com.gmail.mararok.igui.style.attributes.BackgroundAttribute;
 import com.gmail.mararok.igui.style.attributes.ColorAttribute;
+import com.gmail.mararok.igui.style.attributes.FontAttribute;
 
 public class Label extends SceneNode {
 	private GeometryVisualNode panelGeometry;
 	private TextVisualNode labelTextNode;
 	
-	private String text;
-	private Font font;
+	private String text = "";
+	private String fontName;
 	
 	private Gradient color = new SolidGradient(RGBAColor.WHITE);
-	private Gradient backgroundColor = new SolidGradient(RGBAColor.GREEN);
+	private Gradient backgroundColor;
 	
 	public String getText() {
 		return text;
 	}
 	
 	public void setText(String newText) {
-		text = newText;
-		if (getScene() == null) {
-			return;
-		}
+		text = (newText == null)?"":newText;
+		if (hasScene()) {
 		
-		if (newText == "") {
-			destroyLabelText();
-			destroyPanelGeometry();
-			return;
-		}
+			if (newText == "") {
+				destroyLabelText();
+				destroyPanelGeometry();
+				return;
+			}
 		
-		if (labelTextNode == null) {
-			createLabelText();
-		} else {
-			labelTextNode.setText(text);
+			if (labelTextNode == null) {
+				createLabelText();
+				createPanelGeometry();
+			} else {
+				labelTextNode.setText(text);
+			}
+			
+			setSize((int)labelTextNode.getFont().getLineWidth(text),(int)labelTextNode.getFont().getLineHeight(text));
 		}
-		
-		setSize((int)labelTextNode.getFont().getLineWidth(text),(int)labelTextNode.getFont().getLineHeight(text));
 	}
 	
 	@Override
 	public void updateAttribute(AttributeType type, Attribute value) {
 		switch (type) {
 		case color: 
-			setColor(((ColorAttribute)value).getColor());
+			setColor(((ColorAttribute)value));
 			break;
 			
 		case background: 
-			setBackgroundColor(((BackgroundAttribute)value).getColor());
+			setBackgroundColor(((BackgroundAttribute)value));
 			break;
-			
+		
+		case font:
+			setFont((FontAttribute)value);
+			break;
 		default:
 			break;
 		}
 	}
 
-	private void setColor(Gradient newColor) {
-		color = newColor;
-		if (getScene() == null) {
-			return;
-		}
-		
-		if (color == null && labelTextNode != null) {
-			destroyLabelText();
-			destroyPanelGeometry();
-		} else if (labelTextNode != null) {
-			labelTextNode.setColor(((SolidGradient)color).getColor());
-		}
-	}
-	
-	private void setBackgroundColor(Gradient newColor) {
-		backgroundColor = newColor;
-		if (getScene() == null) {
-			return;
-		}
-		
-		if (newColor == null && panelGeometry != null) {
-			getScene().getVisualRoot().detachChild(panelGeometry);
-			panelGeometry = null;
-		} else {
-			if (panelGeometry != null) {
-				if (backgroundColor != null) {
-					if (backgroundColor instanceof SolidGradient) {
-						panelGeometry.getMesh().setColors(((SolidGradient) backgroundColor).getColor());
-					}
-					panelGeometry.updateGeometry();
-				}
+	private void setColor(ColorAttribute newColor) {
+		color = newColor.getColor();
+		if (hasScene()) {
+			
+			if (color == null) {
+				destroyLabelText();
+				return;
+			}
+			
+			if (labelTextNode == null) {
+				createLabelText();
 			} else {
-				createPanelGeometry();
+				labelTextNode.setColor(((SolidGradient)color).getColor());
 			}
 		}
 	}
 	
-	private void setFont(Font newFont) {
-		font = newFont;
-		if (getScene() == null) {
-			return;
+	private void setBackgroundColor(BackgroundAttribute newBackground) {
+		backgroundColor = newBackground.getColor();
+		if (hasScene()) {
+			
+			if (backgroundColor == null) {
+				destroyPanelGeometry();
+				return;
+			}
+			
+			if (panelGeometry == null) {
+				createPanelGeometry();
+			} else {
+				backgroundColor.setMeshColors(panelGeometry.getMesh());
+				panelGeometry.updateGeometry();
+			}
 		}
-		
-		if (labelTextNode != null) {
-			labelTextNode.setFont(font);
+	}
+	
+	private void setFont(FontAttribute newFont) {
+		fontName = newFont.getFont();
+		if (hasScene()) {
+			if (fontName == null) {
+				destroyLabelText();
+				return;
+			}
+			if(labelTextNode == null) {
+				createLabelText();
+			} else {
+				labelTextNode.setFont(getScene().getSceneManager().getGUI().getFontManager().getFontByName(fontName));
+			}
+			setSize((int)labelTextNode.getFont().getLineWidth(text),(int)labelTextNode.getFont().getLineHeight(text));
 		}
 	}
 
 	@Override
-	protected void onAttachToScene() {
+	protected void onAttachToScene(Scene newScene) {
+		super.onAttachToScene(newScene);
 		createLabelText();
-		createPanelGeometry();
 	}
 	
 	@Override
 	protected void onDetachFromScene() {
+		super.onDetachFromScene();
 		destroyLabelText();
-		destroyPanelGeometry();
 	}
 	
 	@Override
 	protected void updateBounds() {
-		System.out.println(getCenterX()+" "+getCenterY());
 		if (labelTextNode != null) {
 			labelTextNode.setTranslation(getCenterX()-getWidth()/2,getScene().getRenderDevice().getHeight()-getCenterY()+getHeight()/2,getZ()+2);
 		}
@@ -143,61 +148,43 @@ public class Label extends SceneNode {
 		}
 	}
 	
-	@Override
-	public void onEvent(ImpactEvent event) {
-		
-	}
-	
 	private void createLabelText() {
 		labelTextNode = getScene().getRenderDevice().createTextNode();
-		boolean canShow = false;
 		
-		if (color != null) {
-			setColor(color);
-			canShow = true;
-		} else {
-			canShow = true;
+		if (color == null || text == "") {
+			return;
 		}
 		
-		if (font != null) {
-			setFont(font);
-			canShow = true;
-		} else {
-			canShow = true;
-		}
+		labelTextNode.setColor(((SolidGradient)color).getColor());
+		labelTextNode.setFont(getScene().getSceneManager().getGUI().getFontManager().getFontByName(fontName));
+		labelTextNode.setText(text);
 		
-		if (text != "") {
-			setText(getText());	
-			canShow = true;
-		} else {
-			canShow = false;
-		}
+		setSize((int)labelTextNode.getFont().getLineWidth(text),(int)labelTextNode.getFont().getLineHeight(text));
 		
-		if (canShow)
-			getScene().getVisualRoot().attachChild(labelTextNode);
+		getScene().getVisualRoot().attachChild(labelTextNode);
+		
+		createPanelGeometry();
 	}
 	
 	private void destroyLabelText() {
 		if (labelTextNode != null) {
 			getScene().getVisualRoot().detachChild(labelTextNode);
 			labelTextNode = null;
+			destroyPanelGeometry();
 		}
 	}
 	
 	private void createPanelGeometry() {
-		if (backgroundColor == null) {
+		if (backgroundColor == null || labelTextNode == null) {
 			return;
 		}
-		
+
 		panelGeometry = getScene().getRenderDevice().createGeometryNode();
 		panelGeometry.setMesh(new QuadMemoryMesh());
 		
 		updateBounds();
 			
-		if (backgroundColor instanceof SolidGradient) {
-			panelGeometry.getMesh().setColors(((SolidGradient) backgroundColor).getColor());
-		}
-		
+		backgroundColor.setMeshColors(panelGeometry.getMesh());
 		panelGeometry.updateGeometry();
 		getScene().getVisualRoot().attachChild(panelGeometry);
 	}

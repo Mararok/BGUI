@@ -5,4 +5,7 @@
 */
 package com.gmail.mararok.igui.render;
 
-public interface Gradient {}
+public interface Gradient {
+	
+	void setMeshColors(MemoryMesh mesh);
+}

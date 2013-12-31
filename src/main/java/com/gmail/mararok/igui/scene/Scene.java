@@ -25,14 +25,13 @@ public class Scene {
 	private SceneManager sceneManager;
 	
 	public Scene(String id, SceneManager sceneManager) {
-		super();
 		this.id = id;
 		rootVisualNode = sceneManager.getRenderDevice().getRootGUINode();
-		rootNode = new RootSceneNode(this);
-		
+		this.sceneManager = sceneManager;
 		controllers = new THashMap<String,Controller>();
 		
-		this.sceneManager = sceneManager;
+		rootNode = new RootSceneNode(this);
+		
 	}
 
 	public String getID() {

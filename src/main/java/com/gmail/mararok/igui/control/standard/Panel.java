@@ -7,23 +7,39 @@ package com.gmail.mararok.igui.control.standard;
 
 import com.gmail.mararok.igui.render.Gradient;
 import com.gmail.mararok.igui.render.QuadMemoryMesh;
-import com.gmail.mararok.igui.render.SolidGradient;
 import com.gmail.mararok.igui.scene.ParentSceneNode;
+import com.gmail.mararok.igui.scene.Scene;
+import com.gmail.mararok.igui.scene.SceneNode;
 import com.gmail.mararok.igui.spi.render.GeometryVisualNode;
 import com.gmail.mararok.igui.style.attributes.Attribute;
 import com.gmail.mararok.igui.style.attributes.AttributeType;
 import com.gmail.mararok.igui.style.attributes.BackgroundAttribute;
+import com.gmail.mararok.igui.style.attributes.MarginAttribute;
+import com.gmail.mararok.igui.style.attributes.PaddingAttribute;
 
 public class Panel extends ParentSceneNode {
 	private GeometryVisualNode panelGeometry;
 	private Gradient backgroundColor;
 	
 	@Override
+	public void attachChild(SceneNode child) {
+		super.attachChild(child);
+		child.setPosition(getCenterX()-child.getWidth()/2,getCenterY()-child.getHeight()/2);
+	}
+
+	@Override
+	public void detachChild(SceneNode child) {
+		super.detachChild(child);
+		child.setPosition(0,0);
+	}
+	
+	@Override
 	public void updateAttribute(AttributeType type, Attribute value) {
 		switch (type) {
-		case background: {
+		case background: 
 			setBackgroundColor((BackgroundAttribute)value);
-		}
+			break;
+			
 		default:
 			break;
 		}
@@ -31,59 +47,59 @@ public class Panel extends ParentSceneNode {
 	
 	private void setBackgroundColor(BackgroundAttribute attribute) {
 		backgroundColor = attribute.getColor();
-		if (getScene() == null) {
-			return;
-		}
-		
-		if (backgroundColor == null && panelGeometry != null) {
-			getScene().getVisualRoot().detachChild(panelGeometry);
-			panelGeometry = null;
-		} else {
-			if (panelGeometry != null) {
-				if (backgroundColor != null) {
-					if (backgroundColor instanceof SolidGradient) {
-						panelGeometry.getMesh().setColors(((SolidGradient) backgroundColor).getColor());
-					}
+		if (hasScene()) {
+			
+			if (backgroundColor == null) {
+				destroyPanelGeometry();
+			} else {
+				if (panelGeometry == null) {
+					createPanelGeometry();
+				} else {
+					backgroundColor.setMeshColors(panelGeometry.getMesh());
 					panelGeometry.updateGeometry();
 				}
-			} else {
-				createPanelGeometry();
 			}
 		}
 	}
 	
 	
 	@Override
-	protected void onAttachToScene() {
-		super.onAttachToScene();
+	protected void onAttachToScene(Scene newScene) {
+		super.onAttachToScene(newScene);
 		createPanelGeometry();
 	}
 
 	private void createPanelGeometry() {
-		if (backgroundColor == null) {
+		if (backgroundColor == null || panelGeometry != null) {
 			return;
 		}
 		
 		panelGeometry = getScene().getRenderDevice().createGeometryNode();
 		panelGeometry.setMesh(new QuadMemoryMesh());
 		
-		panelGeometry.setTranslation(getCenterX(),getScene().getRenderDevice().getHeight()-getCenterY(),getZ());
-		panelGeometry.setScale(getWidth()/2,getHeight()/2,1);
-			
-		if (backgroundColor instanceof SolidGradient) {
-			panelGeometry.getMesh().setColors(((SolidGradient) backgroundColor).getColor());
-		}
+		updatePanelGeometryBounds();
+		
+		backgroundColor.setMeshColors(panelGeometry.getMesh());
 		panelGeometry.updateGeometry();
 		
 		getScene().getVisualRoot().attachChild(panelGeometry);
 	}
 	
+	private void updatePanelGeometryBounds() {
+		panelGeometry.setTranslation(getCenterX(),getScene().getRenderDevice().getHeight()-getCenterY(),getZ());
+		panelGeometry.setScale(getWidth()/2,getHeight()/2,1);
+	}
 	@Override
 	protected void updateBounds() {
 		super.updateBounds();
 		if (panelGeometry != null) {
-			panelGeometry.setTranslation(getCenterX(),getScene().getRenderDevice().getHeight()-getCenterY(),getZ());
-			panelGeometry.setScale(getWidth()/2,getHeight()/2,1);
+			updatePanelGeometryBounds();
+		}
+		
+		if (hasChildren()) {
+			for (SceneNode child : children) {
+				child.setPosition(getCenterX()-child.getWidth()/2,getCenterY()-child.getHeight()/2);
+			}
 		}
 	}
 	

@@ -14,4 +14,9 @@ public class SolidGradient implements Gradient {
 	public RGBAColor getColor() {
 		return color;
 	}
+
+	@Override
+	public void setMeshColors(MemoryMesh mesh) {
+		mesh.setColors(color);
+	}
 }

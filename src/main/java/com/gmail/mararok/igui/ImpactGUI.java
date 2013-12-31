@@ -5,6 +5,7 @@
  */
 package com.gmail.mararok.igui;
 
+import com.gmail.mararok.igui.render.FontManager;
 import com.gmail.mararok.igui.scene.SceneManager;
 import com.gmail.mararok.igui.script.GUIScriptEngine;
 import com.gmail.mararok.igui.spi.input.InputDevice;
@@ -25,6 +26,8 @@ public class ImpactGUI {
 	
 	private GUIScriptEngine scriptEngine;
 	
+	private FontManager fontManager;
+	
 	private StyleClassManager styleClassManager;
 	
 	public ImpactGUI(RenderDevice renderDevice,InputDevice inputDevice) {
@@ -41,6 +44,7 @@ public class ImpactGUI {
 		
 		scriptEngine = new GUIScriptEngine();
 		
+		fontManager = new FontManager(renderDevice);
 		styleClassManager = new StyleClassManager();
 	}
 	
@@ -66,6 +70,10 @@ public class ImpactGUI {
 	
 	public GUIScriptEngine getScriptEngine() {
 		return scriptEngine;
+	}
+	
+	public FontManager getFontManager() {
+		return fontManager;
 	}
 	
 	public StyleClassManager getStyleClassManager() {

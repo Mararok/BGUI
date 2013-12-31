@@ -8,28 +8,13 @@ package com.gmail.mararok.igui.spi.render;
 import com.gmail.mararok.igui.render.Glyph;
 
 public interface Font {
-
-	public enum Style {
-		PLAIN(java.awt.Font.PLAIN),
-		BOLD(java.awt.Font.BOLD),
-		ITALIC(java.awt.Font.ITALIC);
-
-		private int awtStyle;
-		
-		private Style(int awtStyle) {
-			this.awtStyle = awtStyle;
-		}
-		
-		public int toAWTStyle() {
-			return awtStyle;
-		}
-	}
+	String getName();
 	
-	float getWidth(char character);
-	float getLineWidth(String text);
+	int getWidth(char character);
+	int getLineWidth(String text);
 	
-	float getHeight(char character);
-	float getLineHeight(String text);
+	int getHeight(char character);
+	int getLineHeight(String text);
 	
 	Glyph getGlyph(char character);
 	Image getFontImage();

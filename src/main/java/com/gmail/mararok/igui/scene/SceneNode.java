@@ -13,10 +13,13 @@ import java.util.List;
 
 import com.gmail.mararok.igui.event.EventHandler;
 import com.gmail.mararok.igui.event.ImpactEvent;
+import com.gmail.mararok.igui.event.mouse.MouseEvent;
 import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.style.Region;
 import com.gmail.mararok.igui.style.Style;
 import com.gmail.mararok.igui.style.StyleClass;
+import com.gmail.mararok.igui.style.attributes.Attribute;
+import com.gmail.mararok.igui.style.attributes.AttributeType;
 import com.gmail.mararok.igui.util.Rectangle;
 
 public abstract class SceneNode implements Region {
@@ -193,32 +196,24 @@ public abstract class SceneNode implements Region {
 			getParent().detachChild(this);
 		}
 		
-		parent = (ParentSceneNode)newParent;
-		Scene lastScene = scene;
+		parent = newParent;
 		
-		if (parent == null) {
-			if (lastScene != null) {
-				onDetachFromScene();
-			}
-			return;
+		onDetachFromScene();
+	
+		if (parent != null && parent.getScene() != null) {
+			onAttachToScene(parent.getScene());
 		}
 		
-		scene = parent.getScene();
-		
-		if (lastScene != null) {
-			if (lastScene != scene) {
-				onDetachFromScene();
-				onAttachToScene();
-			}
-		} else if (scene != null) {
-			onAttachToScene();
-		}
 	}
 	
 	public Scene getScene() {
 		return scene;
 	}
 
+	public boolean hasScene() {
+		return scene != null;
+	}
+	
 	public void setFocused(boolean focus) {
 		if (getScene() == null) {
 			return;
@@ -325,6 +320,9 @@ public abstract class SceneNode implements Region {
 		}
 	}
 
+	@Override
+	public void updateAttribute(AttributeType type, Attribute attribute) {}
+	
 	public void registerHandler(String eventTypeName, EventHandler handler) {
 		if (eventHandlers == null) {
 			eventHandlers = new THashMap<String,EventHandler>();
@@ -333,10 +331,34 @@ public abstract class SceneNode implements Region {
 		eventHandlers.put(eventTypeName,handler);
 	}
 	
-	public abstract void onEvent(ImpactEvent event);
+	public void onEvent(ImpactEvent event) {
+		if (event instanceof MouseEvent) {
+			MouseEvent mevent = (MouseEvent) event;
+			if (bounds.contains(mevent.getX(),mevent.getY())) {
+				onMouseEvent(mevent);
+			}
+		}
+	}
 	
-	protected abstract void onAttachToScene();
-	protected abstract void onDetachFromScene();
+	protected void onMouseEvent(MouseEvent event) {
+		if (eventHandlers != null) {
+			EventHandler handler = eventHandlers.get(event.getName());
+			if (handler != null) {
+				handler.onEvent(event);
+			}
+		}
+	}
+	
+	protected void onAttachToScene(Scene newScene) {
+		if (scene != newScene) {
+			onDetachFromScene();
+			scene = newScene;
+		}
+	}
+	
+	protected void onDetachFromScene() {
+		scene = null;
+	}
 	
 	@Override
 	public String toString() {

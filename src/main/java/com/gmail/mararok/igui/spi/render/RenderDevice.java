@@ -8,7 +8,6 @@ package com.gmail.mararok.igui.spi.render;
 public interface RenderDevice {
 	
 	Font createFont(String fontName);
-	Font createFont(String fontName,Font.Style style, int size);
 	Image createImage(String filename);
 	
 	ParentVisualNode createParentNode();

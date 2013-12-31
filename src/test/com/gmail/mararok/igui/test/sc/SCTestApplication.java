@@ -15,7 +15,9 @@ import com.gmail.mararok.igui.scene.Scene;
 import com.gmail.mararok.igui.spi.render.RenderDevice;
 import com.gmail.mararok.igui.style.attributes.AttributeType;
 import com.gmail.mararok.igui.style.attributes.BackgroundAttribute;
+import com.gmail.mararok.igui.style.attributes.FontAttribute;
 import com.jme3.app.SimpleApplication;
+import com.jme3.asset.plugins.FileLocator;
 
 public class SCTestApplication extends SimpleApplication {
 	private ImpactGUI igui;
@@ -23,6 +25,8 @@ public class SCTestApplication extends SimpleApplication {
 	@Override
 	public void simpleInitApp() {
 		flyCam.setDragToRotate(true);
+		assetManager.registerLocator(".",FileLocator.class);
+		
 		igui = new ImpactGUI(new JMERenderDevice(guiNode,assetManager,cam),new JMEInputDevice(inputManager));
 		testScene = igui.getSceneManager().createScene("TestScene");
 		igui.getSceneManager().setCurrentScene("TestScene");
@@ -34,17 +38,18 @@ public class SCTestApplication extends SimpleApplication {
 		leftPanel.setID("leftPanel");
 		
 		Label label = new Label();
+		((FontAttribute)label.getStyle().getAttribute(AttributeType.font)).setFont("simpleFont.fnt");
+		//((BackgroundAttribute)label.getStyle().getAttribute(AttributeType.background)).setColor(RGBAColor.BLUE);;
 		label.setText("TEST text");
 		//label.setPosition(100,100);
 		
-		System.out.println(label.getWidth());
 		Panel rightPanel = new Panel();
 		((BackgroundAttribute)rightPanel.getStyle().getAttribute(AttributeType.background)).setColor(RGBAColor.BLUE);
 		rightPanel.setSize(300,300);
 		rightPanel.setLocalX(400);
 		rightPanel.setID("rightPanel");
 		testScene.attachChild(rightPanel);
-		testScene.attachChild(label);
+		leftPanel.attachChild(label);
 		testScene.attachChild(leftPanel);
 	}
 

@@ -12,33 +12,38 @@ import com.jme3.font.BitmapFont;
 import com.jme3.font.BitmapText;
 
 public class JMEFontAC implements Font {
+	private String name;
+	
 	private BitmapFont realFont;
 	
-	public JMEFontAC(BitmapFont realFont) {
+	public JMEFontAC(String name, BitmapFont realFont) {
+		this.name = name;
+		
 		this.realFont = realFont;
 	}
+	
 	BitmapText createLabel(String content) {
 		return realFont.createLabel(content);
 	}
 	
 	@Override
-	public float getWidth(char character) {
+	public int getWidth(char character) {
 		return getLineWidth(""+character);
 	}
 
 	@Override
-	public float getLineWidth(String text) {
-		return realFont.getLineWidth(text);
+	public int getLineWidth(String text) {
+		return (int) realFont.getLineWidth(text);
 	}
 
 	@Override
-	public float getHeight(char character) {
-		return getLineHeight(""+character);
+	public int getHeight(char character) {
+		return realFont.getCharSet().getLineHeight();
 	}
 
 	@Override
-	public float getLineHeight(String text) {
-		return 10;
+	public int getLineHeight(String text) {
+		return realFont.getCharSet().getLineHeight();
 	}
 
 	@Override
@@ -51,6 +56,10 @@ public class JMEFontAC implements Font {
 	public Image getFontImage() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	@Override
+	public String getName() {
+		return name;
 	}
 
 }
